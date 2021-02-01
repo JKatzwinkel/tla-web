@@ -41,15 +41,15 @@ jobs:
         timeout: 60000
 
     - name: log ES ingestion status
-      run: curl -s localhost:9201/_cat/indices
+      run: curl -s http://es:9200/_cat/indices
 
     - name: wait for backend to be populated with corpus data
       uses: "cygnetdigital/wait_for_response@v2.0.0"
       with:
-        url: http://localhost:8090/lemma/get/100690
+        url: http://backend:8090/lemma/get/100690
         responseCode: 200
         interval: 5000
-        timeout: 240000
+        timeout: 100000
 
     - name: screenshot lemma search results page
       uses: "flameddd/screenshots-ci-action@v1.1.1"
