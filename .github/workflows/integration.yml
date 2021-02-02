@@ -43,7 +43,7 @@ jobs:
       run: curl -s localhost:8080/
 
     - name: curl frontend using appropriate/curl docker image
-      run: docker run --network container:tla-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
+      run: docker run --network container:tla-web appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
 
     - name: curl backend from shell
       run: curl localhost:8090/
