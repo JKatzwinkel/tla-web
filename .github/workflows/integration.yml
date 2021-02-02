@@ -33,8 +33,23 @@ jobs:
         interval: 2000
         timeout: 60000
 
+    - name: show container status
+      run: docker-compose ps
+
+    - name: show tla-ingest container logs
+      run: docker-compose logs -f populate
+
+    - name: curl frontend from shell
+      run: curl -s localhost:8080/
+
+    - name: curl frontend using appropriate/curl docker image
+      run: docker run --network container:tla-frontend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8080/
+
     - name: curl backend from shell
       run: curl localhost:8090/
+
+    - name: curl backend from shell
+      run: curl backend:8090/
 
     - name: curl backend using appropriate/curl docker image
       run: docker run --network container:tla-backend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8090/
