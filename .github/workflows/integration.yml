@@ -39,6 +39,9 @@ jobs:
     - name: show tla-ingest container logs
       run: docker-compose logs -f populate
 
+    - name: show tla-backend container logs
+      run: docker-compose logs backend
+
     - name: curl frontend from shell
       run: curl -s localhost:8080/
 
