@@ -14,7 +14,7 @@ jobs:
     - uses: "actions/checkout@v2"
 
     - name: start TLA containers
-      run: docker-compose up -d --force-recreate --build
+      run: docker-compose up -d
       env:
         SAMPLE_URL: http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
         ES_PORT: 9201
@@ -37,7 +37,7 @@ jobs:
       run: docker-compose ps
 
     - name: show tla-ingest container logs
-      run: docker-compose logs -f populate
+      run: docker-compose logs populate
 
     - name: show tla-backend container logs
       run: docker-compose logs backend
@@ -77,8 +77,8 @@ jobs:
       with:
         url: http://localhost:8090/lemma/get/100690
         responseCode: 200
-        interval: 10000
-        timeout: 600000
+        interval: 5000
+        timeout: 100000
 
     - name: screenshot lemma search results page
       uses: "flameddd/screenshots-ci-action@v1.1.1"

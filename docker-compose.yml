@@ -21,7 +21,7 @@ services:
         depends_on:
             - es
         build:
-            context: https://github.com/thesaurus-linguae-aegyptiae/tla-es.git#master
+            context: https://github.com/jkatzwinkel/tla-es.git#master
         environment:
             - ES_HOST=es
             - ES_PORT=9200
@@ -35,7 +35,7 @@ services:
         depends_on:
             - populate
         build:
-            context: https://github.com/thesaurus-linguae-aegyptiae/tla-es.git#master
+            context: https://github.com/jkatzwinkel/tla-es.git#master
         environment:
             - ES_HOST=es
             - ES_PORT=9200
