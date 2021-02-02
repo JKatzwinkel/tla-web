@@ -33,16 +33,34 @@ jobs:
         interval: 2000
         timeout: 60000
 
+    - name: curl backend from shell
+      run: curl localhost:8090/
+
+    - name: curl backend using appropriate/curl docker image
+      run: docker run --network container:tla-backend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8090/
+
     - name: log ES ingestion status
       run: curl -s localhost:9201/_cat/indices
+
+    - name: curl backend lemma count from shell
+      run: curl localhost:8090/lemma/count
+
+    - name: curl backend lemma count using appropriate/curl docker image
+      run: docker run --network container:tla-backend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8090/lemma/count
+
+    - name: curl backend lemma record from shell
+      run: curl localhost:8090/lemma/get/100690
+
+    - name: curl backend lemma record using appropriate/curl docker image
+      run: docker run --network container:tla-backend appropriate/curl -s --retry 10 --retry-connrefused http://localhost:8090/lemma/get/100690
 
     - name: wait for backend to be populated with corpus data
       uses: "cygnetdigital/wait_for_response@v2.0.0"
       with:
         url: http://localhost:8090/lemma/get/100690
         responseCode: 200
-        interval: 5000
-        timeout: 900000
+        interval: 10000
+        timeout: 600000
 
     - name: screenshot lemma search results page
       uses: "flameddd/screenshots-ci-action@v1.1.1"
