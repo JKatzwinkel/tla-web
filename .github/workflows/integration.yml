@@ -33,9 +33,6 @@ jobs:
         interval: 2000
         timeout: 60000
 
-    - name: show tla-ingest container logs
-      run: docker-compose logs populate
-
     - name: show tla-backend container logs
       run: docker-compose logs backend
 
@@ -49,6 +46,10 @@ jobs:
         responseCode: 200
         interval: 5000
         timeout: 100000
+      continue-on-error: true
+
+    - name: show tla-ingest container logs
+      run: docker-compose logs populate
 
     - name: query backend endpoint URL paths list
       run: curl -s localhost:8090/
