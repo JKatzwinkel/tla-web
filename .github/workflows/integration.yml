@@ -72,6 +72,15 @@ jobs:
       with:
         path: /tmp/**/*.flv
         name: screencast
+
+    - name: check if selenium screencasts have been uploaded
+      uses: "actions/download-artifact@v2.0.9"
+      with:
+        name: screencast
+      continue-on-error: true
+
+    - name: cancel workflow if selenium tests have been failing
+      if: ${{ success() }}
       run: exit 1
 
     - name: start frontend container
