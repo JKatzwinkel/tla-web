@@ -64,6 +64,15 @@ jobs:
 
     - name: run Selenium tests
       run: ./gradlew selenium --info
+      continue-on-error: true
+
+    - name: upload screencasts of failed selenium tests
+      if: ${{ failure() }}
+      uses: "actions/upload-artifact@v2.2.3"
+      with:
+        path: /tmp/**/*.flv
+        name: screencast
+      run: exit 1
 
     - name: start frontend container
       run: docker-compose up -d frontend
@@ -94,8 +103,8 @@ jobs:
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
-    - name: upload screenshots
-      uses: "actions/upload-artifact@v2"
+    - name: upload screenshots of lemma search results page
+      uses: "actions/upload-artifact@v2.2.3"
       with:
         path: screenshots
         name: lemma-search
@@ -107,8 +116,8 @@ jobs:
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
-    - name: upload screenshots
-      uses: "actions/upload-artifact@v2"
+    - name: upload screenshots of lemma details page
+      uses: "actions/upload-artifact@v2.2.3"
       with:
         path: screenshots
         name: lemma-details
@@ -120,8 +129,8 @@ jobs:
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
-    - name: upload screenshots
-      uses: "actions/upload-artifact@v2"
+    - name: upload screenshots of sentence details page
+      uses: "actions/upload-artifact@v2.2.3"
       with:
         path: screenshots
         name: sentence-details
@@ -133,8 +142,8 @@ jobs:
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
-    - name: upload screenshots
-      uses: "actions/upload-artifact@v2"
+    - name: upload screenshots of thesaurus entry details page
+      uses: "actions/upload-artifact@v2.2.3"
       with:
         path: screenshots
         name: ths-details
@@ -146,8 +155,8 @@ jobs:
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
-    - name: upload screenshots
-      uses: "actions/upload-artifact@v2"
+    - name: upload screenshots of sentence search form
+      uses: "actions/upload-artifact@v2.2.3"
       with:
         path: screenshots
         name: sentence-search-form
@@ -159,8 +168,8 @@ jobs:
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
-    - name: upload screenshots
-      uses: "actions/upload-artifact@v2"
+    - name: upload screenshots of sentence search results page
+      uses: "actions/upload-artifact@v2.2.3"
       with:
         path: screenshots
         name: sentence-search-results

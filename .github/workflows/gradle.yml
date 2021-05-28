@@ -29,7 +29,7 @@ jobs:
       run: chmod +x gradlew
 
     - name: run tests && build project
-      run: ./gradlew build
+      run: ./gradlew build --no-daemon
 
     - uses: KyleAure/junit-report-annotations-action@1.5
       with:

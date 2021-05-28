@@ -170,7 +170,7 @@ public class SearchPageTest {
         );
 
         chrome.findElement(
-            By.cssSelector("nav.search-results-pagination #page-link-4")
+            By.cssSelector("nav.search-results-pagination #page-link-5")
         ).click();
 
         new WebDriverWait(chrome, Duration.ofSeconds(2));
