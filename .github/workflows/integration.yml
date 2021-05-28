@@ -64,7 +64,6 @@ jobs:
 
     - name: run Selenium tests
       run: ./gradlew selenium --info
-      continue-on-error: true
 
     - name: upload screencasts of failed selenium tests
       if: ${{ failure() }}
