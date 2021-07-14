@@ -5,6 +5,15 @@
 >
   <body>
     <div layout:fragment="content">
+      <script>
+        const saveDropdown = (name, prop) => {
+          setCookie(
+            `form-field-${name}-select-${prop}`,
+            $(`#${name}-${prop}`).val(),
+            '/search'
+          )
+        }
+      </script>
       <div class="row search my-4">
         <div class="col-lg-8 col-sm-12">
           <div class="accordion" id="search-forms-container">

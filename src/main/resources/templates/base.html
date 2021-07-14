@@ -36,5 +36,10 @@
 
     <footer th:replace="fragments/common :: footer"/>
 
+    <script type="text/javascript" id="cookiebanner" th:src="@{/vendor/cookiebanner.min.js}" src="../static/vendor/cookiebanner.min.js"
+      data-cookie="accepted" data-moreinfo="/legal/privacy"
+      th:data-message="#{cookie_banner_msg}"
+      th:data-linkmsg="#{cookie_banner_linkmsg}">
+    </script>
   </body>
 </html>

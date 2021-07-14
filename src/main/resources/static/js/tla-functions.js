@@ -1,76 +1,34 @@
 $(window).on('pageshow', init);
 
-function copyStringToClipboard (str) {
-       // Create new element
-       var el = document.createElement('textarea');
-       // Set value (string to be copied)
-       el.value = str;
-       // Set non-editable to avoid focus and move outside of view
-       el.setAttribute('readonly', '');
-       el.style = {position: 'absolute', left: '-9999px'};
-       document.body.appendChild(el);
-       // Select text inside element
-       el.select();
-       // Copy text to clipboard
-       document.execCommand('copy');
-       // Remove temporary element
-       document.body.removeChild(el);
-    }
-	
-function getCookie(Bezeichner) {
-  var Wert = "";
-  if (document.cookie) {
-    var Wertstart = document.cookie.indexOf(Bezeichner+"=") + Bezeichner.length +1;
-    var Wertende = document.cookie.indexOf(";", Wertstart);
-    if (Wertende < Wertstart) {
-      Wertende = document.cookie.length;
-	}
-	Wert = document.cookie.substring(Wertstart, Wertende);
-  }
-  return Wert;
+const copyStringToClipboard = (str) => {
+    navigator.clipboard.writeText(str)
 }
 
-function setCookie(Bezeichner, Wert) {
-  var jetzt = new Date();
-  var Auszeit = new Date(jetzt.getTime() + 1000 * 60 * 60 * 24 * 365);
-  document.cookie = Bezeichner + "=" + Wert + "; expires=" + Auszeit.toGMTString() + "; path=/; samesite=lax";
+const getCookie = (name) => Cookies.get(name)
+
+const setCookie = (name, value, path = undefined) => {
+    if (Cookies.get("accepted")) {
+        let params = { expires: 365 }
+        if (path !== undefined) {
+            params = {
+                path: path,
+                ...params
+            }
+        }
+        console.log(`set ${name} to ${value}`)
+        console.log(JSON.stringify(params))
+        Cookies.set(name, value, params)
+    }
 }
 
 function init() {	
 
     // Cookie Acceptance Banner ausblenden
 
-	  var cookieAcceptanceState = getCookie("CookiePolicy");
-	  if (cookieAcceptanceState == "accepted") {
-		  $('.cookie-container').addClass('d-none');
-		  var ausgabe = document.getElementById('cookie-info');
-		  ausgabe.innerHTML = '(Cookies '+cookieAcceptanceState+')';
-	  }
+    if (Cookies.get("accepted")) {
+       $('#cookie-info').html('(Cookies accepted)')
+    }
 	
-    $('.cookie-ok').click(function()  {
-           $('.cookie-container').addClass('d-none');
-            setCookie("CookiePolicy", "accepted");
-            });
-		
-    $('.cookie-dismissed').click(function()  {
-           $('.cookie-container').addClass('d-none');
-            });
-
-	// Search-Button
-	
-    $('.dictionary-search-form-btn').click(function()  {
-		  var search_btn = document.getElementById("submit-search-form");
-		  search_btn.innerHTML = '<span class="fas fa-arrow-circle-right"></span>Search in dictionary';
-		  search_btn.setAttribute('form','dict-search')
-		  });	
-
-    $('.text-word-search-form-btn').click(function()  {
-		  var search_btn = document.getElementById("submit-search-form");
-		  search_btn.innerHTML = '<span class="fas fa-arrow-circle-right"></span>Search in texts';
-		  search_btn.setAttribute('form','text-word-search')
-		  });	
-		  
-
 	// Abbreviation help links
 	
 	$('.ling-glossing').click(function(e) {
@@ -283,17 +241,6 @@ function init() {
         $('.combination-search-btn').click(function (e) {
 			e.preventDefault();
             $('.combination-search').slideToggle('slow');
-        });	
-    
-     // .corpus-path
-		$('html').not('.corpus-path-all').click(function (e) {
-		 if ($('.corpus-path-all').is(':visible') && !e.target == '.corpus-path-all') {
-                $('.corpus-path-all').slideUp('ease-out');
-            }
-        });
-        $('.show-corpus-path').click(function (e) {
-			e.preventDefault();
-            $('.corpus-path-all, .hide-dots').slideToggle('slow');
         });	
     
         

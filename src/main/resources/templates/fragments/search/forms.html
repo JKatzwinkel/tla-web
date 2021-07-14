@@ -197,7 +197,7 @@
                 let name = /*[[${name}]]*/ null;
                 $(`#${name}-type`).on('input', () => {
                   populateSubTypeDropDown(name);
-                  save(name, 'type');
+                  saveDropdown(name, 'type');
                 });
               }
               //]]>
@@ -207,24 +207,17 @@
               {
                 let name = /*[[${name}]]*/ null;
                 $(`#${name}-subtype`).on('input', () => {
-                  save(name, 'subtype');
+                  saveDropdown(name, 'subtype');
                 });
               }
               //]]>
             </script>
             <script th:inline="javascript">
               //<![CDATA[
-              function save(name, prop) {
-                Cookies.set(
-                  `form-field-${name}-select-${prop}`,
-                  $(`#${name}-${prop}`).val(),
-                  {expires: 1, path: '/search'}
-                );
-              }
               $(window).on('pageshow', () => {
                 let name = /*[[${name}]]*/ null;
-                let typeValue = $(`#${name}-type > :selected`).val() || Cookies.get(`form-field-${name}-select-type`);
-                let subtypeValue = $(`#${name}-type-hidden-options-${typeValue} > :selected`).val() || Cookies.get(`form-field-${name}-select-subtype`);
+                let typeValue = $(`#${name}-type > :selected`).val() || getCookie(`form-field-${name}-select-type`);
+                let subtypeValue = $(`#${name}-type-hidden-options-${typeValue} > :selected`).val() || getCookie(`form-field-${name}-select-subtype`);
                 if (typeValue) {
                   $(`#${name}-type`).val(typeValue);
                   populateSubTypeDropDown(name);

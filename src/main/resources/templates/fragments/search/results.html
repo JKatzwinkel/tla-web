@@ -157,15 +157,11 @@
       <div th:fragment="hide-properties-buttons" class="hide-properties-buttons">
         <script th:inline="javascript">
           //<![CDATA[
-          {
-            let objectType = /*[[${objectType}]]*/ null;
-            function saveHideButtonState(name, state) {
-              Cookies.set(
-                `${objectType}-results-hide-property-${name}`,
-                state,
-                {expires: 1, path: `/${objectType}/search`}
-              );
-            }
+          let objectType = /*[[${objectType}]]*/ null;
+          const saveHideButtonState = (name, state) => {
+            setCookie(
+              `${objectType}-results-hide-property-${name}`, state
+            )
           }
           //]]>
         </script>
@@ -214,7 +210,7 @@
                 selector = `${selector} .${subProperty}`;
               }
               button.children('i#on').toggle();
-              if (Cookies.get(`${objectType}-results-hide-property-${name}`) != 'true') {
+              if (getCookie(`${objectType}-results-hide-property-${name}`) != 'true') {
                 button.children('i').toggle();
                 $(selector).toggle();
               }

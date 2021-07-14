@@ -12,7 +12,7 @@ plugins {
 }
 
 group = 'org.bbaw.aaew.tla'
-version = '0.0.817'
+version = '0.0.818'
 sourceCompatibility = '11'
 
 ext {
@@ -20,16 +20,19 @@ ext {
     bootstrapVersion = env.BOOTSTRAP_VERSION.orElse('4.6.0')
     jqueryVersion = env.JQUERY_VERSION.orElse('3.6.0')
     cookieJsVersion = env.COOKIEJS_VERSION.orElse('2.2.1')
+    cookieBannerVersion = env.COOKIE_BANNER_VERSION.orElse('1.2.2')
     fontawesomeSrc = "https://use.fontawesome.com/releases/v${fontawesomeVersion}/fontawesome-free-${fontawesomeVersion}-web.zip"
     bootstrapSrc = "https://github.com/twbs/bootstrap/releases/download/v${bootstrapVersion}/bootstrap-${bootstrapVersion}-dist.zip"
     jquerySrc = "https://code.jquery.com/jquery-${jqueryVersion}.min.js"
     cookieJsSrc = "https://github.com/js-cookie/js-cookie/releases/download/v${cookieJsVersion}/js.cookie-${cookieJsVersion}.min.js"
+    cookieBannerSrc = "https://cdn.jsdelivr.net/gh/dobarkod/cookie-banner@${cookieBannerVersion}/dist/cookiebanner.min.js"
     staticDir = 'src/main/resources/static'
     vendorDir = "${staticDir}/vendor"
 }
 
 def assets = [
   'cookieJs' : [cookieJsSrc, 'js.cookie.min.js'],
+  'cookieBanner': [cookieBannerSrc, 'cookiebanner.min.js'],
   'jquery': [jquerySrc, 'jquery.min.js'],
   'headroomJs': ['https://unpkg.com/headroom.js/dist/headroom.min.js', 'headroom.min.js']
 ]

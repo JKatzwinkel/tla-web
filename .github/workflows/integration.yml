@@ -59,7 +59,7 @@ jobs:
     - name: make gradle wrapper executable
       run: chmod +x gradlew
 
-    - name: install third-party ressources
+    - name: install third-party resources
       run: ./gradlew install
 
     - name: run Selenium tests
@@ -103,7 +103,7 @@ jobs:
     - name: screenshot lemma details page
       uses: "flameddd/screenshots-ci-action@v1.1.1"
       with:
-        url: http://localhost:8080/lemma/59920
+        url: http://localhost:8080/lemma/59920?lang=de
         devices: iPhone 6,iPhone 6 landscape,Nexus 7,iPad Pro,Galaxy S III landscape,iPad Pro landscape
         type: png
 
