@@ -11,7 +11,11 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 public class TLALocaleResolver extends AcceptHeaderLocaleResolver {
 
-    private SessionLocaleResolver sessionLocaleResolver =  new SessionLocaleResolver();
+    private SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
+
+    public TLALocaleResolver() {
+        this.setDefaultLocale(Locale.ENGLISH);
+    }
 
     public static class TLALocaleChangeInterceptor extends LocaleChangeInterceptor {
         public TLALocaleChangeInterceptor(String name) {
