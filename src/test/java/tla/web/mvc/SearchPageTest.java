@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -81,13 +82,63 @@ public class SearchPageTest {
         return browser;
     }
 
+    WebDriverWait wait(RemoteWebDriver browser, int seconds) {
+        return new WebDriverWait(browser, Duration.ofSeconds(seconds));
+    }
+
+    @Test
+    @DisplayName("switching language back and forth should work")
+    public void testLanguageSwitcher() throws Exception {
+        var chrome = getBrowser();
+        open(chrome, "/search");
+
+        chrome.findElement(
+            By.cssSelector(".language.breadcrumb > a.lang-de")
+        ).click();
+
+        wait(chrome, 2);
+
+        assertEquals(
+            messages.getMessage("form_label_lemma-quick-search", null, Locale.GERMAN),
+            chrome.findElement(
+                By.cssSelector("#toggle-lemma-quick-search-form-button > span:nth-child(2)")
+            ).getText()
+        );
+
+        chrome.findElement(
+            By.cssSelector(".language.breadcrumb > a.lang-en")
+        ).click();
+
+        wait(chrome, 2);
+
+        assertEquals(
+            messages.getMessage("form_label_lemma-quick-search", null, Locale.ENGLISH),
+            chrome.findElement(
+                By.cssSelector("#toggle-lemma-quick-search-form-button > span:nth-child(2)")
+            ).getText()
+        );
+
+        chrome.findElement(
+            By.cssSelector("header > nav a[href=\"/\"]")
+        ).click();
+
+        wait(chrome, 2);
+
+        assertEquals(
+            messages.getMessage("menu_global_home", null, Locale.ENGLISH),
+            chrome.findElement(
+                By.cssSelector("nav .breadcrumb .breadcrumb-item:nth-child(1) > a")
+            ).getText()
+        );
+    }
+
     @Test
     @SuppressWarnings("deprecation")
     public void lemmaSearch() throws Exception {
         var chrome = getBrowser();
         open(chrome, "/search?lang=de");
 
-        new WebDriverWait(chrome, Duration.ofSeconds(5)).until(
+        wait(chrome, 10).until(
             ExpectedConditions.elementToBeClickable(
                 By.id("toggle-sentence-search-form-button")
             )
@@ -173,7 +224,7 @@ public class SearchPageTest {
             By.cssSelector("nav.search-results-pagination #page-link-4")
         ).click();
 
-        new WebDriverWait(chrome, Duration.ofSeconds(2));
+        wait(chrome, 2);
 
         chrome.findElement(
             By.cssSelector("button#hide-property-button-hieroglyphs")

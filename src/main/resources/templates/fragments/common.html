@@ -108,7 +108,8 @@
         <div class="language breadcrumb">
           <th:block th:each="lang, i : ${env.l10n}">
             <a th:classappend="${env.lang == lang} ? 'active' : ''"
-                th:href="${@templateUtils.setQueryParam('lang', lang)}" th:text="${lang}" class="text-uppercase">
+               th:href="${@templateUtils.setQueryParam('lang', lang)}" th:text="${lang}"
+               th:class="|text-uppercase lang-${lang}">
               EN
             </a>
             <i th:unless="${i.last}" class="px-1">|</i>
