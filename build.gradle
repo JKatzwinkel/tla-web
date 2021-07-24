@@ -5,14 +5,14 @@ plugins {
     id 'application'
     id 'maven-publish'
     id 'co.uzzu.dotenv.gradle' version '1.1.0'
-    id 'de.undercouch.download' version '4.1.1'
-    id 'org.springframework.boot' version '2.5.1'
+    id 'de.undercouch.download' version '4.1.2'
+    id 'org.springframework.boot' version '2.5.3'
     id 'com.github.ben-manes.versions' version '0.39.0'
     id 'com.github.dawnwords.jacoco.badge' version '0.2.4'
 }
 
 group = 'org.bbaw.aaew.tla'
-version = '0.0.818'
+version = '0.0.819'
 sourceCompatibility = '11'
 
 ext {
@@ -78,10 +78,10 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:2.4.4'
     implementation 'org.jooq:jool:0.9.14'
 
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.1'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.5.1'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.0-M1'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.0-M1'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.3'
-    implementation 'org.slf4j:slf4j-simple:2.0.0-alpha1'
+    implementation 'org.slf4j:slf4j-simple:2.0.0-alpha2'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     implementation 'com.github.jkatzwinkel:tla-common:master-SNAPSHOT'
@@ -90,9 +90,9 @@ dependencies {
     testImplementation 'org.seleniumhq.selenium:selenium-remote-driver:4.0.0-beta-4'
     testImplementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.0.0-beta-4'
     testImplementation 'org.seleniumhq.selenium:selenium-support:4.0.0-beta-4'
-    testImplementation 'org.testcontainers:selenium:1.15.3'
-    testImplementation 'org.testcontainers:junit-jupiter:1.15.3'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.1'
+    testImplementation 'org.testcontainers:selenium:1.16.0'
+    testImplementation 'org.testcontainers:junit-jupiter:1.16.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.0-M1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1'
 }
 
