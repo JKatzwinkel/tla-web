@@ -29,6 +29,9 @@ public abstract class SearchProperties {
      */
     private List<String> sortOrders;
 
+    /**
+     * search config registry
+     */
     private static Map<Class<? extends TLAObject>, SearchProperties> modelSearchProperties = new HashMap<>();
 
     public SearchProperties() {

@@ -66,7 +66,7 @@ public class EditorialContentController {
 
     /**
      * Select one of the languages in which a requested editorial page is available
-     * under consideration of the <pre>Accept-Language</pre> values passed.
+     * under consideration of the <code>Accept-Language</code> values passed.
      */
     private String negotiateContentLanguage(String path, HttpHeaders header) {
         List<Locale.LanguageRange> requested = header.getAcceptLanguage();

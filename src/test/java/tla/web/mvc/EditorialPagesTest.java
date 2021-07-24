@@ -14,11 +14,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Stream;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +32,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import tla.web.config.EditorialConfig.EditorialRegistry;
 
+@TestInstance(Lifecycle.PER_CLASS)
 public class EditorialPagesTest extends ViewTest {
 
     static final String NO_SUPPORT_LANG = "es";
@@ -58,6 +64,10 @@ public class EditorialPagesTest extends ViewTest {
         );
     }
 
+    /**
+     * makes sure that both localization language (language in which i18n labels are being displayed)
+     * and payload language (translation of actual editorial page) match the expectation
+     */
     void testLocalization(ResultActions testResponse, String path, String lang) throws Exception {
         this.testLocalization(testResponse, lang);
         testResponse.andExpect(
@@ -74,13 +84,20 @@ public class EditorialPagesTest extends ViewTest {
         );
     }
 
-    @Test
-    void testEditorials() throws Exception {
-        for (Entry<String, Set<String>> e : pages.getLangSupport().entrySet()) {
-            openEditorial(
-                e.getKey(), new LinkedList<>(e.getValue())
-            );
-        }
+    private Stream<Arguments> editorialPageLanguageSupport() {
+        return pages.getLangSupport().entrySet().stream().map(
+            e -> Arguments.of(e.getKey(), e.getValue())
+        );
+    }
+
+    @ParameterizedTest(
+        name = "{index}: editorial {0} should reply to each ?lang URL param value with corresponding translation: {1}"
+    )
+    @MethodSource("editorialPageLanguageSupport")
+    void testEditorials(String editorial, Set<String> languages) throws Exception {
+        openEditorial(
+            editorial, new LinkedList<>(languages)
+        );
     }
 
     private void openEditorial(String path, List<String> languages) throws Exception {
@@ -116,6 +133,9 @@ public class EditorialPagesTest extends ViewTest {
     }
 
     @Test
+    @DisplayName(
+        "request for editorial page with weighted HTTP header attributes should return that page in preferred language"
+    )
     void someAcceptedLanguagesSupported() throws Exception {
         ResultActions test = mockMvc.perform(
             get(
@@ -128,6 +148,9 @@ public class EditorialPagesTest extends ViewTest {
     }
 
     @Test
+    @DisplayName(
+        "request for editorial page with weighted HTTP header language attributes should return page in preferred language"
+    )
     void weightedAcceptedLanguagesSupported() throws Exception {
         ResultActions test = mockMvc.perform(
             get(
@@ -139,7 +162,7 @@ public class EditorialPagesTest extends ViewTest {
         testLocalization(test, "/legal/imprint", "de");
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{index}: requesting imprint with ?lang URL param should yield reponse in expected language: {0}")
     @ValueSource(strings = {"de->de", ";->en", "no->en", "->en"})
     void weightedAcceptedLanguages_langParam(String spec) throws Exception {
         String param = spec.split("->")[0];
