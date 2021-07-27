@@ -231,8 +231,8 @@
 
     <!-- display a single year -->
     <th:block th:fragment="display-year(year)">
-        <span th:text="${(year < 1) ? T(Math).abs(year) : year}">3500</span>
-        <span th:text="#{|object_property_aux_attestation_time_${(year < 1) ? 'bce' : 'ce'}|}">BCE</span>
+        <span th:text="${(year &lt; 1) ? T(Math).abs(year) : year}">3500</span>
+        <span th:text="#{|object_property_aux_attestation_time_${(year &lt; 1) ? 'bce' : 'ce'}|}">BCE</span>
     </th:block>
 
 

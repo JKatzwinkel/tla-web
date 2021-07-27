@@ -1,4 +1,4 @@
-<html>
+<html xmlns:th="http://thymeleaf.org">
   <body>
 
       <!-- Ths Entry search result -->
@@ -59,7 +59,7 @@
             <i class="text-muted fas fa-book mr-0 ml-2"></i>
             <span th:each="bibl : *{bibliography}" class="bibliographic-reference">
               <span class="font-weight-light" th:text="${bibl}">Bib. ref</span>
-              <small th:unless="${biblStat.last}" class="text-muted" th:text="'&bull;'"/>
+              <small th:unless="${biblStat.last}" class="text-muted" th:text="'&#8226;'"/>
             </span>
           </span>
         </div>
@@ -239,7 +239,7 @@
             >
               Page#
             </a>
-            <a th:if="${page} == null" class="page-link">&hellip;</a>
+            <a th:if="${page} == null" class="page-link">&#8230;</a>
           </li>
         </ul>
       </nav>
