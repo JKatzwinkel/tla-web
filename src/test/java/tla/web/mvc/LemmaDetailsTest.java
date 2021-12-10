@@ -100,7 +100,7 @@ public class LemmaDetailsTest extends ViewTest {
             xpath("//div[@id='passport-properties']").doesNotExist()
         ).andExpect(
             xpath("//div[contains(@class,'bibliography')]/p/span/span[contains(@class,'bibliographic-reference')]").nodeCount(3)
-		).andExpect(
+        ).andExpect(
             xpath("//div[contains(@class,'bibliography')]/p/span/span[contains(@class,'bibliographic-reference')]/text()").string(
                 "Wb 1, 130.1-5"
             )

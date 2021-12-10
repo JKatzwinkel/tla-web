@@ -183,7 +183,9 @@ public class SearchController {
                 handlerMapping.registerMapping(
                     RequestMappingInfo.paths(
                         this.getSearchResultsPageRoute(controller)
-                    ).methods(RequestMethod.GET).build(),
+                    ).methods(RequestMethod.GET).options(
+                        EditorialContentController.handlerMappingBuilderConfig(handlerMapping)
+                    ).build(),
                     controller,
                     method
                 );
