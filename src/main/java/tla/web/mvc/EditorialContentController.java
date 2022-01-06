@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo.BuilderConfiguration;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -194,19 +193,6 @@ public class EditorialContentController {
     }
 
 
-    // TODO: this is a workaround snatched from
-    // TODO: https://github.com/qaware/openapi-generator-for-spring/blob/5b95aefe436fc5e4c9e36a5df829e0f43c2ca5aa/openapi-generator-for-spring-webmvc/src/main/java/de/qaware/openapigeneratorforspring/autoconfigure/OpenApiGeneratorWebMvcAutoConfiguration.java#L61-L76
-    // TODO: once spring 5.3.14 is out, replace with RequestMappingHandlerMapping#getRequestMappingInfoBuilderConfiguration from
-    // TODO: https://github.com/spring-projects/spring-framework/pull/27723/files
-    public static BuilderConfiguration handlerMappingBuilderConfig(RequestMappingHandlerMapping handlerMapping) {
-        BuilderConfiguration config = new BuilderConfiguration();
-        config.setTrailingSlashMatch(handlerMapping.useTrailingSlashMatch());
-        config.setContentNegotiationManager(handlerMapping.getContentNegotiationManager());
-        config.setPatternParser(handlerMapping.getPatternParser());
-        return config;
-    }
-
-
     /**
      * Creates request handler mappings for editorial pages previously registered in the
      * {@link EditorialRegistry}.
@@ -226,7 +212,7 @@ public class EditorialContentController {
                 (path, supportedLanguages) -> {
                     handlerMapping.registerMapping(
                         RequestMappingInfo.paths(path).methods(RequestMethod.GET).options(
-                            handlerMappingBuilderConfig(handlerMapping)
+                            handlerMapping.getBuilderConfiguration()
                         ).build(),
                         this,
                         handlerMethod

@@ -187,7 +187,6 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
         @RequestParam(required = false) Optional<String> term,
         @RequestParam(required = false) Optional<String> type
     ) {
-        log.info("term: {}", term.get());
         return getService().autoComplete(
             term.orElse(""), type.orElse("")
         );
