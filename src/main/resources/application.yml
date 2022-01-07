@@ -6,6 +6,9 @@ server:
     error:
         whitelabel:
             enabled: false
+    servlet:
+        session:
+            tracking-modes: cookie
 
 tla:
     name: Thesaurus Linguae Aegyptiae (BETA)
