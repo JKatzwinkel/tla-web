@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "cypress": "^9.2.0",
+    "eslint-plugin-cypress": "^2.12.1"
+  },
+  "scripts": {
+    "cy:run": "$(npm bin)/cypress run"
+  }
+}
