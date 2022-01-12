@@ -25,3 +25,8 @@ app.log
 # ignore resources
 sample.tar.gz
 .gradletasknamecache
+
+# cypress e2e
+node_modules/
+src/test/e2e/cypress/videos/
+src/test/e2e/cypress/screenshots/
