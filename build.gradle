@@ -87,14 +87,6 @@ dependencies {
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
     implementation 'com.github.rosmord.jsesh:jsesh:release-7.5.5'
 
-    testImplementation 'org.seleniumhq.selenium:selenium-remote-driver:4.1.1'
-    testImplementation 'org.seleniumhq.selenium:selenium-chrome-driver:4.1.1'
-    testImplementation 'org.seleniumhq.selenium:selenium-support:4.1.1'
-    // can be changed back to maven central (org.testcontainers) once
-    // https://github.com/testcontainers/testcontainers-java/pull/4609
-    // is merged:
-    testImplementation 'com.github.testcontainers.testcontainers-java:selenium:selenium-refactoring-SNAPSHOT'
-    testImplementation 'com.github.testcontainers.testcontainers-java:junit-jupiter:selenium-refactoring-SNAPSHOT'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
@@ -252,22 +244,7 @@ application {
 }
 
 test {
-    useJUnitPlatform {
-      includeTags '!selenium'
-    }
     finalizedBy 'jacocoTestReport'
-}
-
-task selenium(type: Test) {
-    group = 'Verification'
-    description = 'Runs functional tests of the web UI using a Selenium container.'
-    systemProperty 'spring.profiles.active', 'selenium'
-    doFirst {
-      installationReminder()
-    }
-    useJUnitPlatform {
-      includeTags 'selenium'
-    }
 }
 
 jacocoTestReport {

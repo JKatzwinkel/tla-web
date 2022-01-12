@@ -60,9 +60,6 @@ jobs:
     - name: install third-party resources
       run: ./gradlew install
 
-    - name: run Selenium tests
-      run: ./gradlew selenium --info
-
     - name: start frontend container
       run: docker-compose up -d frontend
       env:
