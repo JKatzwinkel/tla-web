@@ -160,4 +160,15 @@ jobs:
         path: screenshots
         name: sentence-search-results
 
+    - name: run cypress e2e tests
+      run: docker-compose up e2e
+      env:
+        CYPRESS_BASE_URL: http://localhost:8080
+
+    - name: upload cypress screenshots
+      uses: "actions/upload-artifact@v2.2.3"
+      with:
+        path: src/test/e2e/cypress/screenshots
+        name: cypress-screenshots
+
 ...

@@ -5,7 +5,7 @@ services:
 
     es:
         container_name: tla-es
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.15.2
         environment:
             ES_JAVA_OPTS: -Xms512m -Xmx512m -Dlog4j2.formatMsgNoLookups=true
             discovery.type: single-node
@@ -13,8 +13,6 @@ services:
             ingest.geoip.downloader.enabled: "false"
         ports:
             - ${ES_PORT:-9200}:9200
-        stdin_open: true
-        tty: true
         restart: unless-stopped
 
 
@@ -28,7 +26,6 @@ services:
             - ES_HOST=es
             - ES_PORT=9200
             - SAMPLE_URL
-        tty: true
         command: "ingest"
 
 
@@ -43,7 +40,6 @@ services:
             - ES_PORT=9200
         ports:
             - ${BACKEND_PORT:-8090}:8090
-        tty: true
         restart: unless-stopped
 
 
@@ -60,7 +56,18 @@ services:
             - BOOTSTRAP_VERSION
         ports:
             - ${LISTEN_PORT:-8080}:8080
-        tty: true
         restart: unless-stopped
+
+
+    e2e:
+        container_name: tla-e2e
+        depends_on:
+            - frontend
+        image: cypress/included:9.2.0
+        working_dir: /e2e
+        volumes:
+            - ./src/test/e2e:/e2e
+        network_mode: host
+        tty: true
 
 ...
