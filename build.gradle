@@ -6,13 +6,13 @@ plugins {
     id 'maven-publish'
     id 'co.uzzu.dotenv.gradle' version '1.2.0'
     id 'de.undercouch.download' version '4.1.2'
-    id 'org.springframework.boot' version '2.6.2'
+    id 'org.springframework.boot' version '2.6.3'
     id 'com.github.ben-manes.versions' version '0.41.0'
     id 'com.github.dawnwords.jacoco.badge' version '0.2.4'
 }
 
 group = 'org.bbaw.aaew.tla'
-version = '0.0.823'
+version = '0.0.824'
 sourceCompatibility = '11'
 
 ext {
@@ -62,9 +62,8 @@ repositories {
 }
 
 configurations {
-    // don't embed all the servlet containers 
-    implementation.exclude module: 'spring-boot-starter-jetty'
-    implementation.exclude module: 'spring-boot-starter-netty'
+    // use jetty instead of default servlet container (tomcat)
+    implementation.exclude module: 'spring-boot-starter-tomcat'
 
     testImplementation.exclude group: 'org.junit.vintage'
     testImplementation.exclude module: 'junit-vintage-engine'
@@ -78,8 +77,9 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.0.0'
     implementation 'org.jooq:jool:0.9.14'
 
-    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.2'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.2'
+    implementation 'org.springframework.boot:spring-boot-starter-jetty:2.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.6.3'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha5'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
@@ -87,7 +87,7 @@ dependencies {
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
     implementation 'com.github.rosmord.jsesh:jsesh:release-7.5.5'
 
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.3'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
 }

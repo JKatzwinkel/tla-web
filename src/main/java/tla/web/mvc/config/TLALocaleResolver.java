@@ -1,4 +1,4 @@
-package tla.web.mvc;
+package tla.web.mvc.config;
 
 import java.util.Locale;
 
@@ -35,7 +35,7 @@ public class TLALocaleResolver extends AcceptHeaderLocaleResolver {
      * Determines whether a language specifier is even worth considering
      * during content negotiation (i.e. <em>approximate</em> <code>ISO 639-1</code> conformity).
      */
-    static boolean isValidContentLanguage(String lang) {
+    public static boolean isValidContentLanguage(String lang) {
         return lang != null && lang.matches("[A-Za-z]{2}");
     }
 

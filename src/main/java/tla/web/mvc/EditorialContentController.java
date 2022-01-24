@@ -35,6 +35,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 import lombok.extern.slf4j.Slf4j;
 import tla.web.config.EditorialConfig.EditorialRegistry;
 import tla.web.model.ui.BreadCrumb;
+import tla.web.mvc.config.TLALocaleResolver;
 
 /**
  * Uses dynamic mappings to handle requests for quote unquote "<em>static</em>" pages.

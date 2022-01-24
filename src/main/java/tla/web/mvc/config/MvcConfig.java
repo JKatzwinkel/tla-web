@@ -1,4 +1,4 @@
-package tla.web.mvc;
+package tla.web.mvc.config;
 
 import java.util.stream.Stream;
 
@@ -19,6 +19,7 @@ import tla.web.model.mappings.BTSMarkupConverter;
 import tla.web.model.mappings.LanguageFromStringConverter;
 import tla.web.model.mappings.ScriptFromStringConverter;
 import tla.web.model.mappings.URLDecodeConverter;
+import tla.web.mvc.GlobalControllerAdvisor;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
