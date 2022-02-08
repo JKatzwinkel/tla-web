@@ -161,12 +161,13 @@ jobs:
         name: sentence-search-results
 
     - name: run cypress e2e tests
-      run: docker-compose up e2e
+      run: docker-compose up --exit-code-from e2e
       env:
         CYPRESS_BASE_URL: http://localhost:8080
 
     - name: upload cypress screenshots
-      uses: "actions/upload-artifact@v2.2.3"
+      if: failure()
+      uses: "actions/upload-artifact@v2"
       with:
         path: src/test/e2e/cypress/screenshots
         name: cypress-screenshots
