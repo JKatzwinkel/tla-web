@@ -37,19 +37,20 @@ jobs:
         url: http://localhost:8090/version
         responseCode: 200
         interval: 3000
-        timeout: 30000
+        timeout: 60000
       continue-on-error: true
 
     - name: wait for backend to be populated with thesaurus data
       uses: "cygnetdigital/wait_for_response@v2.0.0"
       with:
-        url: http://localhost:8090/ths/get/kjgx2x
+        url: http://localhost:8090/ths/get/7pupjz
         responseCode: 200
         interval: 3000
-        timeout: 30000
+        timeout: 60000
 
     - name: show tla-ingest container logs
       run: docker-compose logs populate
+      if: always()
 
     - name: query backend endpoint URL paths list
       run: curl -s localhost:8090/
