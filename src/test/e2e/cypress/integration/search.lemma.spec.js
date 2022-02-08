@@ -7,7 +7,7 @@ describe('lemma search', () => {
     cy.contains('Hieratic').click()
     cy.contains('Sub-dictionary').siblings().get(
       'input[value=hieratic]'
-    ).invoke('prop', 'checked').should('eq', false)
+    ).invoke('prop', 'checked').should('eq', true)
     cy.contains('Transliteration').click()
     cy.focused().should('have.attr', 'name', 'transcription')
     cy.focused().type('nfr')
