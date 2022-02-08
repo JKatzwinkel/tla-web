@@ -33,7 +33,7 @@ services:
   backend:
     container_name: tla-backend
     depends_on:
-      - populate
+      - es
     build:
       context: https://github.com/jkatzwinkel/tla-es.git#main
     environment:

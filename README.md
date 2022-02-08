@@ -86,7 +86,7 @@ For building and executing only the TLA backend stack, run the following. You wi
 seperately and outside of the containerized setup further down below.
 
 ```bash
-docker-compose up --build --force-recreate -d backend
+docker-compose up --build --force-recreate -d backend populate
 ```
 
 It will take some time for Docker Compose to build and start the services required, and some additional time for
@@ -143,3 +143,4 @@ the [Docker Compose file](docker-compose.yml), the [env var template file](.env.
 [Application Properties file](src/main/resources/application.yml), and the [build file](build.gradle).
 
 
+<!--- vim: set ts=2 sw=2 tw=100 noet ft=markdown : -->
