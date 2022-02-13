@@ -78,6 +78,28 @@ public class LemmaSearchResultsTest extends ViewTest {
     }
 
     @Test
+    @DisplayName("search parameters should be preserved inside hidden search form")
+    void testHiddenSearchForm() throws Exception {
+        mockSearch("demotic_translation_de.json");
+        ResultActions testResponse = mockMvc.perform(
+            get(
+                "/search/lemma?wordClass.type=adjective&wordClass.subtype=nisbe_adjective_preposition"
+            ).header(HttpHeaders.ACCEPT_LANGUAGE, "en")
+        ).andDo(print()).andExpect(
+            status().isOk()
+        );
+        testResponse.andExpect(
+            xpath(
+                "//select[@name='wordClass.type']/option[@value='adjective']"
+            ).exists()
+        ).andExpect(
+            xpath(
+                "//select[@name='anno.type']/option[@value='lemma']"
+            ).exists()
+        );
+    }
+
+    @Test
     void testFulltypeLabels() throws Exception {
         mockSearch("demotic_translation_de.json");
         ResultActions testResponse = mockMvc.perform(

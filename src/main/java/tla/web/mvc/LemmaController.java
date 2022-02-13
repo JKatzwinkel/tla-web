@@ -77,6 +77,8 @@ public class LemmaController extends ObjectController<Lemma, LemmaSearch> {
         @RequestParam MultiValueMap<String, String> params,
         Model model
     ) {
+        model.addAttribute("wordClasses", searchConfig.getWordClasses());
+        model.addAttribute("lemmaAnnotationTypes", searchConfig.getAnnotationTypes());
         return super.getSearchResultsPage(form, page, params, model);
     }
 
