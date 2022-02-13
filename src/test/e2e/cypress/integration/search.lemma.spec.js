@@ -40,4 +40,28 @@ describe('lemma search', () => {
     cy.contains('Dictionary Entry')
     cy.contains('Digitalisiertes Zettelarchiv')
   })
+
+
+  it('search in wordclass', () => {
+    cy.viewport(1920, 1080)
+    cy.visit(
+      '/search/lemma?wordClass.type=adjective&wordClass.subtype=nisbe_adjective_preposition&anno.type=lemma'
+    )
+
+    cy.contains('Search results').siblings('b').last().invoke('text').as('count')
+
+    // change search result sort order
+    cy.get('#select-sort-order').select('timeSpan.begin_asc')
+    cy.url().should('contain', 'sort=timeSpan.begin_asc').should(
+      'contain', 'wordClass.type=adjective'
+    ).should(
+      'contains', 'wordClass.subtype=nisbe_adjective_preposition'
+    ).should(
+      'contains', 'anno.type=lemma'
+    )
+
+    cy.contains('Search results').siblings('b').last().invoke('text').then(text => {
+      cy.get('@count').should('eq', text)
+    })
+  })
 })
