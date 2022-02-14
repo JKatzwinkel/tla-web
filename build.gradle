@@ -96,7 +96,7 @@ task installAssets {
     description = 'Download and install third-party JS/CSS frameworks and libraries'
     dependsOn 'installFontRoboto'
     outputs.files(
-        file("${staticDir}/vendor/")
+        file("${vendorDir}/")
     )
 }
 
@@ -206,6 +206,9 @@ task cleanAssets(type: Delete) {
       entry -> cleanAssets.dependsOn "cleanDownload${entry.key.capitalize()}"
     }
     delete "${staticDir}/vendor/"
+    delete fileTree("${staticDir}/font") {
+        include "roboto*"
+    }
 }
 
 clean {
