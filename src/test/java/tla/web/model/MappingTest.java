@@ -88,9 +88,12 @@ public class MappingTest {
         var period3 = tla.domain.model.extern.AttestedTimespan.Period.builder().begin(-316).end(-70).ref(
             ObjectReference.builder().eclass("BTSThsEntry").id("term2").type("date").build()
         ).build();
+        var grandchild = tla.domain.model.extern.AttestedTimespan.builder().attestations(
+            tla.domain.model.extern.AttestedTimespan.AttestationStats.builder().count(1).build()
+        ).build();
         var child = tla.domain.model.extern.AttestedTimespan.builder().attestations(
             tla.domain.model.extern.AttestedTimespan.AttestationStats.builder().count(11).build()
-        ).period(period2).build();
+        ).period(period2).contains(List.of(grandchild)).build();
         LemmaDto dto = LemmaDto.builder().id("id").attestations(
             List.of(
                 tla.domain.model.extern.AttestedTimespan.builder().attestations(
@@ -109,8 +112,8 @@ public class MappingTest {
             () -> assertEquals(2, l.getAttestations().size(), "should have 2 root attestation nodes"),
             () -> assertTrue(l.getAttestations().get(0) instanceof AttestedTimespan, "attestation should be instance of domain model"),
             () -> assertEquals(5, l.getAttestations().get(0).getAttestations().getCount(), "attestations should have been initialized"),
-            () -> assertEquals(16, l.getAttestations().get(0).getTotal().getCount(), "total attestation count should account for child nodes"),
-            () -> assertEquals(23, l.getAttestationCount(), "total attestation count should account for root nodes and their children"),
+            () -> assertEquals(17, l.getAttestations().get(0).getTotal().getCount(), "total attestation count should account for child nodes"),
+            () -> assertEquals(24, l.getAttestationCount(), "total attestation count should account for root nodes and their children"),
             () -> assertEquals("term1", l.getAttestations().get(0).getPeriod().getRef().getId(), "attestation period object reference should be preserved")
         );
     }

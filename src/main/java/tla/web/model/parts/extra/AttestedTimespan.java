@@ -10,12 +10,16 @@ public class AttestedTimespan extends tla.domain.model.extern.AttestedTimespan {
         return o;
     }
 
+    /**
+     * compute sum of attestation counts of this attested timespan and all its decendants.
+     */
     public AttestationStats getTotal() {
-        AttestationStats stats = this.getContains().stream().map(
-            child -> child.getAttestations()
-        ).reduce(
-            new AttestationStats(),
-            (total, current) -> total.add(current)
+        AttestationStats stats = this.getContains().stream().collect(
+            AttestationStats::new,
+            (result, timespan) -> result.add(
+                AttestedTimespan.of(timespan).getTotal()
+            ),
+            AttestationStats::add
         );
         return stats.add(this.getAttestations());
     }
