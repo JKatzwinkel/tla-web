@@ -6,6 +6,13 @@ updates:
 
   - package-ecosystem: "gradle"
     directory: "/"
+    ignore:
+      - dependency-name: "jsesh"
+        versions:
+          - "20130225"
+          - "20110209"
+          - "7.3.1"
+          - "6.4.1"
     schedule:
       interval: "weekly"
     reviewers:
