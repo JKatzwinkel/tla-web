@@ -2,7 +2,6 @@ package tla.web.mvc;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import tla.domain.command.SearchCommand;
 import tla.domain.model.ObjectPath;
@@ -22,12 +21,8 @@ public abstract class HierarchicObjectController<T extends TLAObject, S extends 
         return paths.stream().map(
             path -> path.stream().map(
                 ref -> createLink(ref)
-            ).collect(
-                Collectors.toList()
-            )
-        ).collect(
-            Collectors.toList()
-        );
+            ).toList()
+        ).toList();
     }
 
 }

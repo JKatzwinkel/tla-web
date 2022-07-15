@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 import java.util.List;
 
 import tla.web.config.ApplicationProperties;
@@ -51,28 +50,29 @@ public class ExternalReferencesConverter extends AbstractConverter<
         SortedMap<String, SortedSet<tla.domain.model.ExternalReference>> source
     ) {
         TreeMap<String, List<tla.web.model.parts.ExternalReference>> res = new TreeMap<>();
-        if (source != null) {
-            source.forEach(
-                (provider, refs) -> {
-                    res.put(
-                        provider,
-                        refs.stream().map(
-                            dto -> {
-                                return tla.web.model.parts.ExternalReference.builder().href(
-                                    formatLink(
-                                        provider,
-                                        dto.getId(),
-                                        dto.getType()
-                                    )
-                                )
-                                .value(dto.getId())
-                                .type(dto.getType()).build();
-                            }
-                        ).collect(Collectors.toList())
-                    );
-                }
-            );
+        if (source == null) {
+            return res;
         }
+        source.forEach(
+            (provider, refs) -> {
+                res.put(
+                    provider,
+                    refs.stream().map(
+                        dto -> tla.web.model.parts.ExternalReference.builder()
+                            .href(
+                                formatLink(
+                                    provider,
+                                    dto.getId(),
+                                    dto.getType()
+                                )
+                            )
+                            .value(dto.getId())
+                            .type(dto.getType())
+                            .build()
+                    ).toList()
+                );
+            }
+        );
         return res;
     }
 }

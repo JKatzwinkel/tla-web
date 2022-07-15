@@ -120,9 +120,7 @@ public class SearchController {
     protected List<SearchFormExpansionState> initFormExpansionStates(MultiValueMap<String, String> params) {
         return SEARCH_FORMS.stream().map(
             this.expandFormExpression(params)
-        ).collect(
-            Collectors.toList()
-        );
+        ).toList();
     }
 
     /**

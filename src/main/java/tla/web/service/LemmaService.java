@@ -2,7 +2,6 @@ package tla.web.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -27,9 +26,7 @@ public class LemmaService extends ObjectService<Lemma> {
                 relatedObject -> relatedObject instanceof Annotation ? (Annotation) relatedObject : null
             ).filter(
                 annotation -> annotation != null && (annotation.getName() != null && annotation.getBody() != null)
-            ).collect(
-                Collectors.toList()
-            );
+            ).toList();
         } else {
             return null;
         }

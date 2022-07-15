@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,9 +40,7 @@ public class SearchResults extends ObjectsContainer {
         if (dtos != null) {
             return dtos.stream().map(
                 d -> MappingConfig.convertDTO(d)
-            ).collect(
-                Collectors.toList()
-            );
+            ).toList();
         } else {
             return new ArrayList<>();
         }

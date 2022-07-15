@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.Getter;
@@ -22,8 +21,8 @@ public class AttestationTimeline {
         private List<Integer> quartiles = new ArrayList<>();
         private Integer quartile = null;
 
-        public QuartileFinder(List<AttestedTimespan> attestations) {
-            var total = computeTotal(attestations);
+        public QuartileFinder(List<AttestedTimespan> attestations, long totalCount) {
+            var total = totalCount;
             List.of(.25, .5, .75).stream().forEach(
                 ratio -> this.targets.add(ratio * total)
             );
@@ -35,8 +34,12 @@ public class AttestationTimeline {
             attestedTimespans.forEach(this::count);
         }
 
+        public static List<Integer> find(List<AttestedTimespan> attestations, long totalCount) {
+            return new QuartileFinder(attestations, totalCount).getQuartiles();
+        }
+
         public static List<Integer> find(List<AttestedTimespan> attestations) {
-            return new QuartileFinder(attestations).getQuartiles();
+            return find(attestations, computeTotal(attestations));
         }
 
         private void count(tla.domain.model.extern.AttestedTimespan attestedTimespan) {
@@ -92,7 +95,7 @@ public class AttestationTimeline {
         ).build();
         this.rectangles = attestations.stream().flatMap(
             attestation -> this.renderAttestedTimespan(attestation)
-        ).collect(Collectors.toList());
+        ).toList();
         Collections.sort(this.rectangles);
         this.tics = this.createXTics();
         this.quartiles = this.createMarks(attestations);
@@ -127,11 +130,9 @@ public class AttestationTimeline {
 
     protected List<Tic> createMarks(List<AttestedTimespan> attestations) {
         if (this.totalCount > 0) {
-            return QuartileFinder.find(attestations).stream().map(
+            return QuartileFinder.find(attestations, this.totalCount).stream().map(
                 quartile -> Tic.of(quartile, 6)
-            ).collect(
-                Collectors.toList()
-            );
+            ).toList();
         }
         return null;
     }

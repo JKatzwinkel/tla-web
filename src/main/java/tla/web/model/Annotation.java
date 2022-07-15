@@ -67,9 +67,7 @@ public class Annotation extends BTSObject {
                     Passport::getLeafNodeValue
                 ).map(
                     String::trim
-                ).collect(
-                    Collectors.toList()
-                );
+                ).toList();
             }
         }
         return Collections.emptyList();
