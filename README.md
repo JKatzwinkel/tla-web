@@ -1,7 +1,7 @@
 ![build](https://github.com/JKatzwinkel/tla-web/workflows/build/badge.svg)
 ![deploy](https://github.com/JKatzwinkel/tla-web/workflows/deploy/badge.svg)
-![LINE](https://img.shields.io/badge/line--coverage-91.82%25-brightgreen.svg)
-![METHOD](https://img.shields.io/badge/method--coverage-85.69%25-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-90.83%25-brightgreen.svg)
+![METHOD](https://img.shields.io/badge/method--coverage-83.64%25-brightgreen.svg)
 
 TLA web frontend.
 
@@ -62,14 +62,14 @@ An example for the assignment of the `SAMPLE_URL` environment variable with an a
 TLA frontend version at hand would be:
 
 ```bash
-export SAMPLE_URL=http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
+  export SAMPLE_URL=http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
 ```
 
 Alternatively, you can create a file named `.env` within the same local folder that contains this
 `README.md`, and insert the following line:
 
 ```ini
-SAMPLE_URL=http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
+  SAMPLE_URL=http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
 ```
 
 Having set the `SAMPLE_URL` variable one way or another, you are ready to use Docker Compose for running either
@@ -79,14 +79,14 @@ on your local machine.
 For building and executing the entire stack, *including the TLA frontend*, run this command in your terminal:
 
 ```bash
-docker-compose up --build --force-recreate -d
+  docker-compose up --build --force-recreate -d
 ```
 
 For building and executing only the TLA backend stack, run the following. You will learn how to run the TLA frontend
 seperately and outside of the containerized setup further down below.
 
 ```bash
-docker-compose up --build --force-recreate -d backend populate
+  docker-compose up --build --force-recreate -d backend populate
 ```
 
 It will take some time for Docker Compose to build and start the services required, and some additional time for
@@ -95,7 +95,7 @@ located at the URL specified via the `SAMPLE_URL` environment variable. In the m
 `tla-ingest` container running the `populate` service with the following command:
 
 ```bash
-docker-compose ps
+  docker-compose ps
 ```
 
 If it takes the `tla-ingest` container longer than you anticipated to exit, you can monitor its progress by checking
@@ -116,20 +116,24 @@ populated with data.
 
 ### Run TLA frontend app using Gradle
 
-- Requires Java 11
+- Requires Java 17
 
 Provided a properly running TLA backend application is available, the TLA frontend application can be executed
-using the included [build file](build.gradle). This requires a Java JDK version 11 or higher.
+using the included [build file](build.gradle). This requires a Java JDK version 17 or higher.
 
 This repository comes with Gradle wrappers for both Unix (`gradlew`) and Windows (`gradlew.bat`). Use the Gradle wrapper
 appropriate for your platform in order to execute build tasks `install` defined in the build file and `bootRun`
 from the Spring Boot Gradle plugin:
 
-    ./gradlew install bootrun --refresh-dependencies
+```bash
+  ./gradlew install bootrun --refresh-dependencies
+```
 
 or 
 
-    ./gradlew.bat install bootrun --refresh-dependencies
+```bash
+  ./gradlew.bat install bootrun --refresh-dependencies
+```
 
 The `bootRun` task ist configured to start up the application in `dev` mode, which disables static asset and template caches.
 This means that modifications to file in the `templates` and `static` subdirectories of `src/main/resources` are being

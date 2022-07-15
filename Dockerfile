@@ -1,11 +1,11 @@
-FROM gradle:7.4-jdk11 AS build
+FROM gradle:7.4.2-jdk17 AS build
 
 COPY --chown=gradle:gradle . /home/gradle/tla-frontend
 WORKDIR /home/gradle/tla-frontend
 RUN gradle installAssets bootJar --no-daemon
 
 
-FROM openjdk:11-jre-slim
+FROM openjdk:17.0.2-jdk-buster
 
 RUN mkdir /app; apt-get update && apt-get install -y fontconfig libfreetype6
 WORKDIR /app
