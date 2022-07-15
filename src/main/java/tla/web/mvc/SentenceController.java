@@ -1,6 +1,8 @@
 package tla.web.mvc;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,34 +35,42 @@ public class SentenceController extends HierarchicObjectController<Sentence, Sen
         return service;
     }
 
+    /**
+     * creates a list of breadcrumb-like link objects beginning with a sentence's
+     * text object and followed by optional paragraph and finally line count information.
+     */
+    private List<BreadCrumb> createSentenceContextLinks(Sentence sentence) {
+        return Stream.of(
+            ObjectController.createLink(
+                sentence.getText().toObjectReference()
+            ),
+            (
+                sentence.getContext().getParagraph() != null
+            ) ? new CorpusPathSegment(
+                null, sentence.getContext().getParagraph(),
+                null, "paragraph"
+            ) : null,
+            new CorpusPathSegment(
+                null, sentence.getContext().getLine(),
+                null, "line"
+            )
+        ).filter(
+            link -> link != null
+        ).toList();
+    }
+
     @Override
     public List<List<BreadCrumb>> createObjectPathLinks(Hierarchic object) {
-        var sentence = ((Sentence) object);
-        var paths = super.createObjectPathLinks(sentence);
-        paths.forEach(
-            links -> {
-                links.add(
-                    ObjectController.createLink(
-                        sentence.getText().toObjectReference()
-                    )
-                );
-                if (sentence.getContext().getParagraph() != null) {
-                    links.add(
-                        new CorpusPathSegment(
-                            null, sentence.getContext().getParagraph(),
-                            null, "paragraph"
-                        )
-                    );
-                }
-                links.add(
-                    new CorpusPathSegment(
-                        null, sentence.getContext().getLine(),
-                        null, "line"
-                    )
-                );
-            }
-        );
-        return paths;
+        var sentence = (Sentence) object;
+        var sentenceContextLinks = createSentenceContextLinks(sentence);
+        return super.createObjectPathLinks(sentence).stream().map(
+            parentObjectPathLinks -> Stream.of(
+                parentObjectPathLinks,
+                sentenceContextLinks
+            ).flatMap(
+                links -> links.stream()
+            ).toList()
+        ).toList();
     }
 
     /*

@@ -95,8 +95,7 @@ public class AttestationTimeline {
         ).build();
         this.rectangles = attestations.stream().flatMap(
             attestation -> this.renderAttestedTimespan(attestation)
-        ).toList();
-        Collections.sort(this.rectangles);
+        ).sorted().toList();
         this.tics = this.createXTics();
         this.quartiles = this.createMarks(attestations);
     }
