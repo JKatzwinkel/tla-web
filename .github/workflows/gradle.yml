@@ -2,7 +2,14 @@
 
 name: build
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - "dependabot/npm**"
+  pull_request:
+    branches-ignore:
+      - "dependabot/npm**"
+
 
 jobs:
 
