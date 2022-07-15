@@ -5,10 +5,10 @@ name: build
 on:
   push:
     branches-ignore:
-      - "dependabot/npm**"
+      - 'dependabot/npm**'
   pull_request:
     branches-ignore:
-      - "dependabot/npm**"
+      - 'dependabot/npm**'
 
 
 jobs:
