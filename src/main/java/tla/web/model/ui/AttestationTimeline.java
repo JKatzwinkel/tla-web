@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import lombok.Getter;
@@ -92,7 +91,7 @@ public class AttestationTimeline {
         ).build();
         this.rectangles = attestations.stream().flatMap(
             attestation -> this.renderAttestedTimespan(attestation)
-        ).collect(Collectors.toList());
+        ).toList();
         Collections.sort(this.rectangles);
         this.tics = this.createXTics();
         this.quartiles = this.createMarks(attestations);
@@ -129,9 +128,7 @@ public class AttestationTimeline {
         if (this.totalCount > 0) {
             return QuartileFinder.find(attestations).stream().map(
                 quartile -> Tic.of(quartile, 6)
-            ).collect(
-                Collectors.toList()
-            );
+            ).toList();
         }
         return null;
     }

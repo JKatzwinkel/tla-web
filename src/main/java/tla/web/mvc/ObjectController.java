@@ -9,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -162,9 +161,7 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
                 passportField.replace(".", "_"),
                 values.stream().map(
                     passportValue -> new CorpusPathSegment(passportValue.getLeafNodeValue())
-                ).collect(
-                    Collectors.toList()
-                )
+                ).toList()
             )
         );
         return res;

@@ -52,9 +52,7 @@ public class ObjectDetails<T extends TLAObject> extends ObjectsContainer {
                     reference -> this.expandRelatedObject(reference)
                 ).filter(
                     o -> o != null
-                ).collect(
-                    Collectors.toList()
-                )
+                ).toList()
             )
         );
     }

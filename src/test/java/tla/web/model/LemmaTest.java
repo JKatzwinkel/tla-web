@@ -1,7 +1,6 @@
 package tla.web.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +35,7 @@ public class LemmaTest {
             .words(
                 wordGlyphs.stream().map(
                     mdc -> Token.builder().glyphs(Glyphs.of(mdc)).build()
-                ).collect(Collectors.toList())
+                ).toList()
             ).build();
         List<Glyphs> glyphs = l.getHieroglyphs();
         assertAll("test hieroglyphs from lemma extraction",

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.SortedMap;
-import java.util.stream.Collectors;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -79,9 +78,7 @@ public class Lemma extends BTSObject {
         if (this.getDictionaryName().equals(Script.HIERATIC)) {
             List<Glyphs> hieroglyphs = this.getWords().stream().map(
                 Token::getGlyphs
-            ).collect(
-                Collectors.toList()
-            );
+            ).toList();
             return (hieroglyphs.stream().allMatch(
                 glyphs -> glyphs == null || glyphs.isEmpty()
             )) ? null : hieroglyphs;
@@ -122,9 +119,7 @@ public class Lemma extends BTSObject {
                         node.getLeafNodeValue().split(";")
                     ).stream().map(
                         bibref -> bibref.strip()
-                    ).collect(
-                        Collectors.toList()
-                    )
+                    ).toList()
                 )
             );
         } catch (Exception e) {

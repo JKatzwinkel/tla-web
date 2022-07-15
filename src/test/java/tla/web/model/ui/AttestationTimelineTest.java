@@ -3,7 +3,6 @@ package tla.web.model.ui;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,7 +79,7 @@ public class AttestationTimelineTest {
             ).attestations(
                 AttestationStats.builder().count(years.get(2)).build()
             ).build())
-        ).collect(Collectors.toList());
+        ).toList();
     }
 
     @Test
@@ -159,7 +158,7 @@ public class AttestationTimelineTest {
                 )
             ).stream().map(
                 a -> (tla.domain.model.extern.AttestedTimespan) a
-            ).collect(Collectors.toList())
+            ).toList()
         );
         roots.get(1).setContains(
             mockAttestationTimespans(
@@ -169,7 +168,7 @@ public class AttestationTimelineTest {
                 )
             ).stream().map(
                 a -> (tla.domain.model.extern.AttestedTimespan) a
-            ).collect(Collectors.toList())
+            ).toList()
         );
         var median = QuartileFinder.find(roots).get(1);
         assertEquals(40, median);
