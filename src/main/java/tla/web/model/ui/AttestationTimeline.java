@@ -21,8 +21,8 @@ public class AttestationTimeline {
         private List<Integer> quartiles = new ArrayList<>();
         private Integer quartile = null;
 
-        public QuartileFinder(List<AttestedTimespan> attestations) {
-            var total = computeTotal(attestations);
+        public QuartileFinder(List<AttestedTimespan> attestations, long totalCount) {
+            var total = totalCount;
             List.of(.25, .5, .75).stream().forEach(
                 ratio -> this.targets.add(ratio * total)
             );
@@ -34,8 +34,12 @@ public class AttestationTimeline {
             attestedTimespans.forEach(this::count);
         }
 
+        public static List<Integer> find(List<AttestedTimespan> attestations, long totalCount) {
+            return new QuartileFinder(attestations, totalCount).getQuartiles();
+        }
+
         public static List<Integer> find(List<AttestedTimespan> attestations) {
-            return new QuartileFinder(attestations).getQuartiles();
+            return find(attestations, computeTotal(attestations));
         }
 
         private void count(tla.domain.model.extern.AttestedTimespan attestedTimespan) {
@@ -126,7 +130,7 @@ public class AttestationTimeline {
 
     protected List<Tic> createMarks(List<AttestedTimespan> attestations) {
         if (this.totalCount > 0) {
-            return QuartileFinder.find(attestations).stream().map(
+            return QuartileFinder.find(attestations, this.totalCount).stream().map(
                 quartile -> Tic.of(quartile, 6)
             ).toList();
         }

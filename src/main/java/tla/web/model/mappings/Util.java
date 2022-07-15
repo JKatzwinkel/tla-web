@@ -49,7 +49,7 @@ public class Util {
             parsed.forEach(item -> item.setRed(rubrum));
             topItems = new TopItemList();
             topItems.addAll(parsed);
-        } else  {
+        } else {
             topItems = new MDCParserModelGenerator().parse(mdc);
         }
         return topItems;
@@ -63,31 +63,32 @@ public class Util {
      * @return textual serialization of SVG vector graphic or null
      */
     public static String jseshRender(String mdc, boolean rubrum) {
-        if (mdc != null && !mdc.isBlank()) {
-            try (StringWriter writer = new StringWriter()) {
-                Rectangle2D boundingBox = facade.getBounds(
-                    mdc, 0, 0
-                );
-                var svg = new SVGGraphics2D(
-                    writer,
-                    new DoubleDimensions(
-                        boundingBox.getWidth(),
-                        boundingBox.getHeight()
-                    )
-                );
-                facade.draw(
-                    topItems(mdc, rubrum), svg, 0, 0
-                );
-                svg.dispose();
-                return patchSVG(writer);
-            } catch (Exception e) {
-                log.warn(
-                    "Jsesh could not render hieroglyph encoding '{}': {}",
-                    mdc, e.toString()
-                );
-            }
+        if (mdc == null || mdc.isBlank()) {
+            return null;
         }
-        return null;
+        try (StringWriter writer = new StringWriter()) {
+            Rectangle2D boundingBox = facade.getBounds(
+                mdc, 0, 0
+            );
+            var svg = new SVGGraphics2D(
+                writer,
+                new DoubleDimensions(
+                    boundingBox.getWidth(),
+                    boundingBox.getHeight()
+                )
+            );
+            facade.draw(
+                topItems(mdc, rubrum), svg, 0, 0
+            );
+            svg.dispose();
+            return patchSVG(writer);
+        } catch (Exception e) {
+            log.warn(
+                "Jsesh could not render hieroglyph encoding '{}': {}",
+                mdc, e.toString()
+            );
+            return null;
+        }
     }
 
     /**
