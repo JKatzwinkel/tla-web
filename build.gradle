@@ -35,7 +35,7 @@ def assets = [
   'cookieJs' : [cookieJsSrc, 'js.cookie.min.js'],
   'cookieBanner': [cookieBannerSrc, 'cookiebanner.min.js'],
   'jquery': [jquerySrc, 'jquery.min.js'],
-  'headroomJs': ['https://unpkg.com/headroom.js/dist/headroom.min.js', 'headroom.min.js']
+  'headroomJs': ['https://unpkg.com/headroom.js@0.12.0/dist/headroom.min.js', 'headroom.min.js']
 ]
 
 def frameworks = [
