@@ -82,7 +82,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-jetty:3.0.0-M3'
     implementation 'org.springframework.boot:spring-boot-starter-web:3.0.0-M3'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.0-M3'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.0-M4'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha7'
     implementation 'org.apache.logging.log4j:log4j-core:2.18.0'
