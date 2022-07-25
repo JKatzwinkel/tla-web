@@ -140,11 +140,25 @@ This means that modifications to file in the `templates` and `static` subdirecto
 reflected in the application's web interface without reboot.
 
 
+## Tests
+
+### e2e tests
+
+Startup the application and then run the cypress container with the appropriate environment
+variables:
+
+```bash
+  CYPRESS_BASE_URL=http://localhost:8080 CYPRESS_VIDEO=false docker-compose up --exit-code-from e2e e2e
+```
+
+
 ## Configuration
 
 For config options and further methods of execution check out the [Dockerfile](Dockerfile),
 the [Docker Compose file](docker-compose.yml), the [env var template file](.env.template), the
-[Application Properties file](src/main/resources/application.yml), and the [build file](build.gradle).
+[Application Properties file](src/main/resources/application.yml), the [build file](build.gradle),
+and the [CI pipeline configuration for integration testing](.github/workflows/integration.yml).
+
 
 
 <!--- vim: set ts=2 sw=2 tw=100 noet ft=markdown : -->
