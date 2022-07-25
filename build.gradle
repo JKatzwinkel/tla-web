@@ -13,7 +13,7 @@ plugins {
 }
 
 group = 'org.bbaw.aaew.tla'
-version = '0.0.825-dev'
+version = '0.0.826-dev'
 sourceCompatibility = '17'
 
 ext {
@@ -62,16 +62,6 @@ repositories {
     maven { url 'https://repo.spring.io/milestone' }
 }
 
-configurations {
-    // use jetty instead of default servlet container (tomcat)
-    implementation.exclude module: 'spring-boot-starter-tomcat'
-
-    implementation.exclude module: 'spring-boot-starter-logging'
-
-    testImplementation.exclude group: 'org.junit.vintage'
-    testImplementation.exclude module: 'junit-vintage-engine'
-}
-
 dependencies {
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -80,8 +70,12 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.1.0'
     implementation 'org.jooq:jool:0.9.14'
 
-    implementation 'org.springframework.boot:spring-boot-starter-jetty:3.0.0-M4'
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.0-M4'
+    implementation('org.springframework.boot:spring-boot-starter-jetty:3.0.0-M4') {
+        exclude module: 'jetty-xml'
+    }
+    implementation('org.springframework.boot:spring-boot-starter-web:3.0.0-M3') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.0-M4'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0'
     implementation 'org.slf4j:slf4j-simple:2.0.0-alpha7'
@@ -89,7 +83,10 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
-    implementation 'com.github.rosmord.jsesh:jsesh:release-7.5.5'
+    implementation('com.github.rosmord.jsesh:jsesh:release-7.5.5') {
+        exclude group: 'com.jgoodies', module: 'forms'
+        exclude group: 'bouncycastle'
+    }
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.0.0-M3'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0-RC1'
