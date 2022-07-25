@@ -29,11 +29,13 @@ describe('search page', () => {
 
     // expand lemma ID search form
     cy.contains('Look up Lemma').click()
+    cy.contains('Look up Lemma').invoke('attr', 'aria-expanded').should('eq', 'true')
     cy.contains('Sub-dictionary').should('not.be.visible')
     cy.contains('Lemma ID').should('be.visible')
 
     // collapse lemma ID search form
     cy.contains('Look up Lemma').click()
+    cy.contains('Look up Lemma').invoke('attr', 'aria-expanded').should('eq', 'false')
     cy.contains('Sub-dictionary').should('not.be.visible')
     cy.contains('Lemma ID').should('not.be.visible')
   })
