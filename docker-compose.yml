@@ -22,7 +22,7 @@ services:
     depends_on:
       - es
     build:
-      context: https://github.com/jkatzwinkel/tla-es.git#java17
+      context: https://github.com/jkatzwinkel/tla-es.git#main
     environment:
       - ES_HOST=es
       - ES_PORT=9200
@@ -35,7 +35,7 @@ services:
     depends_on:
       - es
     build:
-      context: https://github.com/jkatzwinkel/tla-es.git#java17
+      context: https://github.com/jkatzwinkel/tla-es.git#main
     environment:
       - ES_HOST=es
       - ES_PORT=9200
