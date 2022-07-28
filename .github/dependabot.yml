@@ -18,6 +18,13 @@ updates:
     reviewers:
       - "jkatzwinkel"
 
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "jkatzwinkel"
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
