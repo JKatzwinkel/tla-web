@@ -73,7 +73,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-jetty:3.0.0-M4') {
         exclude module: 'jetty-xml'
     }
-    implementation('org.springframework.boot:spring-boot-starter-web:3.0.0-M4') {
+    implementation('org.springframework.boot:spring-boot-starter-web:3.0.0-M5') {
         exclude module: 'spring-boot-starter-tomcat'
     }
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.0-M4'
