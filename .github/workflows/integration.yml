@@ -18,7 +18,7 @@ jobs:
 
     steps:
 
-    - uses: "actions/checkout@v3"
+    - uses: "actions/checkout@v3.1.0"
 
     - name: start backend containers
       run: docker-compose up -d backend populate
@@ -95,7 +95,7 @@ jobs:
 
     - name: upload cypress screenshots
       if: failure()
-      uses: "actions/upload-artifact@v3"
+      uses: "actions/upload-artifact@v3.1.0"
       with:
         path: src/test/e2e/cypress/screenshots
         name: cypress-screenshots
