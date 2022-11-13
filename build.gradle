@@ -71,7 +71,7 @@ dependencies {
     implementation 'org.jooq:jool:0.9.14'
 
     // https://github.com/spring-projects/spring-framework/issues/29435
-    implementation('jakarta.servlet:jakarta.servlet-api:5.0.0')
+    implementation('jakarta.servlet:jakarta.servlet-api:6.0.0')
     implementation('org.springframework.boot:spring-boot-starter-jetty:3.0.0-RC2') {
         exclude group: 'jakarta.servlet', module: 'jakarta.servlet-api' // until jetty 12
         exclude module: 'jetty-xml'
