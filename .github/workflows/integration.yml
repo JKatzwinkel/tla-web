@@ -30,30 +30,27 @@ jobs:
       run: docker-compose logs backend
 
     - name: wait for backend to be populated with lemma data
-      uses: "cygnetdigital/wait_for_response@v2.0.0"
-      with:
+      run: bash .github/scripts/wait_for_response.sh
+      env:
         url: http://localhost:8090/lemma/get/100690
-        responseCode: 200
-        interval: 5000
-        timeout: 120000
+        interval: 5
+        timeout: 120
       continue-on-error: true
 
     - name: wait for backend to be populated with meta data
-      uses: "cygnetdigital/wait_for_response@v2.0.0"
-      with:
+      run: bash .github/scripts/wait_for_response.sh
+      env:
         url: http://localhost:8090/version
-        responseCode: 200
-        interval: 3000
-        timeout: 60000
+        interval: 3
+        timeout: 60
       continue-on-error: true
 
     - name: wait for backend to be populated with thesaurus data
-      uses: "cygnetdigital/wait_for_response@v2.0.0"
-      with:
+      run: bash .github/scripts/wait_for_response.sh
+      env:
         url: http://localhost:8090/ths/get/7pupjz
-        responseCode: 200
-        interval: 3000
-        timeout: 60000
+        interval: 3
+        timeout: 60
 
     - name: show tla-ingest container logs
       run: docker-compose logs populate
@@ -77,12 +74,11 @@ jobs:
         COOKIEJS_VERSION: 2.2.1
 
     - name: wait for frontend to respond
-      uses: "cygnetdigital/wait_for_response@v2.0.0"
-      with:
+      run: bash .github/scripts/wait_for_response.sh
+      env:
         url: http://localhost:8080
-        responseCode: 200
-        interval: 2000
-        timeout: 120000
+        interval: 2
+        timeout: 120
 
     - name: curl frontend from shell
       run: curl -s localhost:8080/
