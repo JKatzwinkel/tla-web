@@ -12,7 +12,7 @@ plugins {
 }
 
 group = 'org.bbaw.aaew.tla'
-version = '0.0.826-dev'
+version = '0.0.827-dev'
 sourceCompatibility = '17'
 
 ext {
@@ -137,7 +137,7 @@ frameworks.each {
 task downloadFontRoboto(type: Download) {
     group = 'Init'
     description = 'Download Google Roboto font'
-    src 'https://google-webfonts-helper.herokuapp.com/api/fonts/roboto?download=zip&subsets=latin&variants=300,500,700,300italic,regular,italic,700italic'
+    src 'https://gwfh.mranftl.com/api/fonts/roboto?download=zip&subsets=latin&variants=300,500,700,300italic,regular,italic,700italic'
     dest new File(buildDir, 'roboto.zip')
     onlyIfModified true
 }
