@@ -25,6 +25,7 @@ import tla.web.config.LinkFormatter;
 import tla.web.model.Lemma;
 import tla.web.model.Sentence;
 import tla.web.model.Text;
+import tla.web.model.mappings.context.ExternalReferencesConverter;
 import tla.web.model.meta.BTSObject;
 import tla.web.repo.TlaClient;
 

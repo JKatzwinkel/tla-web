@@ -1,4 +1,4 @@
-package tla.web.model.mappings;
+package tla.web.model.mappings.context;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

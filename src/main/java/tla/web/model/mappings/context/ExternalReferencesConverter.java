@@ -1,4 +1,4 @@
-package tla.web.model.mappings;
+package tla.web.model.mappings.context;
 
 import java.util.Map;
 import java.util.SortedMap;

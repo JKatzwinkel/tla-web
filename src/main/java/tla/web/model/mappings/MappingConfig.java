@@ -19,7 +19,7 @@ import tla.domain.dto.meta.NamedDocumentDto;
 import tla.domain.model.SentenceToken;
 import tla.domain.model.meta.BTSeClass;
 import tla.domain.model.meta.TLADTO;
-import tla.web.config.ApplicationProperties;
+import tla.web.model.mappings.context.ExternalReferencesConverter;
 import tla.web.model.meta.BTSObject;
 import tla.web.model.meta.ModelClass;
 import tla.web.model.meta.TLAObject;
