@@ -6,7 +6,6 @@ import java.util.TreeMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 import tla.domain.model.ObjectReference;
 import tla.domain.model.meta.AbstractBTSBaseClass;
 import tla.domain.model.meta.Relatable;
@@ -14,7 +13,6 @@ import tla.domain.model.meta.Resolvable;
 
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 public abstract class TLAObject extends AbstractBTSBaseClass implements Relatable<List<ObjectReference>> {
 

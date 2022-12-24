@@ -2,7 +2,6 @@ package tla.web.model.parts;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import tla.web.model.mappings.Util;
@@ -10,7 +9,6 @@ import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
-@Builder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,11 +34,20 @@ public class Glyphs {
      * @param rubrum whether or not to render the entire thing in red
      */
     public static Glyphs of(String mdc, boolean rubrum) {
-        return Glyphs.builder()
-            .mdc(mdc)
-            .unicode(mdc)
-            .svg(Util.jseshRender(mdc, rubrum))
-            .build();
+        var glyphs = new Glyphs();
+        glyphs.setMdc(mdc);
+        glyphs.setSvg(Util.jseshRender(mdc, rubrum));
+        return glyphs;
+    }
+
+    /**
+     * create UI hieroglyphs representation (including JSesh SVG) out of
+     * Manuel de Codage / Gardiner numbers.
+     */
+    public static Glyphs of(String mdc, String unicode, boolean rubrum) {
+        var glyphs = Glyphs.of(mdc, rubrum);
+        glyphs.setUnicode(unicode);
+        return glyphs;
     }
 
     /**
@@ -48,15 +55,12 @@ public class Glyphs {
      * using JSesh with optional rubrum characteristics.
      */
     public static Glyphs of(tla.domain.model.SentenceToken.Glyphs dto, boolean rubrum) {
-        if (dto != null) {
-            return Glyphs.builder()
-                .mdc(dto.getMdc())
-                .unicode(dto.getUnicode())
-                .svg(Util.jseshRender(dto.getMdc(), rubrum))
-                .build();
-        } else {
+        if (dto == null) {
             return Glyphs.EMPTY;
         }
+        var glyphs = Glyphs.of(dto.getMdc(), dto.getUnicode(), rubrum);
+        glyphs.setUnicode(dto.getUnicode());
+        return glyphs;
     }
 
     /**

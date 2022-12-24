@@ -5,14 +5,12 @@ import java.util.TreeMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 import tla.domain.model.EditorInfo;
 import tla.domain.model.Passport;
 import tla.web.model.parts.ExternalReference;
 
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 public abstract class BTSObject extends TLAObject {
 

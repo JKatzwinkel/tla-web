@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.modelmapper.AbstractConverter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import tla.web.model.mappings.context.ExternalReferencesConverter;
 import tla.web.model.meta.BTSObject;
 import tla.web.model.meta.ModelClass;
 import tla.web.model.meta.TLAObject;
-import tla.web.model.parts.Glyphs;
 import tla.web.model.parts.Token;
 
 /**
@@ -116,25 +114,6 @@ public class MappingConfig {
     }
 
     /**
-     * Produces the model mapper's type map for the specified DTO type and model class.
-     * If the model mapper doesn't already have a type map for those two specific classes,
-     * it will create an empty one and return the result.
-     */
-    private TypeMap<?, ?> getDTOModelTypeMap(
-        Class<? extends AbstractDto> dtoClass, Class<? extends TLAObject> modelClass
-    ) {
-        TypeMap<?, ?> typemap = modelMapper().getTypeMap(
-            dtoClass.asSubclass(AbstractDto.class), modelClass.asSubclass(TLAObject.class)
-        );
-        if (typemap == null) {
-            typemap = modelMapper().createTypeMap(
-                dtoClass.asSubclass(AbstractDto.class), modelClass.asSubclass(TLAObject.class)
-            );
-        }
-        return typemap;
-    }
-
-    /**
      * Register mappings from DTO to domain model class instances by creating a type map
      * in the {@link ModelMapper} for the specified classes.
      */
@@ -143,7 +122,7 @@ public class MappingConfig {
         Class<D> dtoClass, Class<T> modelClass
     ) {
         log.info("register model mappings from {} to {}", dtoClass, modelClass);
-        TypeMap typemap = getDTOModelTypeMap(dtoClass, modelClass);
+        TypeMap typemap = modelMapper.typeMap(dtoClass, modelClass);
         if (BTSObject.class.isAssignableFrom(modelClass)) {
             if (DocumentDto.class.isAssignableFrom(dtoClass)) {
                 typemap.includeBase(DocumentDto.class, BTSObject.class);

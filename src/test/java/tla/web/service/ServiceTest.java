@@ -54,10 +54,21 @@ public class ServiceTest {
     @Test
     void detailsPropertiesPassportValues() throws Exception {
         Passport p = tla.domain.util.IO.getMapper().readValue(
-            "{\"lemma\":[{\"main_group\":[{\"lsort\":[\"QZe\"],\"nominal_osing\":[\"I 2.13\"]}]}]}",
+            """
+                {
+                    "lemma": [
+                        {
+                            "main_group": [
+                                {"lsort": ["QZe"], "nominal_osing": ["I 2.13"]}
+                            ]
+                        }
+                    ]
+                }
+            """,
             Passport.class
         );
-        Lemma l = Lemma.builder().passport(p).build();
+        Lemma l = new Lemma();
+        l.setPassport(p);
         Map<String, List<Passport>> values = lemmaService.getDetailsPassportPropertyValues(l);
         assertAll("check passport value extraction",
             () -> assertEquals(1, values.size()),
