@@ -64,10 +64,6 @@ public class MappingConfTest {
                 Sentence.class, MappingConfig.getModelClass("BTSSentence"),
                 "sentence model registered"
             ),
-            () -> assertNull(
-                MappingConfig.getModelClass("BTSText"),
-                "text model not registered, model classes must be registered by someone"
-            ),
             () -> assertEquals(
                 "lemma",
                 TlaClient.getBackendPathPrefix(MappingConfig.getModelClass("BTSLemmaEntry")),

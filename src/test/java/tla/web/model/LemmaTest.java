@@ -34,7 +34,11 @@ public class LemmaTest {
             .id("1")
             .words(
                 wordGlyphs.stream().map(
-                    mdc -> Token.builder().glyphs(Glyphs.of(mdc)).build()
+                    mdc -> {
+                        var token = new Token();
+                        token.setGlyphs(Glyphs.of(mdc));
+                        return token;
+                    }
                 ).toList()
             ).build();
         List<Glyphs> glyphs = l.getHieroglyphs();

@@ -51,19 +51,6 @@ import tla.web.model.parts.Token;
 @Configuration
 public class MappingConfig {
 
-    private static class TokenGlyphsConverter extends AbstractConverter<SentenceToken, Glyphs> {
-        @Override
-        protected Glyphs convert(SentenceToken source) {
-            return Glyphs.of(
-                source.getGlyphs(),
-                source.getAnnoTypes() != null && source.getAnnoTypes().contains("rubrum")
-            );
-        }
-    }
-
-    @Autowired
-    private ApplicationProperties properties;
-
     private static ModelMapper modelMapper;
 
     private static Map<String, Class<? extends TLAObject>> modelClasses = new HashMap<>();
@@ -97,10 +84,12 @@ public class MappingConfig {
         modelMapper.createTypeMap(DocumentDto.class, BTSObject.class).addMapping(
             DocumentDto::getEditors, BTSObject::setEdited
         );
-        /* specific type mappings */ 
-        modelMapper.createTypeMap(SentenceToken.class, Token.class).addMappings(
-            m -> m.using(new TokenGlyphsConverter()).map(
-                dto -> dto, Token::setGlyphs
+        /* specific type mappings */
+        modelMapper.typeMap(SentenceToken.class, Token.class).addMappings(
+            m -> m.using(
+                new TokenGlyphsToSVGConverter()
+            ).<String>map(
+                token -> token, (dest, result) -> dest.getGlyphs().setSvg(result)
             )
         );
         /* add mappings for registered model classes and apply base type mappings */
