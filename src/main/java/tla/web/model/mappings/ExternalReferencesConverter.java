@@ -30,10 +30,14 @@ public class ExternalReferencesConverter extends AbstractConverter<
 
     private Map<String, LinkFormatter> linkFormatters;
 
-    public ExternalReferencesConverter(ApplicationProperties properties) {
-        this.linkFormatters = properties.getLinkFormatters();
+    public ExternalReferencesConverter(Map<String, LinkFormatter> linkFormatters) {
+        this.linkFormatters = linkFormatters;
         log.info("instantiate external refs converter");
         log.info(linkFormatters.toString());
+    }
+
+    public ExternalReferencesConverter(ApplicationProperties properties) {
+        this(properties.getLinkFormatters());
     }
 
     private String formatLink(String provider, String id, String type) {

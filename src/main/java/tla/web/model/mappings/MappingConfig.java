@@ -68,9 +68,11 @@ public class MappingConfig {
 
     private static Map<String, Class<? extends TLAObject>> modelClasses = new HashMap<>();
 
-    @Bean
-    public ExternalReferencesConverter externalReferencesConverter() {
-        return new ExternalReferencesConverter(properties);
+    private ExternalReferencesConverter externalReferencesConverter;
+
+    @Autowired
+    public MappingConfig(ExternalReferencesConverter externalReferencesConverter) {
+        this.externalReferencesConverter = externalReferencesConverter;
     }
 
     @Bean
@@ -82,10 +84,9 @@ public class MappingConfig {
      * Creates a new model mapper and configures type maps for converting DTO to domain model
      * class instances.
      */
-    private ModelMapper initModelMapper() {
+    protected ModelMapper initModelMapper() {
         modelMapper = new ModelMapper();
         log.info("registered model classes: {}", modelClasses.values());
-        ExternalReferencesConverter externalReferencesConverter = externalReferencesConverter();
         /* general base type mappings */
         modelMapper.createTypeMap(NamedDocumentDto.class, BTSObject.class).addMappings(
             m -> m.using(externalReferencesConverter).map(

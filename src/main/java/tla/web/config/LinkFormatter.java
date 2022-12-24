@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.util.UriTemplate;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @Setter
 @Validated
+@NoArgsConstructor
 public class LinkFormatter {
 
     private Map<String, UriTemplate> typeFormats = new HashMap<>();
@@ -38,8 +40,12 @@ public class LinkFormatter {
     private Pattern idPattern;
     private String typePattern;
 
+    public LinkFormatter(String defaultFormat) {
+        this.defaultFormat = new UriTemplate(defaultFormat);
+    }
+
     public boolean canFormat(String id) {
-        return (this.idPattern == null) || (this.idPattern.matcher(id).find());
+        return this.idPattern == null || this.idPattern.matcher(id).find();
     }
 
     /**
@@ -84,14 +90,13 @@ public class LinkFormatter {
         try {
             if (this.defaultFormat != null) {
                 return this.defaultFormat.expand(id).toString();
+            }
+            if (this.typeFormats.containsKey("default")) {
+                log.info("didn't get a type for ID {}, but default-format is undefined; trying 'default' type format", id);
+                return this.typeFormats.get("default").expand(id).toString();
             } else {
-                if (this.typeFormats.containsKey("default")) {
-                    log.info("didn't get a type for ID {}, but default-format is undefined; trying 'default' type format", id);
-                    return this.typeFormats.get("default").expand(id).toString();
-                } else {
-                    log.warn("didn't get a type for ID {}, but neither default-format nor 'default' type-format is undefined", id);
-                    return null;
-                }
+                log.warn("didn't get a type for ID {}, but neither default-format nor 'default' type-format is undefined", id);
+                return null;
             }
         } catch (NullPointerException e) {
             if (this.typeFormats.size() > 0) {
