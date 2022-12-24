@@ -30,13 +30,17 @@ public class LemmaTest {
     @Test
     void getHieroglyphs() throws Exception {
         List<String> wordGlyphs = List.of("N35", "", "G43");
-        Lemma l = Lemma.builder()
-            .id("1")
-            .words(
-                wordGlyphs.stream().map(
-                    mdc -> Token.builder().glyphs(Glyphs.of(mdc)).build()
-                ).toList()
-            ).build();
+        var l = new Lemma();
+        l.setId("1");
+        l.setWords(
+            wordGlyphs.stream().map(
+                mdc -> {
+                    var token = new Token();
+                    token.setGlyphs(Glyphs.of(mdc));
+                    return token;
+                }
+            ).toList()
+        );
         List<Glyphs> glyphs = l.getHieroglyphs();
         assertAll("test hieroglyphs from lemma extraction",
             () -> assertEquals(3, glyphs.size(), "item count"),
@@ -48,30 +52,31 @@ public class LemmaTest {
 
     @Test
     void getBibliography() throws Exception {
-        Passport p = new Passport();
-        Passport b = new Passport();
-        b.add(
+        Passport passport = new Passport();
+        Passport bibliography = new Passport();
+        bibliography.add(
             "bibliographical_text_field",
             new Passport(
                 "Wb 1, 130.1-5; Germer, Flora, 125; LÄ II, 1265"
             )
         );
-        p.add("bibliography", b);
+        passport.add("bibliography", bibliography);
         assertAll("test passport",
-            () -> assertTrue(!b.isEmpty(), "subnode not empty"),
-            () -> assertTrue(b.containsKey("bibliographical_text_field"), "subnode key"),
-            () -> assertEquals(1, p.size(), "root size"),
-            () -> assertEquals(List.of("bibliography"), p.getFields(), "root keys"),
-            () -> assertTrue(p.containsKey("bibliography"), "root key"),
-            () -> assertTrue(!p.getProperties().get("bibliography").isEmpty(), "subnodes exist"),
-            () -> assertTrue(p.getProperties().get("bibliography").get(0).containsKey("bibliographical_text_field"))
+            () -> assertTrue(!bibliography.isEmpty(), "subnode not empty"),
+            () -> assertTrue(bibliography.containsKey("bibliographical_text_field"), "subnode key"),
+            () -> assertEquals(1, passport.size(), "root size"),
+            () -> assertEquals(List.of("bibliography"), passport.getFields(), "root keys"),
+            () -> assertTrue(passport.containsKey("bibliography"), "root key"),
+            () -> assertTrue(!passport.getProperties().get("bibliography").isEmpty(), "subnodes exist"),
+            () -> assertTrue(passport.getProperties().get("bibliography").get(0).containsKey("bibliographical_text_field"))
         );
-        Lemma l = Lemma.builder().passport(p).build();
+        Lemma lemma = new Lemma();
+        lemma.setPassport(passport);
         assertAll("see if bibliography can be extracted",
-            () -> assertNotNull(l.getBibliography(), "bibliography not null"),
-            () -> assertTrue(!l.getBibliography().isEmpty(), "bibl not empty"),
-            () -> assertEquals(3, l.getBibliography().size(), "3 bibl entries"),
-            () -> assertEquals("Germer, Flora, 125", l.getBibliography().get(1), "value trimmed")
+            () -> assertNotNull(lemma.getBibliography(), "bibliography not null"),
+            () -> assertTrue(!lemma.getBibliography().isEmpty(), "bibl not empty"),
+            () -> assertEquals(3, lemma.getBibliography().size(), "3 bibl entries"),
+            () -> assertEquals("Germer, Flora, 125", lemma.getBibliography().get(1), "value trimmed")
         );
     }
 }

@@ -1,7 +1,6 @@
 package tla.web.model.parts;
-    
+
 import lombok.Getter;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Singular;
@@ -15,7 +14,6 @@ import lombok.AllArgsConstructor;
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Token {
@@ -28,7 +26,7 @@ public class Token {
 
     private Transcription transcription;
 
-    private Glyphs glyphs;
+    private Glyphs glyphs = new Glyphs();
 
     private SentenceToken.Flexion flexion;
 

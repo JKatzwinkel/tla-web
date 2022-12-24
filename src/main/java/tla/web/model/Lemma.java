@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Singular;
-import lombok.experimental.SuperBuilder;
 import lombok.extern.slf4j.Slf4j;
 import tla.domain.dto.LemmaDto;
 import tla.domain.model.Language;
@@ -26,7 +25,6 @@ import tla.web.model.parts.extra.AttestedTimespan;
 @Slf4j
 @Getter
 @Setter
-@SuperBuilder
 @NoArgsConstructor
 @BackendPath("lemma")
 @TLADTO(LemmaDto.class)
