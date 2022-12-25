@@ -189,8 +189,14 @@ task installFontRoboto(dependsOn: downloadFontRoboto, type: Copy) {
     into file("${staticDir}/font")
 }
 
-def checkStylesheetFileReference(styleSheet, ref) {
+def checkStylesheetFileReference(String styleSheet, String ref) {
     if (!new File(staticDir, ref).exists()) {
+        println """    \
+            file ${ref} referenced in CSS stylesheet could not be found. Actual contents of fonts dir:
+        """.stripIndent()
+        file("${staticDir}/font/").eachFile {
+            file -> println " ${file.name}"
+        }
         throw new GradleException(
             """\
             @font-face src out of date: CSS file ${styleSheet} points to missing resource ${staticDir}/${ref}!
