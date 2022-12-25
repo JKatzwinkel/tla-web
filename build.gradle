@@ -189,6 +189,31 @@ task installFontRoboto(dependsOn: downloadFontRoboto, type: Copy) {
     into file("${staticDir}/font")
 }
 
+def checkStylesheetFileReference(styleSheet, ref) {
+    if (!new File(staticDir, ref).exists()) {
+        throw new GradleException(
+            """\
+            @font-face src out of date: CSS file ${styleSheet} points to missing resource ${staticDir}/${ref}!
+            Fix the issue by updating this reference before running again!
+            """.stripIndent()
+        )
+    }
+}
+
+task validateWebFontImports() {
+    dependsOn 'installFontRoboto'
+    group = 'Init'
+    description = 'Check stylesheet loading font files for dead references'
+    doFirst {
+        def stylesheet = 'src/main/resources/static/css/roboto.css'
+        (
+            file(stylesheet).text =~ /font\/\S*\.(eot|woff2?|ttf|svg)/
+        ).findAll()*.first().each {
+            ref -> checkStylesheetFileReference(stylesheet, ref)
+        }
+    }
+}
+
 task install {
     inputs.files(
       file('.env')
@@ -199,6 +224,7 @@ task install {
     outputs.files(
       file("${staticDir}/vendor/")
     )
+    finalizedBy 'validateWebFontImports'
 }
 
 task cleanAssets(type: Delete) {
