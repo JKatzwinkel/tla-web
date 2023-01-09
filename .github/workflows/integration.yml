@@ -91,7 +91,7 @@ jobs:
 
     - name: upload cypress screenshots
       if: failure()
-      uses: "actions/upload-artifact@v3.1.1"
+      uses: "actions/upload-artifact@v3.1.2"
       with:
         path: src/test/e2e/cypress/screenshots
         name: cypress-screenshots
