@@ -49,8 +49,8 @@ jobs:
       run: bash .github/scripts/wait_for_response.sh
       env:
         url: http://localhost:8090/ths/get/7pupjz
-        interval: 3
-        timeout: 60
+        interval: 5
+        timeout: 120
 
     - name: show tla-ingest container logs
       run: docker-compose logs populate
