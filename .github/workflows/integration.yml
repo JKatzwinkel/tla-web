@@ -4,9 +4,10 @@ name: deploy
 
 on:
   pull_request:
-  push:
     branches:
-      - main
+    - qa
+    paths:
+    - 'src/test/e2e/**'
   schedule:
     - cron: '0 0 1,15 * *'
 
