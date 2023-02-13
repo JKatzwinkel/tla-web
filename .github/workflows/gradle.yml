@@ -14,12 +14,12 @@ on:
 
 jobs:
 
-  build:
-    runs-on: ubuntu-18.04
+  xmllint:  
+    runs-on: ubuntu-20.04
+  
     steps:
 
-    - name: checkout code
-      uses: actions/checkout@v3.3.0
+    - uses: actions/checkout@v3.3.0
 
     - name: install xmllint
       run: sudo apt update && sudo apt-get install --no-install-recommends -y libxml2-utils
@@ -27,13 +27,29 @@ jobs:
     - uses: korelstar/xmllint-problem-matcher@v1.1.0
 
     - name: validate HTML templates
-      run: find src/main/resources/{templates,pages} -type f -iname "*.html" -exec xmllint --noout {} \;
+      run: find src/main/resources/{templates,pages} -type f -iname "*.html" -exec xmllint --noout {} \;    
+  
+
+  build:
+    runs-on: ubuntu-20.04
+    needs: xmllint
+    
+    strategy:
+      matrix:
+        java-version:
+          - 17
+          - 19
+          
+    steps:
+  
+    - name: checkout code
+      uses: actions/checkout@v3.2.0
 
     - name: set up jdk
       uses: actions/setup-java@v3.9.0
       with:
         distribution: 'temurin'
-        java-version: 17
+        java-version: ${{ matrix.java-version }}
         cache: 'gradle'
 
     - name: make ./gradlew executable

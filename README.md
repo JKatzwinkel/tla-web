@@ -79,14 +79,14 @@ on your local machine.
 For building and executing the entire stack, *including the TLA frontend*, run this command in your terminal:
 
 ```bash
-  docker-compose up --build --force-recreate -d
+  docker compose up --build --force-recreate -d
 ```
 
 For building and executing only the TLA backend stack, run the following. You will learn how to run the TLA frontend
 seperately and outside of the containerized setup further down below.
 
 ```bash
-  docker-compose up --build --force-recreate -d backend populate
+  docker compose up --build --force-recreate -d backend populate
 ```
 
 It will take some time for Docker Compose to build and start the services required, and some additional time for
@@ -95,7 +95,7 @@ located at the URL specified via the `SAMPLE_URL` environment variable. In the m
 `tla-ingest` container running the `populate` service with the following command:
 
 ```bash
-  docker-compose ps
+  docker compose ps
 ```
 
 If it takes the `tla-ingest` container longer than you anticipated to exit, you can monitor its progress by checking
@@ -148,7 +148,7 @@ Startup the application and then run the cypress container with the appropriate 
 variables:
 
 ```bash
-  CYPRESS_BASE_URL=http://localhost:8080 CYPRESS_VIDEO=false docker-compose up --exit-code-from e2e e2e
+  CYPRESS_BASE_URL=http://localhost:8080 CYPRESS_VIDEO=false docker compose up --exit-code-from e2e e2e
 ```
 
 
