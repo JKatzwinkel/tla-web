@@ -3,11 +3,13 @@
 name: deploy
 
 on:
-  pull_request:
+  push:
     branches:
-    - qa
+    - main
+  pull_request:
     paths:
     - 'src/test/e2e/**'
+    - 'src/main/resources/**'
   schedule:
     - cron: '0 0 1,15 * *'
 
