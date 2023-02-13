@@ -1,11 +1,11 @@
-FROM gradle:7.6.0-jdk17 AS build
+FROM gradle:7.6.0-jdk19 AS build
 
 COPY --chown=gradle:gradle . /home/gradle/tla-frontend
 WORKDIR /home/gradle/tla-frontend
 RUN gradle installAssets bootJar --no-daemon
 
 
-FROM openjdk:18.0.2-jdk-buster
+FROM openjdk:19-jdk-buster
 
 RUN mkdir /app; apt-get update && apt-get install -y fontconfig libfreetype6
 WORKDIR /app
