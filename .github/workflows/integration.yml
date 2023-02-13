@@ -28,7 +28,7 @@ jobs:
     - uses: "actions/checkout@v3.3.0"
 
     - name: start backend containers
-      run: docker-compose up -d backend populate
+      run: docker compose up -d backend populate
       env:
         SAMPLE_URL: http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
         ES_PORT: 9201
@@ -60,7 +60,7 @@ jobs:
         timeout: 120
 
     - name: show tla-ingest container logs
-      run: docker-compose logs populate
+      run: docker compose logs populate
       if: always()
 
     - name: query backend endpoint URL paths list
@@ -70,7 +70,7 @@ jobs:
       run: curl -s localhost:8090/version
 
     - name: start frontend container
-      run: docker-compose up -d frontend
+      run: docker compose up -d frontend
       env:
         ES_PORT: 9201
         BACKEND_PORT: 8090
@@ -91,7 +91,7 @@ jobs:
       run: curl -s localhost:8080/
 
     - name: run cypress e2e tests
-      run: docker-compose up --exit-code-from e2e e2e
+      run: docker compose up --exit-code-from e2e e2e
       env:
         CYPRESS_BASE_URL: http://localhost:8080
         CYPRESS_VIDEO: false
