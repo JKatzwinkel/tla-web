@@ -10,6 +10,10 @@ on:
     paths:
     - 'src/test/e2e/**'
     - 'src/main/resources/**'
+    - 'Dockerfile'
+    - 'docker-compose.yml'
+    - '.dockerignore'
+    - '.github/workflows/integration.yml'
   schedule:
     - cron: '0 0 1,15 * *'
 
