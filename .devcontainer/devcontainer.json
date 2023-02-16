@@ -1,0 +1,12 @@
+{
+	"image": "mcr.microsoft.com/devcontainers/universal:2",
+	"features": {
+		"ghcr.io/dhoeric/features/act:1": {},
+		"ghcr.io/devcontainers/features/java:1": {
+			"version": "17"
+		},
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"configureZshAsDefaultShell": "true"
+		}
+	}
+}
