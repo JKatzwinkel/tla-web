@@ -250,6 +250,14 @@ clean {
     dependsOn 'cleanInstall'
 }
 
+processResources {
+    mustRunAfter 'installFontRoboto'
+    mustRunAfter 'installFontawesome'
+    mustRunAfter 'installBootstrap'
+    mustRunAfter 'downloadCookieBanner'
+    mustRunAfter 'installAssets'
+}
+
 springBoot {
     buildInfo()
 }
