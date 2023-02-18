@@ -1,4 +1,4 @@
-FROM gradle:7.6.0-jdk19 AS build
+FROM gradle:8.0.0-jdk19 AS build
 
 COPY --chown=gradle:gradle . /home/gradle/tla-frontend
 WORKDIR /home/gradle/tla-frontend

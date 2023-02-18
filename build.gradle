@@ -123,15 +123,23 @@ def createDownloadAssetTask(String name, String url, String destFile) {
 }
 
 assets.each {
-  entry -> installAssets.dependsOn createDownloadAssetTask(
-    entry.key, entry.value[0], entry.value[1]
-  )
+  entry -> {
+    var task = createDownloadAssetTask(
+      entry.key, entry.value[0], entry.value[1]
+    )
+    installAssets.dependsOn task
+    processResources.mustRunAfter task
+  }
 }
 
 frameworks.each {
-  entry -> installAssets.dependsOn installFrameworkTask(
-    entry.key, entry.value[0], entry.value[1]
-  )
+  entry -> {
+    var task = createInstallFrameworkTask(
+      entry.key, entry.value[0], entry.value[1]
+    )
+    installAssets.dependsOn task
+    processResources.mustRunAfter task
+  }
 }
 
 task downloadFontRoboto(type: Download) {
@@ -154,7 +162,7 @@ def downloadFrameworkTask(String name, String url) {
     }
 }
 
-def installFrameworkTask(String name, String url, String dir) {
+def createInstallFrameworkTask(String name, String url, String dir) {
     return tasks.create("install${name.capitalize()}", Copy) {
       inputs.files(
         new File(buildDir, "${name}.zip")
@@ -248,6 +256,11 @@ task cleanAssets(type: Delete) {
 
 clean {
     dependsOn 'cleanInstall'
+}
+
+processResources {
+    mustRunAfter 'installFontRoboto'
+    mustRunAfter 'installAssets'
 }
 
 springBoot {
