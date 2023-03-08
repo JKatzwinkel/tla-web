@@ -13,6 +13,7 @@ src/main/resources/static/vendor/
 src/main/resources/static/font/
 
 # ignore IDE stuff
+.classpath
 .project
 WEB-INF/
 .vscode/
