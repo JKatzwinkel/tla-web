@@ -122,23 +122,19 @@ def createDownloadAssetTask(String name, String url, String destFile) {
 }
 
 assets.each {
-  entry -> {
     var task = createDownloadAssetTask(
-      entry.key, entry.value[0], entry.value[1]
+      it.key, it.value[0], it.value[1]
     )
     installAssets.dependsOn task
     processResources.mustRunAfter task
-  }
 }
 
 frameworks.each {
-  entry -> {
     var task = createInstallFrameworkTask(
-      entry.key, entry.value[0], entry.value[1]
+      it.key, it.value[0], it.value[1]
     )
     installAssets.dependsOn task
     processResources.mustRunAfter task
-  }
 }
 
 task downloadFontRoboto(type: Download) {
