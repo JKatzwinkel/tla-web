@@ -122,7 +122,8 @@ public class MappingTest {
     void jseshTest() {
         assertAll("test JSesh MdC to SVG rendering",
             () -> assertTrue(Util.jseshRender("G43:N35", true).contains("#ff0000"), "rubra rendered in red"),
-            () -> assertFalse(Util.jseshRender("G43:N35").contains("#ff0000"), "default rendering not red")
+            () -> assertFalse(Util.jseshRender("G43:N35").contains("#ff0000"), "default rendering not red"),
+            () -> assertTrue(Util.jseshRender("N35").startsWith("<svg"))
         );
     }
 

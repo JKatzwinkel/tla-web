@@ -31,14 +31,11 @@ public class Util {
     private static MDCDrawingFacade facade = new MDCDrawingFacade();
 
     public static String patchSVG(Writer writer) {
-        var jsesh = writer.toString();
-        if (jsesh.startsWith("<?xml")) {
-            jsesh = jsesh.substring(
-                XML_HEAD.length()
-            );
-        }
+        var xml = writer.toString().substring(
+            XML_HEAD.length()
+        );
         return RegExUtils.replacePattern(
-            jsesh, SVG_ATTR_REGEX, SVG_ATTR_REPLACEMENT
+            xml, SVG_ATTR_REGEX, SVG_ATTR_REPLACEMENT
         );
     }
 
