@@ -18,7 +18,7 @@ sourceCompatibility = '17'
 ext {
     fontawesomeVersion = env.FONTAWESOME_VERSION.orElse('5.12.1')
     bootstrapVersion = env.BOOTSTRAP_VERSION.orElse('4.6.0')
-    jqueryVersion = env.JQUERY_VERSION.orElse('3.6.0')
+    jqueryVersion = env.JQUERY_VERSION.orElse('3.6.4')
     cookieJsVersion = env.COOKIEJS_VERSION.orElse('2.2.1')
     cookieBannerVersion = env.COOKIE_BANNER_VERSION.orElse('1.2.2')
     fontawesomeSrc = "https://use.fontawesome.com/releases/v${fontawesomeVersion}/fontawesome-free-${fontawesomeVersion}-web.zip"
@@ -31,7 +31,7 @@ ext {
 }
 
 def assets = [
-  'cookieJs' : [cookieJsSrc, 'js.cookie.min.js'],
+  'cookieJs': [cookieJsSrc, 'js.cookie.min.js'],
   'cookieBanner': [cookieBannerSrc, 'cookiebanner.min.js'],
   'jquery': [jquerySrc, 'jquery.min.js'],
   'headroomJs': ['https://unpkg.com/headroom.js@0.12.0/dist/headroom.min.js', 'headroom.min.js']
