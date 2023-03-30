@@ -27,14 +27,14 @@
 
   <body>
 
-    <header th:replace="fragments/common :: header"/>
+    <header th:replace="~{fragments/common :: header}"/>
 
     <main id="printable-content" class="container content">
-      <div th:replace="fragments/common :: breadcrumbs"/>
+      <div th:replace="~{fragments/common :: breadcrumbs}"/>
       <div layout:fragment="content"/>
     </main>
 
-    <footer th:replace="fragments/common :: footer"/>
+    <footer th:replace="~{fragments/common :: footer}"/>
 
     <script type="text/javascript" id="cookiebanner" th:src="@{/vendor/cookiebanner.min.js}" src="../static/vendor/cookiebanner.min.js"
       data-cookie="accepted" data-moreinfo="/legal/privacy"

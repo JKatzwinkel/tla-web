@@ -13,7 +13,7 @@
         <div class="col-xl-10">
           <input class="form-control mb-3 lemma-id" type="text" th:field="*{id}"
               th:id="lemma-quick-search-id" th:list="lemma-quick-search-id-suggestions">
-            <script th:replace="fragments/search/tools :: autocomplete('lemma-quick-search-id')"></script>
+            <script th:replace="~{fragments/search/tools :: autocomplete('lemma-quick-search-id')}"></script>
           </input>
           <datalist th:id="lemma-quick-search-id-suggestions"/>
         </div>
@@ -24,7 +24,7 @@
     <form id="sentence-search" name="sentence-search"
         th:action="@{${@searchController.getSearchResultsPageRoute(@__sentenceController__)}}"
         th:object="${sentenceSearchForm}" method="get">
-      <div th:replace=" :: translation-spec('sentence', 'sentenceSearchForm', ${allTranslationLanguages})"/>
+      <div th:replace="~{ :: translation-spec('sentence', 'sentenceSearchForm', ${allTranslationLanguages})}"/>
       <div>
         <!--<div class="form-group row">
           <input class="form-control mb-3 col-xl-10" type="text" th:name="|passport['date.date.date'].values|"/>
@@ -37,7 +37,7 @@
 
             <input class="form-control mb-3 lemma-id" type="text" th:field="*{tokens[__${i.index}__].lemma.id}"
                 th:id="|token-${i.index}-lemma|" th:list="|token-${i.index}-lemma-suggestions|">
-              <script th:replace="fragments/search/tools :: autocomplete(__|token-${i.index}-lemma|__)"></script>
+              <script th:replace="~{fragments/search/tools :: autocomplete(__|token-${i.index}-lemma|__)}"></script>
             </input>
             <datalist th:id="|token-${i.index}-lemma-suggestions|"/>
           </div>
@@ -46,7 +46,7 @@
           <div class="col-xl-10">
             <input class="form-control mb-3" type="text" th:field="*{tokens[__${i.index}__].glyphs}"/>
           </div>
-          <div th:replace=" :: translation-spec('token-__${i.index}__', 'sentenceSearchForm.tokens[__${i.index}__]', ${allTranslationLanguages})"/>
+          <div th:replace="~{ :: translation-spec('token-__${i.index}__', 'sentenceSearchForm.tokens[__${i.index}__]', ${allTranslationLanguages})}"/>
         </fieldset>
       </div>
     </form>
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div th:replace=" :: type-spec('wordClass', 'lemmaSearchForm.wordClass', ${wordClasses})"/>
+      <div th:replace="~{ :: type-spec('wordClass', 'lemmaSearchForm.wordClass', ${wordClasses})}"/>
 
       <div class="form-group row">
         <label class="col-form-label col-xl-2" th:for="*{root}" th:text="#{field_label_root_transcription}">Root</label>
@@ -82,7 +82,7 @@
         </div>
       </div>
 
-      <div th:replace=" :: translation-spec('dict', 'lemmaSearchForm', ${allTranslationLanguages})"/>
+      <div th:replace="~{ :: translation-spec('dict', 'lemmaSearchForm', ${allTranslationLanguages})}"/>
 
       <div class="form-group row">
         <label class="col-form-label col-xl-2" th:for="*{bibliography}" th:text="#{field_label_bibliography}">Bibliography</label>
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <div th:replace=" :: type-spec('annotation-type', 'lemmaSearchForm.anno', ${lemmaAnnotationTypes})"/>
+      <div th:replace="~{ :: type-spec('annotation-type', 'lemmaSearchForm.anno', ${lemmaAnnotationTypes})}"/>
 
     </form>
 

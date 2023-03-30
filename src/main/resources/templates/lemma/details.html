@@ -12,12 +12,12 @@
 
     <div layout:fragment="content">
 
-      <div th:replace="fragments/details :: details-page-header"/>
+      <div th:replace="~{fragments/details :: details-page-header}"/>
 
       <div class="row">
         <div class="col-sm-12 col-lg-8" id="details-content" th:object="${obj}">
 
-          <div th:replace="fragments/details :: lemma-property-hieroglyphs"/>
+          <div th:replace="~{fragments/details :: lemma-property-hieroglyphs}"/>
 
           <!-- persistente URL / ID -->
           <div>
@@ -36,16 +36,16 @@
           </div>
 
           <!-- Sub-Wörterbuch hier./dem.  -->
-          <div th:replace="fragments/details :: lemma-property-dict"/>
-          <div th:replace="fragments/details :: object-property-type-subtype(${objectType})"/>
-          <div th:replace="fragments/details :: translations"/>
-          <div th:replace="fragments/details :: object-property-passport-properties"/>
-          <div th:replace="fragments/details :: lemma-property-attestations"/>
-          <div th:replace="fragments/details :: bibliography"/>
-          <div th:replace="fragments/details :: external-references"/>
-          <div th:replace="fragments/details :: single-entry-annotations"/>
-          <div th:replace="fragments/details :: editor-info"/>
-          <div th:replace="fragments/details :: object-property-related-objects"/>
+          <div th:replace="~{fragments/details :: lemma-property-dict}"/>
+          <div th:replace="~{fragments/details :: object-property-type-subtype(${objectType})}"/>
+          <div th:replace="~{fragments/details :: translations}"/>
+          <div th:replace="~{fragments/details :: object-property-passport-properties}"/>
+          <div th:replace="~{fragments/details :: lemma-property-attestations}"/>
+          <div th:replace="~{fragments/details :: bibliography}"/>
+          <div th:replace="~{fragments/details :: external-references}"/>
+          <div th:replace="~{fragments/details :: single-entry-annotations}"/>
+          <div th:replace="~{fragments/details :: editor-info}"/>
+          <div th:replace="~{fragments/details :: object-property-related-objects}"/>
 
         </div>  <!-- close content col-sm-12 -->
 

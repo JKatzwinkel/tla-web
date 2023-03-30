@@ -5,7 +5,7 @@
 
       <div th:fragment="ths-search-result" class="result-list-item" th:object="${obj}">
         <span class="float-right result-list-item-element type-subtype font-italic font-weight-light">
-          <span th:replace="fragments/details :: type-subtype">Term category</span>
+          <span th:replace="~{fragments/details :: type-subtype}">Term category</span>
         </span>
         <a th:href="${(#mvc.url('TC#getSingleObjectDetailsPage').arg(0,obj.id)).build()}">
           <h2 class="result-list-item-element label bbaw-libertine" th:text="*{name}">Theben</h2>
@@ -13,7 +13,7 @@
         <small class="text-muted text-monospace d-flex" th:text="*{id}">ID</small>
 
         <div>
-          <th:block th:each="entry : *{translations}" th:unless="*{translations} == null" th:insert="fragments/common :: single-lang-translation(${entry})"/>
+          <th:block th:each="entry : *{translations}" th:unless="*{translations} == null" th:insert="~{fragments/common :: single-lang-translation(${entry})}"/>
         </div>
 
         <hr/>
@@ -25,14 +25,14 @@
       <div th:fragment="lemma-search-result" class="result-list-item"
           th:classappend="${#strings.endsWith(obj.reviewState,'obsolete')} ? 'obsolete' : ''"
           th:object="${obj}" th:id="|lemma-${obj.id}|">
-        <a th:replace="fragments/common :: review-state(${obj})"/>
+        <a th:replace="~{fragments/common :: review-state(${obj})}"/>
 
         <a th:href="${(#mvc.url('LC#getSingleObjectDetailsPage').arg(0,obj.id)).build()}">
           <!-- line 1 -->
           <h2 class="result-list-item-element transcription bbaw-libertine" th:text="*{name}">nfr</h2>
           <span th:unless="${obj.type == 'root'}" class="subcorpus" th:text="#{|dict_${obj.dictionaryName}|}">Demotic</span>
           <span class="result-list-item-element hieroglyphs" th:if="${obj.hieroglyphs != null}">
-            <span th:replace="fragments/details :: hieroglyphs">N35:G43</span>
+            <span th:replace="~{fragments/details :: hieroglyphs}">N35:G43</span>
           </span>
           <span class="result-list-item-element lemma-id text-muted">
             (ID<span class="ml-1" th:text="*{id}">33410</span>)
@@ -45,10 +45,10 @@
           </span>
           <!-- line 2 -->
           <span class="result-list-item-element wordClass font-italic font-weight-light">
-            <span th:replace="fragments/details :: type-subtype">Part of speech</span>
+            <span th:replace="~{fragments/details :: type-subtype}">Part of speech</span>
           </span>
           <span class="result-list-item-element translations">
-            <th:block th:each="entry : *{translations}" th:insert="fragments/common :: single-lang-translation(${entry})"/>
+            <th:block th:each="entry : *{translations}" th:insert="~{fragments/common :: single-lang-translation(${entry})}"/>
           </span>
           <span class="result-list-item-element attested-timespan" th:unless="*{timespan} == null">
             <span th:text="*{timespan.begin}">begin</span>
@@ -71,16 +71,16 @@
       <div th:fragment="sentence-search-result" class="result-list-item" th:object="${obj}">
         <div class="occ-list-item mt-3 pt-1 pb-1" th:id="*{id}">
           <div class="sentence-line-mode">
-            <div th:replace="fragments/common :: sentence-hieroglyphs"/>
-            <div th:replace="fragments/common :: sentence-transcription"/>
+            <div th:replace="~{fragments/common :: sentence-hieroglyphs}"/>
+            <div th:replace="~{fragments/common :: sentence-transcription}"/>
           </div>
         </div>
 
         <span class="result-list-item-element translations">
-          <th:block th:each="entry : *{translations}" th:insert="fragments/common :: single-lang-translation(${entry})"/>
+          <th:block th:each="entry : *{translations}" th:insert="~{fragments/common :: single-lang-translation(${entry})}"/>
         </span>
 
-        <div class="result-list-item-element paths" th:insert=" :: search-result-object-paths('sentence')"/>
+        <div class="result-list-item-element paths" th:insert="~{ :: search-result-object-paths('sentence')}"/>
 
       </div>
 
@@ -90,7 +90,7 @@
       <div th:fragment="lemma-sort-order-select">
         <div style="display: none">
           <!-- hidden form for storage of search parameters -->
-          <form th:replace="fragments/search/forms :: #lemma-search"/>
+          <form th:replace="~{fragments/search/forms :: #lemma-search}"/>
         </div>
 
         <div class="input-group mb-3">
@@ -166,12 +166,12 @@
           //]]>
         </script>
         <th:block th:each="e : ${hideableProperties}" th:with="property=${e.key}">
-          <div th:replace=" :: hide-property-button(${property}, null)"/>
+          <div th:replace="~{ :: hide-property-button(${property}, null)}"/>
           <th:block th:with="subProperties=${e.value}">
             <div th:unless="${#lists.isEmpty(subProperties)}"
                 class="indented-buttons">
               <th:block th:each="subProperty : ${subProperties}">
-                <div th:replace=" :: hide-property-button(${property}, ${subProperty})"/>
+                <div th:replace="~{ :: hide-property-button(${property}, ${subProperty})}"/>
               </th:block>
             </div>
           </th:block>
@@ -272,7 +272,7 @@
         <th:block th:with="controller = |${objType}Controller|">
          <th:block th:with="objectPaths = ${@__${controller}__.createObjectPathLinks(obj)}">
           <p>
-            <div th:replace="fragments/common::object-paths(${objectPaths},false)"/>
+            <div th:replace="~{fragments/common::object-paths(${objectPaths},false)}"/>
           </p>
          </th:block>
         </th:block>

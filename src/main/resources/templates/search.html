@@ -56,7 +56,7 @@
                   th:id="|${formId}-collapsible|"
                   th:aria-labelledby="|#${formId}-heading|"
                   data-parent="#search-forms-container"
-                  th:insert="fragments/search/forms :: #__${formId}__"/>
+                  th:insert="~{fragments/search/forms :: #__${formId}__}"/>
             </div>
           </div>
         </div>
@@ -67,8 +67,8 @@
                 th:id="|${formId}-sidebar-controls|" class="sidebar-controls"
                 th:style="${searchForm.expanded} ? '' : 'display: none;'"
             >
-              <div th:replace="fragments/search/forms :: submit-form-button(${searchForm})"/>
-              <div th:replace="fragments/search/forms :: clear-form-button(__${formId}__)"/>
+              <div th:replace="~{fragments/search/forms :: submit-form-button(${searchForm})}"/>
+              <div th:replace="~{fragments/search/forms :: clear-form-button(__${formId}__)}"/>
             </div>
           </div>
         </div>

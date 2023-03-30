@@ -181,7 +181,7 @@
     <!-- sentence hieroglyphs -->
     <div th:fragment="sentence-hieroglyphs" th:if="*{hasGlyphs}" class="result-list-item-element hieroglyphs">
       <a th:each="token : *{tokens}" th:href="|#${token.id}|" th:id="${token.id}">
-        <div th:replace=" :: token-hieroglyphs"/>
+        <div th:replace="~{ :: token-hieroglyphs}"/>
       </a>
     </div>
 

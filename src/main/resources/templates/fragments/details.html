@@ -5,8 +5,8 @@
 
     <!-- Object details page header (incl. social media stuff) -->
     <div th:fragment="details-page-header" class="row mb-3 details-header">
-        <div th:replace=" :: review-state-header"/>
-        <div th:replace="fragments/common :: social"/>
+        <div th:replace="~{ :: review-state-header}"/>
+        <div th:replace="~{fragments/common :: social}"/>
     </div>
 
     <!-- Object details header (name && review state) -->
@@ -15,7 +15,7 @@
         <h2 class="id mt-1">
           <span class="bbaw-libertine" th:utext="${{caption}}">Object name</span>
         </h2>
-        <a th:replace="fragments/common :: review-state(${obj})"/>
+        <a th:replace="~{fragments/common :: review-state(${obj})}"/>
     </div>
 
     <!-- Generic Passport Properties -->
@@ -63,7 +63,7 @@
         <p>
             <strong th:text="#{object_property_translation}" class="details-property-label">Translation</strong>
         </p>
-        <div th:each="entry : ${obj.translations}" th:insert="fragments/common :: single-lang-translation(${entry})">
+        <div th:each="entry : ${obj.translations}" th:insert="~{fragments/common :: single-lang-translation(${entry})}">
         </div>
     </div>
 
@@ -123,7 +123,7 @@
         <hr/>
         <p>
             <strong th:text="#{|${objType}_property_type|}" class="details-property-label">Type</strong>
-            <span th:replace=" :: type-subtype"/>
+            <span th:replace="~{ :: type-subtype}"/>
         </p>
     </div>
 
@@ -136,7 +136,7 @@
             <strong th:text="#{|${objType}_property_object_paths|}" class="details-property-label">
                 Object path
             </strong>
-            <div th:replace="fragments/common::object-paths(${objectPaths},false)"/>
+            <div th:replace="~{fragments/common::object-paths(${objectPaths},false)}"/>
         </p>
        </th:block>
       </th:block>
@@ -146,7 +146,7 @@
     <div th:fragment="lemma-property-hieroglyphs" id="lemma-property-hieroglyphs" th:unless="${obj.hieroglyphs} == null">
         <p>
             <strong th:text="#{lemma_property_hieroglyphs}" class="details-property-label">Hieroglyphic spelling(s):</strong>
-            <span th:replace=" :: hieroglyphs"/>
+            <span th:replace="~{ :: hieroglyphs}"/>
         </p>
     </div>
 
@@ -169,20 +169,20 @@
                 <span id="lemma-attestation-count-texts" th:text="${obj.attestationCount}">5</span>
             </a>
             <br/>
-            <th:block th:replace=" :: lemma-timespan"/>
+            <th:block th:replace="~{ :: lemma-timespan}"/>
         </p>
-        <div th:include="fragments/widgets/timeline :: timeline"/>
+        <div th:include="~{fragments/widgets/timeline :: timeline}"/>
     </div>
 
     <!-- Lemma Attestations timespan -->
     <span th:fragment="lemma-timespan" th:if="${obj.timespan != null}">
         <strong th:text="#{lemma_property_attestation_timespan}" class="details-property-label">Attestation time:</strong>
         <span th:text="#{object_property_aux_attestation_time_from}">from</span>
-        <span th:insert=" :: display-year(${obj.timespan.begin})" id="attestation-timespan-from">
+        <span th:insert="~{ :: display-year(${obj.timespan.begin})}" id="attestation-timespan-from">
             420 BCE
         </span>
         <span th:text="#{object_property_aux_attestation_time_to}">to</span>
-        <span th:insert=" :: display-year(${obj.timespan.end})" id="attestation-timespan-to">
+        <span th:insert="~{ :: display-year(${obj.timespan.end})}" id="attestation-timespan-to">
             60 CE
         </span>
     </span>
@@ -198,7 +198,7 @@
             <div class="col-md-12">
                 <div class="related-objects-item" th:each="obj : ${predicate.value}" th:object="${obj}" th:id="${obj.id}"
                     th:unless="${obj == null || obj.eclass == 'BTSAnnotation'}"
-                    th:include="fragments/search/results :: |${objectType}-search-result|">
+                    th:include="~{fragments/search/results :: |${objectType}-search-result|}">
                 </div>
             </div>
         </div>

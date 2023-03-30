@@ -12,21 +12,21 @@
 
     <div layout:fragment="content">
 
-      <div th:replace="fragments/details :: details-page-header"/>
+      <div th:replace="~{fragments/details :: details-page-header}"/>
 
       <div class="row">
         <div class="col-sm-12 col-lg-8" id="details-content" th:object="${obj}">
 
           <div class="occ-list-item mt-3 pt-1 pb-1" th:id="*{id}">
             <div class="sentence-line-mode">
-              <div th:replace="fragments/common :: sentence-hieroglyphs"/>
-              <div th:replace="fragments/common :: sentence-transcription"/>
+              <div th:replace="~{fragments/common :: sentence-hieroglyphs}"/>
+              <div th:replace="~{fragments/common :: sentence-transcription}"/>
             </div>
           </div>
 
-          <div th:replace="fragments/details :: translations"/>
-          <div th:replace="fragments/details :: object-property-object-paths('sentence')"/>
-          <div th:replace="fragments/details :: editor-info"/>
+          <div th:replace="~{fragments/details :: translations}"/>
+          <div th:replace="~{fragments/details :: object-property-object-paths('sentence')}"/>
+          <div th:replace="~{fragments/details :: editor-info}"/>
 
         </div>
 
