@@ -170,7 +170,10 @@ logging:
     file:
         name: app.log
     level:
-        root: DEBUG
+        root: INFO
+        org:
+            eclipse:
+                jetty: WARN
 
 spring:
     config:
