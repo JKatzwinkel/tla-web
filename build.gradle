@@ -79,7 +79,7 @@ dependencies {
         exclude module: 'spring-boot-starter-tomcat'
     }
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.0-M2'
-    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.0'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
