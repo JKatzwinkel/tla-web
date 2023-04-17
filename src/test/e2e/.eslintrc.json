@@ -5,5 +5,8 @@
   "extends": [
     "plugin:cypress/recommended",
     "eslint:recommended"
-  ]
+  ],
+  "env": {
+    "node": true
+  }
 }
