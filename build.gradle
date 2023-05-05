@@ -75,7 +75,7 @@ dependencies {
         exclude group: 'jakarta.servlet', module: 'jakarta.servlet-api' // until jetty 12
         exclude module: 'jetty-xml'
     }
-    implementation('org.springframework.boot:spring-boot-starter-web:3.1.0-RC1') {
+    implementation('org.springframework.boot:spring-boot-starter-web:3.1.0-RC2') {
         exclude module: 'spring-boot-starter-tomcat'
     }
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.0-RC1'
