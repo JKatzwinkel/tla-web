@@ -140,7 +140,7 @@ frameworks.each {
 task downloadFontRoboto(type: Download) {
     group = 'Init'
     description = 'Download Google Roboto font'
-    src 'https://gwfh.mranftl.com/api/fonts/roboto?download=zip&subsets=latin&variants=300,500,700,300italic,regular,italic,700italic'
+    src 'https://gwfh.mranftl.com/api/fonts/roboto?download=zip&subsets=latin&variants=300,500,700,300italic,regular,italic,700italic&formats=woff2'
     dest new File(buildDir, 'roboto.zip')
     onlyIfModified true
 }
