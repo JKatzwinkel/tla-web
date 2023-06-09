@@ -11,9 +11,9 @@ on:
 
 jobs:
 
-  xmllint:  
+  xmllint:
     runs-on: ubuntu-20.04
-  
+
     steps:
 
     - uses: actions/checkout@v3.5.2
@@ -24,21 +24,21 @@ jobs:
     - uses: korelstar/xmllint-problem-matcher@v1.1.0
 
     - name: validate HTML templates
-      run: find src/main/resources/{templates,pages} -type f -iname "*.html" -exec xmllint --noout {} \;    
-  
+      run: find src/main/resources/{templates,pages} -type f -iname "*.html" -exec xmllint --noout {} \;
+
 
   build:
     runs-on: ubuntu-20.04
     needs: xmllint
-    
+
     strategy:
       matrix:
         java-version:
           - 17
           - 19
-          
+
     steps:
-  
+
     - name: checkout code
       uses: actions/checkout@v3.5.2
 
