@@ -5,7 +5,7 @@ WORKDIR /home/gradle/tla-frontend
 RUN gradle installAssets bootJar --no-daemon
 
 
-FROM openjdk:22-jdk-buster
+FROM openjdk:22-jdk-slim-bookworm
 
 RUN mkdir /app; apt-get update && apt-get install -y fontconfig libfreetype6
 WORKDIR /app
