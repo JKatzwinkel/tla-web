@@ -51,10 +51,6 @@ services:
     environment:
       - BACKEND_PORT=8090
       - BACKEND_HOST=backend
-      - JQUERY_VERSION
-      - COOKIEJS_VERSION
-      - FONTAWESOME_VERSION
-      - BOOTSTRAP_VERSION
     ports:
       - ${LISTEN_PORT:-8080}:8080
     restart: unless-stopped

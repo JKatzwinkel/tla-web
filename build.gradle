@@ -4,7 +4,6 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'maven-publish'
-    id 'co.uzzu.dotenv.gradle' version '2.0.0'
     id 'de.undercouch.download' version '5.4.0'
     id 'org.springframework.boot' version '3.1.0'
     id 'com.github.ben-manes.versions' version '0.47.0'
@@ -16,11 +15,11 @@ version = '0.0.827-dev'
 sourceCompatibility = '17'
 
 ext {
-    fontawesomeVersion = env.FONTAWESOME_VERSION.orElse('5.12.1')
-    bootstrapVersion = env.BOOTSTRAP_VERSION.orElse('4.6.0')
-    jqueryVersion = env.JQUERY_VERSION.orElse('3.6.4')
-    cookieJsVersion = env.COOKIEJS_VERSION.orElse('2.2.1')
-    cookieBannerVersion = env.COOKIE_BANNER_VERSION.orElse('1.2.2')
+    fontawesomeVersion = '5.12.1'
+    bootstrapVersion = '4.6.0'
+    jqueryVersion = '3.6.4'
+    cookieJsVersion = '2.2.1'
+    cookieBannerVersion = '1.2.2'
     fontawesomeSrc = "https://use.fontawesome.com/releases/v${fontawesomeVersion}/fontawesome-free-${fontawesomeVersion}-web.zip"
     bootstrapSrc = "https://github.com/twbs/bootstrap/releases/download/v${bootstrapVersion}/bootstrap-${bootstrapVersion}-dist.zip"
     jquerySrc = "https://code.jquery.com/jquery-${jqueryVersion}.min.js"
