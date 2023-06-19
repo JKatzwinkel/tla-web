@@ -34,6 +34,11 @@ jobs:
         SAMPLE_URL: http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
         ES_PORT: 9201
 
+    - name: start frontend container
+      run: docker compose up -d frontend
+      env:
+        LISTEN_PORT: 8080
+
     - name: show tla-backend container logs
       run: docker-compose logs backend
 
@@ -69,17 +74,6 @@ jobs:
 
     - name: query backend version info
       run: curl -s localhost:8090/version
-
-    - name: start frontend container
-      run: docker compose up -d frontend
-      env:
-        ES_PORT: 9201
-        BACKEND_PORT: 8090
-        LISTEN_PORT: 8080
-        FONTAWESOME_VERSION: 5.12.1
-        BOOTSTRAP_VERSION: 4.4.1
-        JQUERY_VERSION: 3.5.1
-        COOKIEJS_VERSION: 2.2.1
 
     - name: wait for frontend to respond
       run: bash .github/scripts/wait_for_response.sh
