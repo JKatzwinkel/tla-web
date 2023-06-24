@@ -154,10 +154,9 @@ variables:
 
 ## Configuration
 
-For config options and further methods of execution check out the [Dockerfile](Dockerfile),
-the [Docker Compose file](docker-compose.yml), the [env var template file](.env.template), the
-[Application Properties file](src/main/resources/application.yml), the [build file](build.gradle),
-and the [CI pipeline configuration for integration testing](.github/workflows/integration.yml).
+For config options and further methods of execution check out the [Dockerfile](Dockerfile), the [Docker Compose
+file](docker-compose.yml), the [Application Properties file](src/main/resources/application.yml), the [build
+file](build.gradle), and the [CI pipeline configuration for integration testing](.github/workflows/integration.yml).
 
 
 
