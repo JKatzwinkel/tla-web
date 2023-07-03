@@ -49,9 +49,6 @@ jobs:
         java-version: ${{ matrix.java-version }}
         cache: 'gradle'
 
-    - name: make ./gradlew executable
-      run: chmod +x gradlew
-
     - name: run tests && build project
       run: ./gradlew build --no-daemon
 
