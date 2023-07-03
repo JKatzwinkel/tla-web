@@ -302,3 +302,6 @@ jacocoTestReport {
     finalizedBy 'generateJacocoBadge'
 }
 
+tasks.withType(JavaCompile) {
+    options.deprecation = true
+}
