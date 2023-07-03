@@ -47,7 +47,7 @@ public class TLALocaleResolver extends AcceptHeaderLocaleResolver {
     @Override
     public Locale resolveLocale(HttpServletRequest request) {
         if (isValidContentLanguage(request.getParameter("lang"))) {
-            return new Locale(
+            return Locale.forLanguageTag(
                 request.getParameter("lang")
             );
         } else {

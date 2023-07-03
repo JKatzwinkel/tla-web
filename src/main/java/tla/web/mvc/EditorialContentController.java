@@ -134,7 +134,7 @@ public class EditorialContentController {
             getPageTitleMsgKey(path, lang),
             null,
             path,
-            new Locale(lang)
+            Locale.forLanguageTag(lang)
         );
     }
 
