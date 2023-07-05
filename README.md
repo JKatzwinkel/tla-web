@@ -148,7 +148,14 @@ Startup the application and then run the cypress container with the appropriate 
 variables:
 
 ```bash
-  CYPRESS_BASE_URL=http://localhost:8080 CYPRESS_VIDEO=false docker compose up --exit-code-from e2e e2e
+  CYPRESS_BASE_URL=http://localhost:8080 CYPRESS_VIDEO=false docker compose run e2e
+```
+
+You can choose the browser against which cypress should be run against using the `CYPRESS_BROWSER` environment
+variable (set it to some bogus value to have cypress list the browsers available):
+
+```bash
+  CYPRESS_BROWSER=firefox docker compose run e2e
 ```
 
 

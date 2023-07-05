@@ -86,10 +86,11 @@ jobs:
       run: curl -s localhost:8080/
 
     - name: run cypress e2e tests
-      run: docker compose up --exit-code-from e2e e2e
+      run: docker compose run e2e
       env:
         CYPRESS_BASE_URL: http://localhost:8080
         CYPRESS_VIDEO: false
+        CYPRESS_BROWSER: firefox
 
     - name: upload cypress screenshots
       if: failure()

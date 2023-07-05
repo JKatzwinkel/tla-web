@@ -67,5 +67,6 @@ services:
       - CYPRESS_BASE_URL
     network_mode: host
     tty: true
+    command: "${CYPRESS_BROWSER:+--browser }${CYPRESS_BROWSER:-}"
 
 ...
