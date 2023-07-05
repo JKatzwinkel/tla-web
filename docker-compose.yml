@@ -62,6 +62,9 @@ services:
     working_dir: /e2e
     volumes:
       - ./src/test/e2e:/e2e
+    environment:
+      - CYPRESS_VIDEO
+      - CYPRESS_BASE_URL
     network_mode: host
     tty: true
 
