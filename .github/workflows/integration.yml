@@ -40,7 +40,7 @@ jobs:
         LISTEN_PORT: 8080
 
     - name: show tla-backend container logs
-      run: docker-compose logs backend
+      run: docker compose logs backend
 
     - name: wait for backend to be populated with lemma data
       run: bash .github/scripts/wait_for_response.sh
