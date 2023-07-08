@@ -81,6 +81,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.1.1'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.2.1'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    // for CVE-2022-1471, likely redundant with some future spring-boot release:
+    implementation 'org.yaml:snakeyaml:2.0'
 
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
     implementation('com.github.rosmord.jsesh:jsesh:release-7.6.1') {
