@@ -78,7 +78,7 @@ public class EditorialPagesTest extends ViewTest {
             xpath("//div[@id='breadcrumbs']/div/nav/ol/li[last()]/span/text()").string(
                 messages.getMessage(
                     EditorialContentController.getPageTitleMsgKey(path, lang),
-                    null, new Locale(lang)
+                    null, Locale.forLanguageTag(lang)
                 )
             )
         );
