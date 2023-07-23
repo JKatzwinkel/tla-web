@@ -190,5 +190,8 @@ spring:
             - file:./src/main/resources/pages/
             cache:
                 period: 0
+    output:
+        ansi:
+            enabled: ALWAYS
 
 ...
