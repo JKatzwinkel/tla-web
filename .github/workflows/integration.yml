@@ -14,7 +14,6 @@ on:
     - 'docker-compose.yml'
     - '.dockerignore'
     - '.github/workflows/integration.yml'
-    - 'gradle/**'
   schedule:
     - cron: '0 0 1,15 * *'
 
