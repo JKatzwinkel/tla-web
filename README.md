@@ -1,7 +1,7 @@
 ![build](https://github.com/JKatzwinkel/tla-web/workflows/build/badge.svg)
 ![deploy](https://github.com/JKatzwinkel/tla-web/workflows/deploy/badge.svg)
-![LINE](https://img.shields.io/badge/line--coverage-90.12%25-brightgreen.svg)
-![METHOD](https://img.shields.io/badge/method--coverage-90.52%25-brightgreen.svg)
+![LINE](https://img.shields.io/badge/line--coverage-90.99%25-brightgreen.svg)
+![METHOD](https://img.shields.io/badge/method--coverage-91.33%25-brightgreen.svg)
 
 TLA web frontend.
 
