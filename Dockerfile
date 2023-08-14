@@ -7,7 +7,7 @@ RUN gradle installAssets bootJar --no-daemon
 
 FROM openjdk:22-jdk-slim-bookworm
 
-RUN mkdir /app; apt-get update && apt-get install -y fontconfig libfreetype6
+RUN mkdir /app; apt-get update && apt-get install -y fontconfig
 WORKDIR /app
 
 COPY --from=build /home/gradle/tla-frontend/build/libs/*.jar /app/tla-web-frontend.jar
