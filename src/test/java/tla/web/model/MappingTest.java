@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.TreeSet;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.StringUtils;
 
 import tla.domain.dto.AnnotationDto;
@@ -29,7 +28,6 @@ import tla.web.model.meta.TLAObject;
 import tla.web.model.parts.Token;
 import tla.web.model.parts.extra.AttestedTimespan;
 
-@SpringBootTest
 public class MappingTest {
 
     @Test
