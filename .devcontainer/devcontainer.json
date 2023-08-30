@@ -1,12 +1,9 @@
 {
-	"name": "Java",
-	"image": "mcr.microsoft.com/devcontainers/java:0-17",
+	"image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
 	"features": {
-		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/devcontainers/features/common-utils:2": {
 			"configureZshAsDefaultShell": "true"
 		},
-		"ghcr.io/devcontainers-contrib/features/curl-apt-get:1": {},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"customizations": {
