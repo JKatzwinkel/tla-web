@@ -11,7 +11,7 @@ Copyright (C) 2019-2021 Berlin-Brandenburgische Akademie der Wissenschaften
 ## Usage
 
 This Thesaurus Linguae Aegyptiae (TLA) web frontend requires an instance of the
-corresponding [TLA backend application](https://github.com/thesaurus-linguae-aegyptiae/tla-es)
+corresponding [TLA backend application](https://github.com/jkatzwinkel/tla-es)
 in order to work. You can either retrieve the TLA backend from github and run it yourself,
 or you can utilize the [Docker Compose Setup](docker-compose.yml) shipped with this TLA frontend
 source code repository, which contains services for population and execution of the TLA backend.
@@ -55,7 +55,7 @@ As the `populate` service is needed to be able retrieve a TLA corpus data file i
 The value assigned to the environment variable `SAMPLE_URL` should be a URL pointing to a `.tar.gz` file
 containing preferably recent TLA corpus data serialized to JSON files using a version of the TLA format
 compatible to both the version of the TLA backend application, and the
-[TLA model DTO library](https://github.com/thesaurus-linguae-aegyptiae/tla-common) used by this TLA frontend
+[TLA model DTO library](https://github.com/jkatzwinkel/tla-common) used by this TLA frontend
 application for communication with the TLA backend.
 
 An example for the assignment of the `SAMPLE_URL` environment variable with an appropriate data source for the
