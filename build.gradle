@@ -89,7 +89,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web:3.2.0-M2') {
         exclude module: 'spring-boot-starter-tomcat'
     }
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.2.0-M2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.2.0-M3'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
     implementation 'org.apache.commons:commons-lang3:3.13.0'
 
