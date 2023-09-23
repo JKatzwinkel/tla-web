@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "cypress": "^13.2.0",
-    "eslint-plugin-cypress": "^2.14.0"
+    "eslint-plugin-cypress": "^2.15.1"
   },
   "scripts": {
     "cy:run": "$(npm bin)/cypress run"
