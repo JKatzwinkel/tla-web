@@ -36,7 +36,7 @@ public class Sentence extends TLAObject implements Hierarchic {
 
     private Transcription transcription;
 
-    private Text text;
+    private Text text = Text.EMPTY;
 
     @Singular
     private SortedMap<Language, List<String>> translations;
@@ -51,20 +51,20 @@ public class Sentence extends TLAObject implements Hierarchic {
     }
 
     public String getName() {
-        return this.getText() != null ? this.getText().getName() : null;
+        return this.getText().getName();
     }
 
     public String reviewState() {
-        return this.getText() != null ? this.getText().getReviewState() : "published";
+        return this.getText().getReviewState();
     }
 
     public EditorInfo getEdited() {
-        return this.getText() != null ? this.getText().getEdited() : null;
+        return this.getText().getEdited();
     }
 
     @Override
     public List<ObjectPath> getPaths() {
-        return this.getText() != null ? this.getText().getPaths() : null;
+        return this.getText().getPaths();
     }
 
 }

@@ -1,7 +1,6 @@
 package tla.web.model;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import lombok.AccessLevel;
@@ -41,11 +40,11 @@ public class Annotation extends BTSObject {
      * Escapes markup.
      */
     public String getBody() {
+        if (this.body == null) {
+            this.body = this.extractBody();
+        }
         return Util.escapeMarkup(
-            String.join(
-                "\n\n",
-                this.body != null ? this.body : this.extractBody()
-            )
+            String.join("\n\n", this.body)
         );
     }
 
@@ -53,23 +52,24 @@ public class Annotation extends BTSObject {
      * Try to extract text content from <code>"annotation.lemma"</code> nodes in the annotation's passport.
      */
     private Collection<String> extractBody() {
-        if (this.getPassport() != null) {
-            List<Passport> nodes = this.getPassport().extractProperty(
-                "annotation.lemma"
-            );
-            if (nodes != null) {
-                return nodes.stream().filter(
-                    node -> {
-                        return !node.isEmpty() && !node.getLeafNodeValue().isBlank();
-                    }
-                ).map(
-                    Passport::getLeafNodeValue
-                ).map(
-                    String::trim
-                ).toList();
-            }
+        if (this.getPassport() == null) {
+            return List.of();
         }
-        return Collections.emptyList();
+        List<Passport> nodes = this.getPassport().extractProperty(
+            "annotation.lemma"
+        );
+        if (nodes == null) {
+            return List.of();
+        }
+        return nodes.stream().filter(
+            node -> {
+                return !node.isEmpty() && !node.getLeafNodeValue().isBlank();
+            }
+        ).map(
+            Passport::getLeafNodeValue
+        ).map(
+            String::trim
+        ).toList();
     }
 
 }

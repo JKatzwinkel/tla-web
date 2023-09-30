@@ -16,6 +16,8 @@ import tla.web.model.meta.BackendPath;
 @TLADTO(TextDto.class)
 public class Text extends CorpusObject {
 
+    public static final Text EMPTY = new Text();
+
     private TextDto.WordCount wordCount;
 
 }

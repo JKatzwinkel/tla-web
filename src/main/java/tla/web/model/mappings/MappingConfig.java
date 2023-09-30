@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -55,7 +54,6 @@ public class MappingConfig {
 
     private ExternalReferencesConverter externalReferencesConverter;
 
-    @Autowired
     public MappingConfig(ExternalReferencesConverter externalReferencesConverter) {
         this.externalReferencesConverter = externalReferencesConverter;
     }
