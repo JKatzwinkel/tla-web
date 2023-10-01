@@ -158,6 +158,11 @@ variable (set it to some bogus value to have cypress list the browsers available
   CYPRESS_BROWSER=firefox docker compose run e2e
 ```
 
+Requirements for running cypress in (debian-based) local environment:
+
+- nodejs 18, npm 9
+- `xvfb`, `libnss3`, `libatk-bridge2.0-0`, `libcups2`, `libgtk-3.0`, `libasound2`
+
 
 ## Configuration
 
