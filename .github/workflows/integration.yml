@@ -9,7 +9,7 @@ on:
   pull_request:
     paths:
     - 'src/test/e2e/**'
-    - 'src/main/resources/**'
+    - 'src/main/**'
     - 'Dockerfile'
     - 'docker-compose.yml'
     - '.dockerignore'
