@@ -21,7 +21,7 @@ jobs:
     - name: install xmllint
       run: sudo apt update && sudo apt-get install --no-install-recommends -y libxml2-utils
 
-    - uses: korelstar/xmllint-problem-matcher@v1.1.0
+    - uses: korelstar/xmllint-problem-matcher@v1.2.0
 
     - name: validate HTML templates
       run: find src/main/resources/{templates,pages} -type f -iname "*.html" -exec xmllint --noout {} \;
