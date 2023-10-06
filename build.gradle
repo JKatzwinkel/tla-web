@@ -80,16 +80,13 @@ dependencies {
     implementation 'org.modelmapper:modelmapper:3.1.1'
     implementation 'org.jooq:jool:0.9.15'
 
-    // https://github.com/spring-projects/spring-framework/issues/29435
-    implementation('jakarta.servlet:jakarta.servlet-api:5.0.0')
-    implementation('org.springframework.boot:spring-boot-starter-jetty:3.2.0-M2') {
-        exclude group: 'jakarta.servlet', module: 'jakarta.servlet-api' // until jetty 12
+    implementation('org.springframework.boot:spring-boot-starter-jetty:3.2.0-M3') {
         exclude module: 'jetty-xml'
     }
-    implementation('org.springframework.boot:spring-boot-starter-web:3.2.0-M2') {
+    implementation('org.springframework.boot:spring-boot-starter-web:3.2.0-M3') {
         exclude module: 'spring-boot-starter-tomcat'
     }
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.2.0-M2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.2.0-M3'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.3.0'
     implementation 'org.apache.commons:commons-lang3:3.13.0'
 
@@ -99,8 +96,7 @@ dependencies {
         exclude group: 'bouncycastle'
     }
 
-    testImplementation('jakarta.servlet:jakarta.servlet-api:6.0.0')
-    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.2.0-M2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:3.2.0-M3'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
 }
