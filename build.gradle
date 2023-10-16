@@ -77,7 +77,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    implementation 'org.modelmapper:modelmapper:3.1.1'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
     implementation 'org.jooq:jool:0.9.15'
 
     implementation('org.springframework.boot:spring-boot-starter-jetty:3.2.0-M3') {
