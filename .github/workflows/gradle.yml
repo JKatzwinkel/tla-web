@@ -2,7 +2,7 @@
 
 name: build
 
-on:
+'on':
   push:
     branches-ignore:
       # branch name globs actually MUST be put in single (not: double) quotes
@@ -12,7 +12,7 @@ on:
 jobs:
 
   xmllint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -28,7 +28,7 @@ jobs:
 
 
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     needs: xmllint
 
     strategy:
