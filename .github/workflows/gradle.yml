@@ -36,6 +36,7 @@ jobs:
         java-version:
           - 17
           - 20
+          - 21
 
     steps:
 
@@ -45,9 +46,9 @@ jobs:
     - name: set up jdk
       uses: actions/setup-java@v3.13.0
       with:
-        distribution: 'temurin'
+        distribution: temurin
         java-version: ${{ matrix.java-version }}
-        cache: 'gradle'
+        cache: gradle
 
     - name: run tests && build project
       run: ./gradlew build --no-daemon

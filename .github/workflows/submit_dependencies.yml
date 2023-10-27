@@ -2,9 +2,9 @@
 
 name: dependencies
 
-on:
+'on':
   push:
-    branches: ['main']
+    branches: [main]
 
 jobs:
   submit:
@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-java@v3.13.0
         with:
           distribution: temurin
-          java-version: 19
+          java-version: 21
 
       - uses: mikepenz/gradle-dependency-submission@v0.9.0
 
