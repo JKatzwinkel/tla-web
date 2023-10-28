@@ -1,3 +1,3 @@
 #!/bin/bash
 
-( [ -d node_modules/ ] || npm install ) && cypress run
+( [ -d node_modules/ ] || npm install ) && cypress run $@

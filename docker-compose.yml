@@ -65,7 +65,7 @@ services:
       - CYPRESS_BASE_URL
     network_mode: host
     tty: true
-    entrypoint: [ sh, docker-entrypoint.sh ]
+    entrypoint: [sh, docker-entrypoint.sh]
     command: "${CYPRESS_BROWSER:+--browser }${CYPRESS_BROWSER:-}"
 
 ...
