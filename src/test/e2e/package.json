@@ -1,7 +1,7 @@
 {
   "devDependencies": {
     "cypress": "^13.3.3",
-    "cypress-terminal-report": "^5.3.7",
+    "cypress-terminal-report": "^5.3.8",
     "eslint-plugin-cypress": "^2.15.1"
   },
   "scripts": {
