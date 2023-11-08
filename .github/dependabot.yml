@@ -17,6 +17,9 @@ updates:
       spring-boot:
         patterns:
           - "org.springframework.boot:spring-boot-*"
+      junit:
+        patterns:
+          - "org.junit.jupiter:junit-jupiter-*"
     schedule:
       interval: "weekly"
     reviewers:
