@@ -17,6 +17,7 @@ updates:
       spring-boot:
         patterns:
           - "org.springframework.boot:spring-boot-*"
+          - "org.springframework.boot:org.springframework.boot.gradle.plugin"
       junit:
         patterns:
           - "org.junit.jupiter:junit-jupiter-*"
