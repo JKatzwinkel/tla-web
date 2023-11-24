@@ -23,6 +23,8 @@ updates:
           - "org.junit.jupiter:junit-jupiter-*"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: ":dependabot"
     reviewers:
       - "jkatzwinkel"
 
@@ -30,6 +32,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: ":dependabot"
     reviewers:
       - "jkatzwinkel"
 
@@ -37,6 +41,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: ":dependabot"
     reviewers:
       - "jkatzwinkel"
 
@@ -44,6 +50,8 @@ updates:
     directory: "/src/test/e2e"
     schedule:
       interval: "monthly"
+    commit-message:
+      prefix: ":dependabot"
     reviewers:
       - "jkatzwinkel"
 
