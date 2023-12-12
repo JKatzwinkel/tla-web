@@ -296,6 +296,18 @@ application {
     mainClass = 'tla.web.App'
 }
 
+tasks.named("dependencyUpdates").configure {
+    resolutionStrategy {
+        componentSelection {
+            all {
+                if (it.candidate.group == 'com.github.rosmord.jsesh' && it.candidate.version == '7.3.1') {
+                   reject("JSesh version ${it.candidate.version} is old, actually...")
+                }
+            }
+        }
+    }
+}
+
 test {
     useJUnitPlatform()
     finalizedBy 'jacocoTestReport'
