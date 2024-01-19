@@ -35,7 +35,6 @@ jobs:
       matrix:
         java-version:
           - 17
-          - 20
           - 21
 
     steps:
