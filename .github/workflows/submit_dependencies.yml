@@ -17,7 +17,14 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
+          cache: gradle
 
-      - uses: mikepenz/gradle-dependency-submission@v1.0.0
+      - name: setup gradle dependency graph submission
+        uses: gradle/gradle-build-action@v3.0.0-beta.5
+        with:
+          dependency-graph: generate-and-submit
+
+      - name: run gradle so that dependency graph gets generated
+        run: ./gradlew compilejava --no-daemon
 
 ...
