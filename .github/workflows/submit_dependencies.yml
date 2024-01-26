@@ -20,7 +20,7 @@ jobs:
           cache: gradle
 
       - name: setup gradle dependency graph submission
-        uses: gradle/gradle-build-action@v3.0.0-beta.5
+        uses: gradle/actions/setup-gradle@v3.0.0-rc.1
         with:
           dependency-graph: generate-and-submit
 
