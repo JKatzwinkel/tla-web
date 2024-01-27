@@ -3,7 +3,8 @@
 name: dependencies
 
 'on':
-  push
+  push:
+    branches: [main]
 
 jobs:
   submit:
