@@ -47,7 +47,6 @@ jobs:
       with:
         distribution: temurin
         java-version: ${{ matrix.java-version }}
-        cache: gradle
 
     - name: run tests && build project
       run: ./gradlew build --no-daemon
