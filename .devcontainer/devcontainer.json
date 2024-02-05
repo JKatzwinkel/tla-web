@@ -6,17 +6,30 @@
 		},
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
+	"postStartCommand": "sudo apt-get update && sudo apt-get install -y fontconfig && sudo apt-get clean",
+	"postAttachCommand": "nvm install 21.6.1",
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ryanluker.vscode-coverage-gutters"
+				"ryanluker.vscode-coverage-gutters",
+				"SonarSource.sonarlint-vscode"
 			],
 			"settings": {
 				"editor.renderWhitespace": "all",
 				"coverage-gutters.coverageFileNames": [
 					"jacocoTestReport.xml"
 				],
-				"coverage-gutters.showLineCoverage": true
+				"coverage-gutters.showLineCoverage": true,
+				"sonarlint.pathToNodeExecutable": "/usr/local/share/nvm/versions/node/v21.6.1/bin/node",
+				"sonarlint.output.showVerboseLogs": true,
+				"sonarlint.analyzerProperties": {
+					"sonar.java.source": "21"
+				},
+				"search.exclude": {
+					"gradlew": true,
+					"gradlew.bat": true,
+					"gradle/": true
+				}
 			}
 		}
 	}

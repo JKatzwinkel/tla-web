@@ -47,10 +47,9 @@ jobs:
       with:
         distribution: temurin
         java-version: ${{ matrix.java-version }}
-        cache: gradle
 
     - name: run tests && build project
-      run: ./gradlew build --no-daemon
+      run: ./gradlew build --no-daemon --warning-mode all
 
     - uses: mikepenz/action-junit-report@v4.0.3
       if: always()
