@@ -158,17 +158,18 @@ variable (set it to some bogus value to have cypress list the browsers available
   CYPRESS_BROWSER=firefox docker compose run e2e
 ```
 
-Requirements for running cypress in (debian-based) local environment:
+For Cypress's system requirements, check the [Cypress installation instructions](https://docs.cypress.io/guides/getting-started/installing-cypress#System-requirements). The current package dependencies on Debian-based operating systems are:
 
-- nodejs 18, npm 9
-- `xvfb`, `libnss3`, `libatk-bridge2.0-0`, `libcups2`, `libgtk-3.0`, `libasound2`
+```bash
+apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+```
 
 
 ## Configuration
 
 For config options and further methods of execution check out the [Dockerfile](Dockerfile), the [Docker Compose
 file](docker-compose.yml), the [Application Properties file](src/main/resources/application.yml), the [build
-file](build.gradle), and the [CI pipeline configuration for integration testing](.github/workflows/integration.yml).
+file](build.gradle), and the [CI pipeline setting up the entire stack for e2e testing](.github/workflows/e2e.yml).
 
 
 
