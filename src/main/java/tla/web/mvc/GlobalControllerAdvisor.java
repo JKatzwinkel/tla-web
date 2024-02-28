@@ -5,7 +5,6 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
@@ -27,13 +26,13 @@ public class GlobalControllerAdvisor extends DefaultHandlerExceptionResolver {
 
     public static final BreadCrumb BREADCRUMB_HOME = BreadCrumb.of("/", "menu_global_home");
 
-    @Autowired
     private BuildProperties buildProperties;
 
     private ApplicationProperties applicationProperties;
 
-    public GlobalControllerAdvisor(ApplicationProperties properties) {
+    public GlobalControllerAdvisor(ApplicationProperties properties, BuildProperties buildProperties) {
         this.applicationProperties = properties;
+        this.buildProperties = buildProperties;
     }
 
     @ModelAttribute("env")

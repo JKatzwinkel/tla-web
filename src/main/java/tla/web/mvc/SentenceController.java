@@ -1,6 +1,7 @@
 package tla.web.mvc;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class SentenceController extends HierarchicObjectController<Sentence, Sen
                 null, "line"
             )
         ).filter(
-            link -> link != null
+            Objects::nonNull
         ).toList();
     }
 

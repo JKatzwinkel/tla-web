@@ -3,6 +3,7 @@ package tla.web.mvc.config;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -26,8 +27,10 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
     @Autowired
-    public GlobalControllerAdvisor globalAdvisoryController(ApplicationProperties applicationProperties) {
-        return new GlobalControllerAdvisor(applicationProperties);
+    public GlobalControllerAdvisor globalAdvisoryController(
+        ApplicationProperties applicationProperties, BuildProperties buildProperties
+    ) {
+        return new GlobalControllerAdvisor(applicationProperties, buildProperties);
     }
 
     /**
