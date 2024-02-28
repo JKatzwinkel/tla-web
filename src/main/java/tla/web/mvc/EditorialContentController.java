@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.jooq.lambda.Seq;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.MessageSource;
@@ -45,17 +44,23 @@ import tla.web.mvc.config.TLALocaleResolver;
 @RequestMapping("/")
 public class EditorialContentController {
 
-    @Autowired
     private MessageSource l10n;
 
-    @Autowired
     private LocaleResolver localeResolver;
 
-    @Autowired
     private EditorialRegistry editorialRegistry;
 
-    @Autowired
     private RequestMappingHandlerMapping handlerMapping;
+
+    public EditorialContentController(
+        MessageSource l10n, LocaleResolver localeResolver,
+        EditorialRegistry editorialRegistry, RequestMappingHandlerMapping handlerMapping
+    ) {
+        this.l10n = l10n;
+        this.localeResolver = localeResolver;
+        this.editorialRegistry = editorialRegistry;
+        this.handlerMapping = handlerMapping;
+    }
 
     @Value("${tla.editorials.path}")
     private String editorialsDir;
@@ -112,7 +117,7 @@ public class EditorialContentController {
     /**
      * build i18n message key for an editorial page's title.
      */
-    public static String getPageTitleMsgKey(String path, String lang) {
+    public static String getPageTitleMsgKey(String path) {
         return "editorial_title_" + Seq.toString(
             Stream.of(
                 path.split("/")
@@ -131,7 +136,7 @@ public class EditorialContentController {
      */
     public String getPageTitle(String path, String lang) {
         return l10n.getMessage(
-            getPageTitleMsgKey(path, lang),
+            getPageTitleMsgKey(path),
             null,
             path,
             Locale.forLanguageTag(lang)
@@ -186,7 +191,7 @@ public class EditorialContentController {
             List.of(
                 BREADCRUMB_HOME,
                 BreadCrumb.of(
-                    getPageTitleMsgKey(path, lang)
+                    getPageTitleMsgKey(path)
                 )
             )
         );
@@ -208,19 +213,15 @@ public class EditorialContentController {
             HttpHeaders.class,
             Model.class
         );
-        try {
-            this.editorialRegistry.getLangSupport().forEach(
-                (path, supportedLanguages) -> {
-                    handlerMapping.registerMapping(
-                        RequestMappingInfo.paths(path).methods(RequestMethod.GET).options(
-                            handlerMapping.getBuilderConfiguration()
-                        ).build(),
-                        this,
-                        handlerMethod
-                    );
-                }
-            );
-        } catch (Exception e) {}
+        this.editorialRegistry.getLangSupport().forEach(
+            (path, supportedLanguages) -> handlerMapping.registerMapping(
+                RequestMappingInfo.paths(path).methods(RequestMethod.GET).options(
+                    handlerMapping.getBuilderConfiguration()
+                ).build(),
+                this,
+                handlerMethod
+            )
+        );
     }
 
 }

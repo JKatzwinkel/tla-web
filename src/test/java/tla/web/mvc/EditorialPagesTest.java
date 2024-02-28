@@ -33,7 +33,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import tla.web.config.EditorialConfig.EditorialRegistry;
 
 @TestInstance(Lifecycle.PER_CLASS)
-public class EditorialPagesTest extends ViewTest {
+class EditorialPagesTest extends ViewTest {
 
     static final String NO_SUPPORT_LANG = "es";
 
@@ -77,7 +77,7 @@ public class EditorialPagesTest extends ViewTest {
         ).andExpect(
             xpath("//div[@id='breadcrumbs']/div/nav/ol/li[last()]/span/text()").string(
                 messages.getMessage(
-                    EditorialContentController.getPageTitleMsgKey(path, lang),
+                    EditorialContentController.getPageTitleMsgKey(path),
                     null, Locale.forLanguageTag(lang)
                 )
             )
@@ -191,7 +191,7 @@ public class EditorialPagesTest extends ViewTest {
         test.andExpect(
             xpath("//div[@id='breadcrumbs']/div/nav/ol/li[last()]/span/text()").string(
                 messages.getMessage(
-                    EditorialContentController.getPageTitleMsgKey("/home", lang),
+                    EditorialContentController.getPageTitleMsgKey("/home"),
                     null, Locale.forLanguageTag(lang)
                 )
             )
