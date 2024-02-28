@@ -22,6 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Util {
 
+    private Util() {
+        //
+    }
+
     public static final String SERIF_FONT_MARKUP_REGEX = "\\$([^$]+)\\$";
     public static final String SERIF_FONT_MARKUP_REPLACEMENT = "<span class=\"bbaw-libertine\">$1</span>";
 
@@ -109,7 +113,7 @@ public class Util {
             SERIF_FONT_MARKUP_REPLACEMENT
         );
         if (escaped != null) {
-            return escaped.replaceAll("\\n", "<br/>");
+            return escaped.replace("\\n", "<br/>");
         }
         return escaped;
     }

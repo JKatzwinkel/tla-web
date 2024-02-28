@@ -2,6 +2,7 @@ package tla.web.model.meta;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lombok.Getter;
@@ -35,8 +36,7 @@ public class ObjectDetails<T extends TLAObject> extends ObjectsContainer {
      * Map payload and related objects from DTO to domain model types.
      */
     public static ObjectDetails<? extends TLAObject> from(SingleDocumentWrapper<? extends AbstractDto> wrapper) {
-        var container = new ObjectDetails<>(wrapper);
-        return container;
+        return new ObjectDetails<>(wrapper);
     }
 
     /**
@@ -49,9 +49,9 @@ public class ObjectDetails<T extends TLAObject> extends ObjectsContainer {
             Collectors.toMap(
                 entry -> entry.getKey(),
                 entry -> entry.getValue().stream().map(
-                    reference -> this.expandRelatedObject(reference)
+                    this::expandRelatedObject
                 ).filter(
-                    o -> o != null
+                    Objects::nonNull
                 ).toList()
             )
         );
