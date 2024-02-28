@@ -3,9 +3,6 @@ package tla.web.model.ui;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import lombok.Getter;
-import lombok.AllArgsConstructor;
-
 /**
  * Simple single-purpose POJO for initializing search form collapsible
  * expansion states (which search form currently has the focus)

@@ -1,6 +1,5 @@
 package tla.web.model.ui;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -14,7 +13,7 @@ import tla.domain.dto.extern.PageInfo;
 @Getter
 public class Pagination {
 
-    public final static int OMISSION_THRESHOLD = 2;
+    public static final int OMISSION_THRESHOLD = 2;
 
     private long fromResult;
     private long toResult;
@@ -32,8 +31,8 @@ public class Pagination {
         if (dtoPage != null) {
             this.currentPage = dtoPage.getNumber() + 1;
             this.totalResults = dtoPage.getTotalElements();
-            this.fromResult = (this.currentPage - 1) * dtoPage.getSize() + 1;
-            this.toResult = (this.currentPage - 1) * dtoPage.getSize() + dtoPage.getNumberOfElements();
+            this.fromResult = (this.currentPage - 1l) * dtoPage.getSize() + 1;
+            this.toResult = (this.currentPage - 1l) * dtoPage.getSize() + dtoPage.getNumberOfElements();
             this.lastPage = Math.max(dtoPage.getTotalPages(), 1);
             this.pages = this.makePageLinks();
         } else {
@@ -49,7 +48,7 @@ public class Pagination {
      * @return
      */
     protected int distanceToRequiredPage(int page) {
-        return Arrays.asList(
+        return List.of(
             1,
             this.currentPage,
             this.lastPage
@@ -57,7 +56,7 @@ public class Pagination {
             requiredPage -> Math.abs(requiredPage - page)
         ).reduce(
             Math::min
-        ).get();
+        ).orElseThrow();
     }
 
     /**
@@ -66,24 +65,24 @@ public class Pagination {
      * ellipsis placeholders (n pages omitted).
      */
     protected List<Integer> makePageLinks() {
-        List<Integer> pages = new LinkedList<Integer>();
-        List<Integer> omitted = new LinkedList<Integer>();
+        List<Integer> included = new LinkedList<>();
+        List<Integer> omitted = new LinkedList<>();
         IntStream.rangeClosed(1, this.lastPage).forEach(
-            p -> {
-                if (this.distanceToRequiredPage(p) > OMISSION_THRESHOLD) {
-                    omitted.add(p);
+            page-> {
+                if (this.distanceToRequiredPage(page) > OMISSION_THRESHOLD) {
+                    omitted.add(page);
                 } else {
                     if (omitted.size() > 1) {
-                        pages.add(null);
+                        included.add(null);
                     } else {
-                        pages.addAll(omitted);
+                        included.addAll(omitted);
                     }
                     omitted.clear();
-                    pages.add(p);
+                    included.add(page);
                 }
             }
         );
-        return pages;
+        return included;
     }
 
 }
