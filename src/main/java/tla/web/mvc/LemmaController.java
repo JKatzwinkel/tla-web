@@ -3,7 +3,6 @@ package tla.web.mvc;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -30,18 +29,21 @@ import tla.web.service.ObjectService;
 @TemplateModelName("lemma")
 public class LemmaController extends ObjectController<Lemma, LemmaSearch> {
 
-    @Autowired
     private LemmaService lemmaService;
 
-    @Autowired
     private LemmaSearchProperties searchConfig;
 
-    public static final Script[] SEARCHABLE_SCRIPTS = {
+    public LemmaController(LemmaService lemmaService, LemmaSearchProperties searchConfig) {
+        this.lemmaService = lemmaService;
+        this.searchConfig = searchConfig;
+    }
+
+    static final Script[] SEARCHABLE_SCRIPTS = {
         Script.HIERATIC,
         Script.DEMOTIC
     };
 
-    public static final Language[] SEARCHABLE_TRANSLATION_LANGUAGES = {
+    static final Language[] SEARCHABLE_TRANSLATION_LANGUAGES = {
         Language.DE,
         Language.EN,
         Language.FR
@@ -82,11 +84,10 @@ public class LemmaController extends ObjectController<Lemma, LemmaSearch> {
 
     @Override
     protected Model extendSearchResultsPageModel(Model model, SearchResults results, SearchCommand<?> searchForm) {
-        if (searchForm instanceof LemmaSearch) {
-            LemmaSearch form = (LemmaSearch) searchForm;
+        if (searchForm instanceof LemmaSearch form) {
             model.addAttribute(
                 "allTranslationLanguages",
-                (form.getTranscription() != null) ? form.getTranslation().getLang() : Collections.EMPTY_LIST
+                (form.getTranscription() != null) ? form.getTranslation().getLang() : Collections.emptyList()
             );
             model.addAttribute("allScripts", form.getScript());
         }

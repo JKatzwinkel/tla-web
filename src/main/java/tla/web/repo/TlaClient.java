@@ -48,10 +48,9 @@ public class TlaClient {
      */
     public static void registerModelclass(Class<? extends TLAObject> modelClass) {
         for (Annotation a: modelClass.getAnnotations()) {
-            if (a instanceof BackendPath) {
+            if (a instanceof BackendPath backendPath) {
                 backendPaths.put(
-                    modelClass,
-                    ((BackendPath) a).value()
+                    modelClass, backendPath.value()
                 );
             }
         }

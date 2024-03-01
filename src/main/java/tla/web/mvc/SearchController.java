@@ -100,7 +100,7 @@ public class SearchController {
      */
     private Function<String, SearchFormExpansionState> expandFormExpression(MultiValueMap<String, String> params) {
         if (SEARCH_FORMS.stream().anyMatch(
-            key -> params.containsKey(key)
+            params::containsKey
         )) {
             return key -> new SearchFormExpansionState(
                 key, params.containsKey(key)

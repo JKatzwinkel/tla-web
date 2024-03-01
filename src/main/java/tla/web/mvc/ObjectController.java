@@ -3,6 +3,7 @@ package tla.web.mvc;
 import static tla.web.mvc.GlobalControllerAdvisor.BREADCRUMB_HOME;
 
 import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -60,7 +61,7 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
 
     private String templatePath = null;
 
-    public ObjectController() {
+    ObjectController() {
         controllers.add(this);
     }
 
@@ -70,10 +71,9 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
      * @return URL path prefix
      */
     public String getRequestMapping() {
-        for (Annotation a : this.getClass().getAnnotationsByType(RequestMapping.class)) {
-            return ((RequestMapping) a).value()[0];
-        }
-        return null;
+        return Arrays.stream(this.getClass().getAnnotationsByType(RequestMapping.class)).map(
+            requestmapping -> requestmapping.value()[0]
+        ).findFirst().orElse(null);
     }
 
     /**
@@ -132,8 +132,8 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
     public String getTemplatePath() {
         if (this.templatePath == null) {
             for (Annotation a : getClass().getAnnotations()) {
-                if (a instanceof TemplateModelName) {
-                    this.templatePath = ((TemplateModelName) a).value();
+                if (a instanceof TemplateModelName tmn) {
+                    this.templatePath = tmn.value();
                 }
             }
         }
