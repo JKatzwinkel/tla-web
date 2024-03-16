@@ -152,7 +152,7 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
     /**
      * Translate object passport to UI representation.
      */
-    public LinkedHashMap<String, List<CorpusPathSegment>> getPassportPropertyValues(ObjectDetails<T> container) {
+    public Map<String, List<CorpusPathSegment>> getPassportPropertyValues(ObjectDetails<T> container) {
         final var res = new LinkedHashMap<String, List<CorpusPathSegment>>();
         getService().getDetailsPassportPropertyValues(
             container.getObject()
@@ -234,7 +234,7 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
         model.addAttribute("caption", getService().getLabel(container.getObject()));
         model.addAttribute("related", container.getRelated());
         model.addAttribute("relations", container.extractRelatedObjects());
-        model = extendSingleObjectDetailsModel(model, container);
+        model = extendSingleObjectDetailsModel(model, container);  // NOSONAR
         return String.format("%s/details", getTemplatePath());
     }
 
@@ -286,7 +286,7 @@ public abstract class ObjectController<T extends TLAObject, S extends SearchComm
      * Subclasses may override in order to extend view model based on search input and results.
      */
     protected Model extendSearchResultsPageModel(
-        Model model, SearchResults results, SearchCommand<?> searchForm
+        Model model, SearchResults results, SearchCommand<?> searchForm  // NOSONAR
     ) {
         return model;
     }
