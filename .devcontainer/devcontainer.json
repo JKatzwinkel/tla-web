@@ -20,7 +20,7 @@
 					"jacocoTestReport.xml"
 				],
 				"coverage-gutters.showLineCoverage": true,
-				"sonarlint.pathToNodeExecutable": "/usr/local/share/nvm/versions/node/v21.6.1/bin/node",
+				"sonarlint.pathToNodeExecutable": "/usr/local/share/nvm/current/bin/node",
 				"sonarlint.output.showVerboseLogs": true,
 				"sonarlint.analyzerProperties": {
 					"sonar.java.source": "21"
