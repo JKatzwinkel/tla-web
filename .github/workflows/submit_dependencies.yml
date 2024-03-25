@@ -17,7 +17,6 @@ jobs:
         with:
           distribution: temurin
           java-version: 21
-          cache: gradle
 
       - name: setup gradle dependency graph submission
         uses: gradle/actions/setup-gradle@v3.1.0

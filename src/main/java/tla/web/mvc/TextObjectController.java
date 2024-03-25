@@ -1,6 +1,5 @@
 package tla.web.mvc;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,8 +14,11 @@ import tla.web.service.TextService;
 @TemplateModelName("text")
 public class TextObjectController extends ObjectController<Text, TextSearch> {
 
-    @Autowired
     private TextService service;
+
+    public TextObjectController(TextService service) {
+        this.service = service;
+    }
 
     @Override
     public ObjectService<Text> getService() {

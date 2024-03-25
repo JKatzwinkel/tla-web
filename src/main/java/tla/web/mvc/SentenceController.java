@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -27,8 +26,11 @@ import tla.web.service.SentenceService;
 @TemplateModelName("sentence")
 public class SentenceController extends HierarchicObjectController<Sentence, SentenceSearch> {
 
-    @Autowired
     private SentenceService service;
+
+    public SentenceController(SentenceService service) {
+        this.service = service;
+    }
 
     @Override
     public ObjectService<Sentence> getService() {
@@ -68,7 +70,7 @@ public class SentenceController extends HierarchicObjectController<Sentence, Sen
                 parentObjectPathLinks,
                 sentenceContextLinks
             ).flatMap(
-                links -> links.stream()
+                links -> links.stream()  // NOSONAR
             ).toList()
         ).toList();
     }
