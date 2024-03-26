@@ -7,7 +7,7 @@
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"postStartCommand": "sudo apt-get update && sudo apt-get install -y fontconfig && sudo apt-get clean",
-	"postAttachCommand": "nvm use 21.6.2 || nvm install 21.6.2",
+	"postAttachCommand": "nvm use 21.7.1 || nvm install 21.7.1",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -20,7 +20,7 @@
 					"jacocoTestReport.xml"
 				],
 				"coverage-gutters.showLineCoverage": true,
-				"sonarlint.pathToNodeExecutable": "/usr/local/share/nvm/versions/node/v21.6.1/bin/node",
+				"sonarlint.pathToNodeExecutable": "/usr/local/share/nvm/current/bin/node",
 				"sonarlint.output.showVerboseLogs": true,
 				"sonarlint.analyzerProperties": {
 					"sonar.java.source": "21"
