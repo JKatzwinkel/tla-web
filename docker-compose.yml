@@ -56,7 +56,7 @@ services:
 
   e2e:
     container_name: tla-e2e
-    image: cypress/included:13.7.1
+    image: cypress/included:13.7.2
     working_dir: /e2e
     volumes:
       - ./src/test/e2e:/e2e
