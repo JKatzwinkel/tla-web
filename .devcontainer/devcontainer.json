@@ -7,7 +7,7 @@
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
 	"postStartCommand": "sudo apt-get update && sudo apt-get install -y fontconfig && sudo apt-get clean",
-	"postAttachCommand": "nvm use 21.7.1 || nvm install 21.7.1",
+	"postAttachCommand": "(nvm use 21.7.1 || nvm install 21.7.1) && exit",
 	"customizations": {
 		"vscode": {
 			"extensions": [
