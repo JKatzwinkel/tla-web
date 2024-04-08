@@ -19,7 +19,7 @@ jobs:
           java-version: 21
 
       - name: setup gradle dependency graph submission
-        uses: gradle/actions/setup-gradle@v3.1.0
+        uses: gradle/actions/setup-gradle@v3.2.0
         with:
           dependency-graph: generate-and-submit
 
