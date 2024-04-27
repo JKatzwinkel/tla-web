@@ -84,6 +84,10 @@ jobs:
     - name: curl frontend from shell
       run: curl -s localhost:8080/
 
+    - name: lint cypress test specs
+      run: npm ci && npm run lint
+      working-directory: ./src/test/e2e/
+
     - name: run cypress e2e tests
       run: docker compose run e2e
       env:
