@@ -5,6 +5,7 @@
     "eslint-plugin-cypress": "^3.0.1"
   },
   "scripts": {
-    "cy": "npx cypress run"
+    "cy": "npx cypress run",
+    "lint": "npx eslint cypress/tests"
   }
 }
