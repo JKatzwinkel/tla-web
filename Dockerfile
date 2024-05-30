@@ -7,8 +7,10 @@ RUN gradle installAssets bootJar --no-daemon
 
 FROM openjdk:23-jdk-slim-bookworm
 
-RUN mkdir /app; apt-get update && apt-get install -y fontconfig \
-  && apt-get clean
+RUN mkdir /app
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends fontconfig=2.14.1-4 \
+  && apt-get clean && rm /var/lib/apt/lists/*
 WORKDIR /app
 
 COPY --from=build /home/gradle/tla-frontend/build/libs/*.jar /app/tla-web-frontend.jar
