@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import tla.domain.command.LemmaSearch;
 import tla.domain.command.SentenceSearch;
@@ -28,9 +28,9 @@ import tla.web.model.meta.TLAObject;
 import tla.web.repo.TlaClient;
 
 @SpringBootTest
-public class ServiceTest {
+class ServiceTest {
 
-    @MockBean
+    @MockitoBean
     private TlaClient backend;
 
     @Autowired

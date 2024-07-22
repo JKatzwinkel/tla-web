@@ -23,7 +23,7 @@ import tla.domain.dto.extern.SingleDocumentWrapper;
 import tla.domain.dto.meta.AbstractDto;
 import tla.web.model.Lemma;
 
-public class LemmaDetailsTest extends ViewTest {
+class LemmaDetailsTest extends ViewTest {
 
     private static final String[] EXPECT_TOP_LEVEL_ELEM_IDS = {
         "lemma-property-dict",
@@ -114,7 +114,7 @@ public class LemmaDetailsTest extends ViewTest {
     void testLemmaDetails_passport() throws Exception {
         final String id = "151410";
         respondToDetailsRequestWithLemma(id);
-        makeDetailsRequest(id, Language.en).andExpect(
+        makeDetailsRequest(id, Language.EN).andExpect(
             xpath("//div[@id='passport-properties']").exists()
         ).andExpect(
             xpath("//div[@id='passport-properties']/p/span[@class='lemma_main_group_nominal_schenkel']").nodeCount(1)
@@ -125,7 +125,7 @@ public class LemmaDetailsTest extends ViewTest {
     @DisplayName("lemma without passport should be rendered regardless")
     void testLemmaDetails_noPassport() throws Exception {
         respondToDetailsRequestWithLemma("875255");
-        makeDetailsRequest("875255", Language.en).andExpect(
+        makeDetailsRequest("875255", Language.EN).andExpect(
             xpath("//div[@id='lemma-property-type-subtype']//span[@id='type-subtype']/span").string(
                 messages.getMessage("lemma_type_root", null, Locale.ENGLISH)
             )
@@ -136,7 +136,7 @@ public class LemmaDetailsTest extends ViewTest {
     @DisplayName("lemma details page should show attested timespan")
     void testAttestedTimespan() throws Exception {
         respondToDetailsRequestWithLemma("100090");
-        makeDetailsRequest("100090", Language.en).andExpect(
+        makeDetailsRequest("100090", Language.EN).andExpect(
             xpath("//div[@id='lemma-property-attestations']/p/span/span[@id='attestation-timespan-from']/span[1]").string("2375")
         ).andExpect(
             xpath("//div[@id='lemma-property-attestations']/p/span/span[@id='attestation-timespan-from']/span[2]").string(
@@ -166,7 +166,7 @@ public class LemmaDetailsTest extends ViewTest {
     @Test
     void testModel() throws Exception {
         respondToDetailsRequestWithLemma("31610");
-        ResultActions testResponse = makeDetailsRequest("31610", Language.en);
+        ResultActions testResponse = makeDetailsRequest("31610", Language.EN);
         testResponse.andExpect(
             model().attributeExists("annotations")
         ).andExpect(
@@ -178,7 +178,7 @@ public class LemmaDetailsTest extends ViewTest {
     @ValueSource(strings = {"100090"})
     void testResponseOk(String id) throws Exception {
         respondToDetailsRequestWithLemma(id);
-        makeDetailsRequest(id, Language.en).andExpect(
+        makeDetailsRequest(id, Language.EN).andExpect(
             xpath("//div[@id='lemma-property-dict']").exists()
         );
     }

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -27,9 +27,9 @@ import tla.web.model.meta.ObjectDetails;
 import tla.web.service.ThsService;
 
 @Slf4j
-public class ThsEntryDetailsTest extends ViewTest {
+class ThsEntryDetailsTest extends ViewTest {
 
-    @MockBean
+    @MockitoBean
     private ThsService service;
 
     @Autowired
@@ -60,7 +60,7 @@ public class ThsEntryDetailsTest extends ViewTest {
             () -> assertEquals(ThsEntry.class, container.getObject().getClass(), "result is ths entry"),
             () -> assertTrue(container.getObject() instanceof ThsEntry, "result is ths entry instance")
         );
-        return new ObjectDetails<ThsEntry>(
+        return new ObjectDetails<>(
             (ThsEntry) container.getObject(),
             container.getRelated()
         );

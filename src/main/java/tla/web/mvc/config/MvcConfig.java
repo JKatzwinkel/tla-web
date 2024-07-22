@@ -22,11 +22,11 @@ import tla.web.model.mappings.ScriptFromStringConverter;
 import tla.web.model.mappings.URLDecodeConverter;
 import tla.web.mvc.GlobalControllerAdvisor;
 
+
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
-    @Autowired
     public GlobalControllerAdvisor globalAdvisoryController(
         ApplicationProperties applicationProperties, BuildProperties buildProperties
     ) {

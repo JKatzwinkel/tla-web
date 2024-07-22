@@ -1,31 +1,32 @@
 package tla.web.mvc;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.MessageSource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import tla.web.repo.TlaClient;
 
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class ViewTest {
+class ViewTest {  // NOSONAR
 
     public static enum Language {
-        en;
+        EN;
     }
 
     @Autowired
     protected MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     protected TlaClient backend;
 
     @Autowired
@@ -46,7 +47,7 @@ public class ViewTest {
     }
 
     void testLocalization(ResultActions testResponse) throws Exception {
-        testLocalization(testResponse, Language.en);
+        testLocalization(testResponse, Language.EN);
     }
 
 }
