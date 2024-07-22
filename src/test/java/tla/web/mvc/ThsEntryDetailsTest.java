@@ -27,7 +27,7 @@ import tla.web.model.meta.ObjectDetails;
 import tla.web.service.ThsService;
 
 @Slf4j
-public class ThsEntryDetailsTest extends ViewTest {
+class ThsEntryDetailsTest extends ViewTest {
 
     @MockitoBean
     private ThsService service;
@@ -60,7 +60,7 @@ public class ThsEntryDetailsTest extends ViewTest {
             () -> assertEquals(ThsEntry.class, container.getObject().getClass(), "result is ths entry"),
             () -> assertTrue(container.getObject() instanceof ThsEntry, "result is ths entry instance")
         );
-        return new ObjectDetails<ThsEntry>(
+        return new ObjectDetails<>(
             (ThsEntry) container.getObject(),
             container.getRelated()
         );
