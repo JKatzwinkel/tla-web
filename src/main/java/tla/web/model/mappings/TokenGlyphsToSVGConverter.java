@@ -8,6 +8,9 @@ public class TokenGlyphsToSVGConverter extends AbstractConverter<SentenceToken, 
 
     @Override
     protected String convert(SentenceToken source) {
+        if (source.getGlyphs() == null) {
+            return null;
+        }
         return Util.jseshRender(
             source.getGlyphs().getMdc(),
             source.getAnnoTypes() != null && source.getAnnoTypes().contains("rubrum")
