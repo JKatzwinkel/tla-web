@@ -18,88 +18,129 @@ on:
     - cron: '0 0 1,15 * *'
 
 
+env:
+  DATA_URL: >-
+    http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
+
+
 jobs:
+
+  check_url:
+    runs-on: ubuntu-latest
+    outputs:
+      url_response: ${{ steps.check.outputs.response_code }}
+
+    steps:
+      - id: check
+        run: |
+          rc=$(curl -sIo /dev/null "${{ env.DATA_URL }}" \
+          -w "%{http_code}" || true)
+          echo "response_code=${rc}" >> "${GITHUB_OUTPUT}"
+
 
   docker:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4.2.0
 
-    - uses: actions/checkout@v4.2.0
+      - name: start backend containers
+        run: docker compose up -d backend
 
-    - name: start backend containers
-      run: docker compose up -d backend populate
-      env:
-        SAMPLE_URL: http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
-        ES_PORT: 9201
+      - name: lint cypress test specs
+        run: npm ci && npm run lint
+        working-directory: ./src/test/e2e/
 
-    - name: start frontend container
-      run: docker compose up -d frontend
-      env:
-        LISTEN_PORT: 8080
+      - name: start frontend container
+        run: docker compose up -d frontend
 
-    - name: show tla-backend container logs
-      run: docker compose logs backend
+      - name: install cypress dependencies
+        run: >-
+          sudo apt-get install -y --no-install-recommends xvfb libglib2.0-0
+          libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0 libgbm1
+          libasound2
 
-    - name: wait for backend to be populated with lemma data
-      run: bash .github/scripts/wait_for_response.sh
-      env:
-        url: http://localhost:8090/lemma/get/100690
-        interval: 5
-        timeout: 120
-      continue-on-error: true
+      - name: query backend endpoint URL paths list
+        run: curl -s localhost:8090/
 
-    - name: wait for backend to be populated with meta data
-      run: bash .github/scripts/wait_for_response.sh
-      env:
-        url: http://localhost:8090/version
-        interval: 3
-        timeout: 60
-      continue-on-error: true
+      - name: run cypress smoke test
+        run: >-
+          npx cypress run -s cypress/tests/language_switcher.spec.js
+        working-directory: ./src/test/e2e/
 
-    - name: wait for backend to be populated with thesaurus data
-      run: bash .github/scripts/wait_for_response.sh
-      env:
-        url: http://localhost:8090/ths/get/7pupjz
-        interval: 5
-        timeout: 120
 
-    - name: show tla-ingest container logs
-      run: docker compose logs populate
-      if: always()
+  e2e:
+    needs: check_url
+    if: needs.check_url.outputs.url_response != '404'
+    runs-on: ubuntu-latest
 
-    - name: query backend endpoint URL paths list
-      run: curl -s localhost:8090/
+    steps:
 
-    - name: query backend version info
-      run: curl -s localhost:8090/version
+      - uses: actions/checkout@v4.2.0
 
-    - name: wait for frontend to respond
-      run: bash .github/scripts/wait_for_response.sh
-      env:
-        url: http://localhost:8080
-        interval: 2
-        timeout: 120
+      - name: start && populate backend containers
+        run: docker compose up -d backend populate
+        env:
+          SAMPLE_URL: ${{ env.DATA_URL }}
+          ES_PORT: 9201
 
-    - name: curl frontend from shell
-      run: curl -s localhost:8080/
+      - name: start frontend container
+        run: docker compose up -d frontend
+        env:
+          LISTEN_PORT: 8080
 
-    - name: lint cypress test specs
-      run: npm ci && npm run lint
-      working-directory: ./src/test/e2e/
+      - name: show tla-backend container logs
+        run: docker compose logs backend
 
-    - name: run cypress e2e tests
-      run: docker compose run e2e
-      env:
-        CYPRESS_BASE_URL: http://localhost:8080
-        CYPRESS_VIDEO: false
-        CYPRESS_BROWSER: firefox
+      - name: wait for backend to be populated with lemma data
+        run: bash .github/scripts/wait_for_response.sh
+        env:
+          url: http://localhost:8090/lemma/get/100690
+          interval: 5
+          timeout: 120
+        continue-on-error: true
 
-    - name: upload cypress screenshots
-      if: failure()
-      uses: actions/upload-artifact@v4.4.3
-      with:
-        path: src/test/e2e/cypress/screenshots
-        name: cypress-screenshots
+      - name: wait for backend to be populated with meta data
+        run: bash .github/scripts/wait_for_response.sh
+        env:
+          url: http://localhost:8090/version
+          interval: 3
+          timeout: 60
+        continue-on-error: true
+
+      - name: wait for backend to be populated with thesaurus data
+        run: bash .github/scripts/wait_for_response.sh
+        env:
+          url: http://localhost:8090/ths/get/7pupjz
+          interval: 5
+          timeout: 120
+
+      - name: show tla-ingest container logs
+        run: docker compose logs populate
+        if: always()
+
+      - name: query backend version info
+        run: curl -s localhost:8090/version
+
+      - name: wait for frontend to respond
+        run: bash .github/scripts/wait_for_response.sh
+        env:
+          url: http://localhost:8080
+          interval: 2
+          timeout: 120
+
+      - name: run cypress e2e tests
+        run: docker compose run e2e
+        env:
+          CYPRESS_BASE_URL: http://localhost:8080
+          CYPRESS_VIDEO: false
+          CYPRESS_BROWSER: firefox
+
+      - name: upload cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          path: src/test/e2e/cypress/screenshots
+          name: cypress-screenshots
 
 ...
