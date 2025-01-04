@@ -18,19 +18,67 @@ on:
     - cron: '0 0 1,15 * *'
 
 
+env:
+  DATA_URL: >-
+    http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
+
+
 jobs:
 
+  check_url:
+    runs-on: ubuntu-latest
+    outputs:
+      url_response: ${{ steps.check.outputs.response_code }}
+
+    steps:
+      - id: check
+        run: |
+          rc=$(curl -sIo /dev/null "${{ env.DATA_URL }}" \
+          -w "%{http_code}" || true)
+          echo "response_code=${rc}" >> "${GITHUB_OUTPUT}"
+
+
   docker:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4.2.0
+
+      - name: start backend containers
+        run: docker compose up -d backend
+
+      - name: lint cypress test specs
+        run: npm ci && npm run lint
+        working-directory: ./src/test/e2e/
+
+      - name: start frontend container
+        run: docker compose up -d frontend
+
+      - name: install cypress dependencies
+        run: >-
+          sudo apt-get install -y --no-install-recommends xvfb libglib2.0-0
+          libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0 libgbm1
+          libasound2
+
+      - name: run cypress smoke test
+        run: >-
+          npx cypress run -s cypress/tests/language_switcher.spec.js
+        working-directory: ./src/test/e2e/
+
+
+  e2e:
+    needs: check_url
+    if: needs.check_url.outputs.url_response != '404'
     runs-on: ubuntu-latest
 
     steps:
 
     - uses: actions/checkout@v4.2.0
 
-    - name: start backend containers
+    - name: start && populate backend containers
       run: docker compose up -d backend populate
       env:
-        SAMPLE_URL: http://aaew64.bbaw.de/resources/tla-data/tla-sample-20210115-1000t.tar.gz
+        SAMPLE_URL: ${{ env.DATA_URL }}
         ES_PORT: 9201
 
     - name: start frontend container
@@ -83,10 +131,6 @@ jobs:
 
     - name: curl frontend from shell
       run: curl -s localhost:8080/
-
-    - name: lint cypress test specs
-      run: npm ci && npm run lint
-      working-directory: ./src/test/e2e/
 
     - name: run cypress e2e tests
       run: docker compose run e2e
