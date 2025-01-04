@@ -63,9 +63,6 @@ jobs:
       - name: query backend endpoint URL paths list
         run: curl -s localhost:8090/
 
-      - name: curl frontend from shell
-        run: curl -s localhost:8080/
-
       - name: run cypress smoke test
         run: >-
           npx cypress run -s cypress/tests/language_switcher.spec.js
