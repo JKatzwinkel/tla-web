@@ -1,0 +1,66 @@
+---
+
+name: update cypress container
+
+'on':
+  pull_request:
+    branches:
+      - 'dependabot/npm_and_yarn/src/test/e2e/cypress-**'
+  push:
+    branches:
+      - 'dependabot/npm_and_yarn/src/test/e2e/cypress-**'
+    paths:
+      - 'src/test/e2e/*.json'
+
+jobs:
+  update-cypress-container:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+
+      - uses: actions/checkout@v4.2.2
+
+      - name: install yq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends yq
+
+      - name: determine version of cypress container
+        id: docker_version
+        run: |
+          cur=$(yq -r .services.e2e.image docker-compose.yml | cut -d: -f2)
+          echo "docker_version=${cur}" >> "${GITHUB_OUTPUT}"
+
+      - name: determine version of cypress npm package
+        id: npm_version
+        run: |
+          npm ci
+          new=$(npx cypress --version --component package)
+          echo "npm_version=${new}" >> "${GITHUB_OUTPUT}"
+        working-directory: src/test/e2e/
+
+      - name: update cypress docker compose service
+        run: >-
+          sed -i 's/included:'${OLD}'/included:'${NEW}'/'
+          docker-compose.yml
+        env:
+          OLD: ${{ steps.docker_version.outputs.docker_version }}
+          NEW: ${{ steps.npm_version.outputs.npm_version }}
+
+      - name: push cypress container update
+        run: |
+          git config user.email "${GIT_MAIL}"
+          git config user.name "github-actions[bot]"
+          git add docker-compose.yml
+          git commit -m "e2e: update cypress container from ${OLD} to ${NEW}"
+          git push
+        env:
+          OLD: ${{ steps.docker_version.outputs.docker_version }}
+          NEW: ${{ steps.npm_version.outputs.npm_version }}
+          GIT_MAIL: >-
+            41898282+github-actions[bot]@users.noreply.github.com
+        continue-on-error: true
+
+...
