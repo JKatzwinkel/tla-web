@@ -49,7 +49,7 @@ jobs:
     - name: run tests && build project
       run: ./gradlew build --no-daemon --warning-mode all
 
-    - uses: mikepenz/action-junit-report@v5.5.0
+    - uses: mikepenz/action-junit-report@v5.5.1
       if: always()
       with:
         report_paths: 'build/test-results/test/TEST-*.xml'
