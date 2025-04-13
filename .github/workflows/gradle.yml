@@ -7,7 +7,11 @@ name: build
     branches-ignore:
       # branch name globs actually MUST be put in single (not: double) quotes
       - 'dependabot/npm**'
-
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
 
 jobs:
 
@@ -41,7 +45,7 @@ jobs:
       uses: actions/checkout@v4.2.2
 
     - name: set up jdk
-      uses: actions/setup-java@v4.7.0
+      uses: actions/setup-java@v4.7.1
       with:
         distribution: temurin
         java-version: ${{ matrix.java-version }}
