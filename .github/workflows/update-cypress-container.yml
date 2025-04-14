@@ -30,8 +30,8 @@ jobs:
       - name: determine version of cypress container
         id: docker_version
         run: |
-          cur=$(yq -r .services.e2e.image docker-compose.yml | cut -d: -f2)
-          echo "docker_version=${cur}" >> "${GITHUB_OUTPUT}"
+          cur=$(yq -r .services.e2e.image docker-compose.yml)
+          echo "docker_version=${cur#*:}" >> "${GITHUB_OUTPUT}"
 
       - name: determine version of cypress npm package
         id: npm_version
