@@ -7,7 +7,11 @@ name: build
     branches-ignore:
       # branch name globs actually MUST be put in single (not: double) quotes
       - 'dependabot/npm**'
-
+  workflow_call:
+    inputs:
+      ref:
+        required: false
+        type: string
 
 jobs:
 
@@ -17,6 +21,8 @@ jobs:
     steps:
 
     - uses: actions/checkout@v4.2.2
+      with:
+        ref: ${{ inputs.ref || github.ref }}
 
     - name: install xmllint
       run: sudo apt update && sudo apt-get install --no-install-recommends -y libxml2-utils
@@ -32,13 +38,16 @@ jobs:
     needs: xmllint
 
     strategy:
+      fail-fast: false
       matrix:
-        java-version: [17, 21, 23]
+        java-version: [17, 21, 23, 24]
 
     steps:
 
-    - name: checkout code
+    - name: checkout code @ ${{ inputs.ref || github.ref }}
       uses: actions/checkout@v4.2.2
+      with:
+        ref: ${{ inputs.ref || github.ref }}
 
     - name: set up jdk
       uses: actions/setup-java@v4.7.0
