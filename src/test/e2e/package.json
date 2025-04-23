@@ -2,7 +2,7 @@
   "devDependencies": {
     "cypress": "^14.3.2",
     "cypress-terminal-report": "^7.1.0",
-    "eslint-plugin-cypress": "^4.2.0"
+    "eslint-plugin-cypress": "^4.3.0"
   },
   "scripts": {
     "cy": "npx cypress run",
