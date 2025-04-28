@@ -27,7 +27,7 @@ jobs:
             to %targetVersion%
           labels: dependencies, gradle
           reviewers: jkatzwinkel
-          release-channel: release-candidate
+          release-channel: stable
 
       - name: determine change status
         id: changed
