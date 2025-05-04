@@ -1,4 +1,4 @@
-FROM gradle:8.13-jdk21 AS build
+FROM gradle:8.14-jdk21 AS build
 
 COPY --chown=gradle:gradle . /home/gradle/tla-frontend
 WORKDIR /home/gradle/tla-frontend
