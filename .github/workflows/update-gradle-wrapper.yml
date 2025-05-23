@@ -20,7 +20,7 @@ jobs:
         uses: gradle-update/update-gradle-wrapper-action@v2.1.0
         with:
           pr-title-template: >-
-            :dependabot: Update Gradle Wrapper from %sourceVersion%
+            :dependabot: Update gradle wrapper from %sourceVersion%
             to %targetVersion%
           commit-message-template: >-
             :dependabot: update gradle wrapper from %sourceVersion%
