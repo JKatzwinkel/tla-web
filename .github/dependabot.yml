@@ -25,8 +25,6 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: ":dependabot"
-    reviewers:
-      - "jkatzwinkel"
 
   - package-ecosystem: "docker"
     directory: "/"
@@ -34,8 +32,6 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: ":dependabot"
-    reviewers:
-      - "jkatzwinkel"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -43,8 +39,6 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: ":dependabot"
-    reviewers:
-      - "jkatzwinkel"
 
   - package-ecosystem: "npm"
     directory: "/src/test/e2e"
@@ -52,7 +46,5 @@ updates:
       interval: "monthly"
     commit-message:
       prefix: ":dependabot"
-    reviewers:
-      - "jkatzwinkel"
 
 ...
