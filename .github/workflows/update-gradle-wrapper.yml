@@ -26,7 +26,7 @@ jobs:
             :dependabot: update gradle wrapper from %sourceVersion%
             to %targetVersion%
           labels: dependencies, gradle
-          reviewers: jkatzwinkel
+          reviewers: JKatzwinkel
           release-channel: stable
 
       - name: determine change status
