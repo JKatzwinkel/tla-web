@@ -5,7 +5,7 @@ WORKDIR /home/gradle/tla-frontend
 RUN gradle installAssets bootJar --no-daemon
 
 
-FROM openjdk:25-jdk-slim-bookworm
+FROM openjdk:26-jdk-slim-bookworm
 
 RUN mkdir /app
 RUN apt-get update \
