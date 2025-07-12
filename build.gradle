@@ -78,7 +78,7 @@ dependencies {
     }
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.5.3'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.4.0'
-    implementation 'org.apache.commons:commons-lang3:3.17.0'
+    implementation 'org.apache.commons:commons-lang3:3.18.0'
 
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
     implementation('com.github.rosmord.jsesh:jsesh:release-7.6.1') {
