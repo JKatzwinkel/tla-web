@@ -13,7 +13,10 @@ plugins {
 
 group = 'org.bbaw.aaew.tla'
 version = '0.0.827-dev'
-sourceCompatibility = '17'
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 ext {
     fontawesomeVersion = '5.12.1'
