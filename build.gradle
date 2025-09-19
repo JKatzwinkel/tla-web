@@ -84,7 +84,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.18.0'
 
     implementation 'com.github.jkatzwinkel:tla-common:main-SNAPSHOT'
-    implementation('com.github.rosmord.jsesh:jsesh:release-7.6.1') {
+    implementation('com.github.rosmord.jsesh:jsesh:release-7.9.1') {
         exclude group: 'com.jgoodies', module: 'forms'
         exclude group: 'com.lowagie', module: 'itext'
         exclude group: 'bouncycastle'
