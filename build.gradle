@@ -60,8 +60,8 @@ publishing {
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
-    maven { url 'https://repo.spring.io/milestone' }
+    maven { url = 'https://jitpack.io' }
+    maven { url = 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
@@ -301,10 +301,10 @@ test {
 }
 
 testlogger {
-    theme 'mocha'
-    slowThreshold 1500
-    showStandardStreams false
-    showFullStackTraces true
+    theme = 'mocha'
+    slowThreshold = 1500
+    showStandardStreams = false
+    showFullStackTraces = true
 }
 
 jacocoTestReport {
