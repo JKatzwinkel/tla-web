@@ -35,11 +35,10 @@ public class Util {
     private static MDCDrawingFacade facade = new MDCDrawingFacade();
 
     public static String patchSVG(Writer writer) {
-        var xml = writer.toString().substring(
-            XML_HEAD.length()
-        );
+        var xml = writer.toString();
         return RegExUtils.replacePattern(
-            xml, SVG_ATTR_REGEX, SVG_ATTR_REPLACEMENT
+            xml.subSequence(XML_HEAD.length(), xml.length()),
+            SVG_ATTR_REGEX, SVG_ATTR_REPLACEMENT
         );
     }
 
@@ -107,15 +106,15 @@ public class Util {
      * with HTML tags.
      */
     public static String escapeMarkup(String text) {
+        if (text == null) {
+            return text;
+        }
         String escaped = RegExUtils.replacePattern(
-            text,
+            text.subSequence(0, text.length()),
             SERIF_FONT_MARKUP_REGEX,
             SERIF_FONT_MARKUP_REPLACEMENT
         );
-        if (escaped != null) {
-            return escaped.replace("\\n", "<br/>");
-        }
-        return escaped;
+        return escaped.replace("\\n", "<br/>");
     }
 
 }
