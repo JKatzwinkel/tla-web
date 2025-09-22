@@ -14,6 +14,7 @@ import jsesh.mdc.model.TopItem;
 import jsesh.mdc.model.TopItemList;
 import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
 import jsesh.utils.DoubleDimensions;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -29,17 +30,16 @@ public class Util {
     public static final String SERIF_FONT_MARKUP_REGEX = "\\$([^$]+)\\$";
     public static final String SERIF_FONT_MARKUP_REPLACEMENT = "<span class=\"bbaw-libertine\">$1</span>";
 
-    public static final String XML_HEAD = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>";
+    public static final String XML_HEAD = "<?xml version='1.0' encoding='UTF-8'?>";
     public static final String SVG_ATTR_REGEX = "width=.([0-9.]+). height=.([0-9.]+).";
     public static final String SVG_ATTR_REPLACEMENT = "viewBox=\"0 0 $1 $2\"";
     private static MDCDrawingFacade facade = new MDCDrawingFacade();
 
     public static String patchSVG(Writer writer) {
-        var xml = writer.toString().substring(
-            XML_HEAD.length()
-        );
+        var xml = writer.toString();
         return RegExUtils.replacePattern(
-            xml, SVG_ATTR_REGEX, SVG_ATTR_REPLACEMENT
+            xml.subSequence(XML_HEAD.length(), xml.length()),
+            SVG_ATTR_REGEX, SVG_ATTR_REPLACEMENT
         );
     }
 
@@ -63,33 +63,27 @@ public class Util {
      * @param rubrum whether to render entire MdC sequence in red
      * @return textual serialization of SVG vector graphic or null
      */
+    @SneakyThrows
     public static String jseshRender(String mdc, boolean rubrum) {
         if (mdc == null || mdc.isBlank()) {
             return null;
         }
-        try (StringWriter writer = new StringWriter()) {
-            Rectangle2D boundingBox = facade.getBounds(
-                mdc, 0, 0
-            );
-            var svg = new SVGGraphics2D(
-                writer,
-                new DoubleDimensions(
-                    boundingBox.getWidth(),
-                    boundingBox.getHeight()
-                )
-            );
-            facade.draw(
-                topItems(mdc, rubrum), svg, 0, 0
-            );
-            svg.dispose();
-            return patchSVG(writer);
-        } catch (Exception e) {
-            log.warn(
-                "Jsesh could not render hieroglyph encoding '{}': {}",
-                mdc, e.toString()
-            );
-            return null;
-        }
+        StringWriter writer = new StringWriter();
+        Rectangle2D boundingBox = facade.getBounds(
+            mdc, 0, 0
+        );
+        var svg = new SVGGraphics2D(
+            writer,
+            new DoubleDimensions(
+                boundingBox.getWidth(),
+                boundingBox.getHeight()
+            )
+        );
+        facade.draw(
+            topItems(mdc, rubrum), svg, 0, 0
+        );
+        svg.dispose();
+        return patchSVG(writer);
     }
 
     /**
@@ -107,15 +101,15 @@ public class Util {
      * with HTML tags.
      */
     public static String escapeMarkup(String text) {
+        if (text == null) {
+            return text;
+        }
         String escaped = RegExUtils.replacePattern(
-            text,
+            text.subSequence(0, text.length()),
             SERIF_FONT_MARKUP_REGEX,
             SERIF_FONT_MARKUP_REPLACEMENT
         );
-        if (escaped != null) {
-            return escaped.replace("\\n", "<br/>");
-        }
-        return escaped;
+        return escaped.replace("\\n", "<br/>");
     }
 
 }

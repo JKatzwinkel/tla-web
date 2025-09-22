@@ -28,10 +28,11 @@ import tla.web.model.meta.TLAObject;
 import tla.web.model.parts.Token;
 import tla.web.model.parts.extra.AttestedTimespan;
 
-public class MappingTest {
+
+class MappingTest {
 
     @Test
-    void lemma() throws Exception {
+    void lemma() {
         Passport p = new Passport();
         p.add("key", new Passport("value"));
         LemmaDto dto = LemmaDto.builder()
@@ -76,7 +77,7 @@ public class MappingTest {
     }
 
     @Test
-    void lemmaAttestations() throws Exception {
+    void lemmaAttestations() {
         var period1 = tla.domain.model.extern.AttestedTimespan.Period.builder().begin(-44).end(60).ref(
             ObjectReference.builder().eclass("BTSThsEntry").id("term1").type("date").build()
         ).build();
