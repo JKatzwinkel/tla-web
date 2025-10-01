@@ -1,9 +1,10 @@
 package tla.web.model.mappings;
 
-import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
@@ -101,13 +102,17 @@ public class MappingConfig {
     }
 
     /**
-     * Register mappings for all previously registered model classes..
+     * Register DTO mappings of all previously registered model classes.
      */
     private void registerModelMappings() {
         for (Class<? extends TLAObject> modelClass : getRegisteredModelClasses()) {
-            for (Annotation a : modelClass.getAnnotationsByType(TLADTO.class)) {
-                registerModelMapping(((TLADTO) a).value(), modelClass);
-            }
+            Arrays.stream(
+                modelClass.getAnnotationsByType(TLADTO.class)
+            ).map(
+                TLADTO::value
+            ).forEach(
+                dtoClass -> registerModelMapping(dtoClass, modelClass)
+            );
         }
     }
 
@@ -121,14 +126,13 @@ public class MappingConfig {
     ) {
         log.info("register model mappings from {} to {}", dtoClass, modelClass);
         TypeMap typemap = modelMapper.typeMap(dtoClass, modelClass);
-        if (BTSObject.class.isAssignableFrom(modelClass)) {
-            if (DocumentDto.class.isAssignableFrom(dtoClass)) {
-                typemap.includeBase(DocumentDto.class, BTSObject.class);
-            }
-            if (NamedDocumentDto.class.isAssignableFrom(dtoClass)) {
-                typemap.includeBase(NamedDocumentDto.class, BTSObject.class);
-            }
-        }
+        Stream.of(
+            DocumentDto.class, NamedDocumentDto.class
+        ).filter(
+            superclass -> superclass.isAssignableFrom(dtoClass)
+        ).forEach(
+            superclass -> typemap.includeBase(superclass, BTSObject.class)
+        );
         return typemap;
     }
 
