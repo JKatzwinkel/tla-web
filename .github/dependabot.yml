@@ -30,6 +30,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 120
+      include:
+        - openjdk
+      exclude:
+        - gradle
     commit-message:
       prefix: ":dependabot"
 
