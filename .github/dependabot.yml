@@ -31,7 +31,7 @@ updates:
     schedule:
       interval: "weekly"
     cooldown:
-      default-days: 120
+      default-days: 90
       include:
         - openjdk
       exclude:
