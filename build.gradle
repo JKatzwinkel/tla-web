@@ -7,7 +7,7 @@ plugins {
     id 'de.undercouch.download' version '5.6.0'
     id 'com.adarshr.test-logger' version '4.0.0'
     id 'org.springframework.boot' version '3.5.6'
-    id 'com.github.ben-manes.versions' version '0.52.0'
+    id 'com.github.ben-manes.versions' version '0.53.0'
     id 'com.github.dawnwords.jacoco.badge' version '0.2.4'
 }
 
@@ -90,6 +90,7 @@ dependencies {
         exclude group: 'bouncycastle'
     }
 
+    testImplementation 'org.mockito:mockito-core:5.20.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:3.5.6'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.0'
