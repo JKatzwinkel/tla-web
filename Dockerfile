@@ -5,10 +5,10 @@ WORKDIR /home/gradle/tla-frontend
 RUN gradle installAssets bootJar --no-daemon
 
 
-FROM openjdk:25-jdk-slim-bookworm
+FROM eclipse-temurin:25-jdk
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends fontconfig=2.14.1-4 \
+  && apt-get install -y --no-install-recommends fontconfig=2.15.0-1.1ubuntu2 \
   && apt-get clean && rm -r /var/lib/apt/lists/* \
   && mkdir /app
 

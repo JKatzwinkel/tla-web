@@ -33,7 +33,7 @@ updates:
     cooldown:
       default-days: 90
       include:
-        - openjdk
+        - eclipse-temurin
       exclude:
         - gradle
     commit-message:
