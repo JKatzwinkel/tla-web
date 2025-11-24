@@ -5,7 +5,7 @@ WORKDIR /home/gradle/tla-frontend
 RUN gradle installAssets bootJar --no-daemon
 
 
-FROM eclipse-temurin:25-jdk
+FROM eclipse-temurin:25-jre
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends fontconfig=2.15.0-1.1ubuntu2 \
