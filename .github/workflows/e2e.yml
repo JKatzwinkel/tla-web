@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6.0.0
+      - uses: actions/checkout@v6.0.1
 
       - name: start backend containers
         run: docker compose up -d backend
@@ -76,7 +76,7 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v6.0.0
+      - uses: actions/checkout@v6.0.1
 
       - name: start && populate backend containers
         run: docker compose up -d backend populate
