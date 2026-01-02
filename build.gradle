@@ -90,7 +90,7 @@ dependencies {
         exclude group: 'bouncycastle'
     }
 
-    testImplementation 'org.mockito:mockito-core:5.20.0'
+    testImplementation 'org.mockito:mockito-core:5.21.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test:4.0.1'
     testImplementation 'org.springframework.boot:spring-boot-webmvc-test:4.0.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:6.0.1'
