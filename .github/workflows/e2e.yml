@@ -54,6 +54,9 @@ jobs:
       - name: start frontend container
         run: docker compose up -d frontend
 
+      - name: update package index
+        run: sudo apt-get update
+
       - name: install cypress dependencies
         run: >-
           sudo apt-get install -y --no-install-recommends xvfb libglib2.0-0
