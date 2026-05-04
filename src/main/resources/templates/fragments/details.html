@@ -159,19 +159,20 @@
 
     <!-- Lemma Attestations -->
     <div th:fragment="lemma-property-attestations" id="lemma-property-attestations">
-        <hr/>
-        <p>
-            <strong th:text="#{lemma_property_attestation}" class="details-property-label">Attestation</strong>
-            <br/>
-            <strong th:text="#{lemma_property_attestation_occurrences}" class="details-property-label">Occurrences:</strong>
-            <a th:href="|${@searchController.getSearchResultsPageRoute(@__sentenceController__)}?tokens[0].lemma.id=${obj.id}|">
-                <i class="fas fa-arrow-circle-right red"></i>
-                <span id="lemma-attestation-count-texts" th:text="${obj.attestationCount}">5</span>
-            </a>
-            <br/>
-            <th:block th:replace="~{ :: lemma-timespan}"/>
-        </p>
-        <div th:insert="~{fragments/widgets/timeline :: timeline}"/>
+      <hr/>
+      <p>
+        <strong th:text="#{lemma_property_attestation}" class="details-property-label">Attestation</strong>
+        <br/>
+        <strong th:text="#{lemma_property_attestation_occurrences}" class="details-property-label">Occurrences:</strong>
+        <a th:href="${href}"
+            th:with="href=|${@searchController.getSearchResultsPageRoute(@__sentenceController__)}?tokens[0].lemma.id=${obj.id}|">
+          <i class="fas fa-arrow-circle-right red"></i>
+          <span id="lemma-attestation-count-texts" th:text="${obj.attestationCount}">5</span>
+        </a>
+        <br/>
+        <th:block th:replace="~{ :: lemma-timespan}"/>
+      </p>
+      <div th:insert="~{fragments/widgets/timeline :: timeline}"/>
     </div>
 
     <!-- Lemma Attestations timespan -->

@@ -233,7 +233,8 @@
         <ul class="pagination justify-content-center">
           <li th:each="page : *{pages}" class="page-item" th:classappend="(${page} == null) ? (disabled) : (${page} == *{currentPage} ? active : '')">
             <a th:if="${page} != null" class="page-link"
-               th:href="${@templateUtils.replaceQueryParam('page', page).build()}"
+               th:with="href=${@templateUtils.replaceQueryParam('page', page).build()}"
+               th:href="${href}"
                th:id="|page-link-${page}|"
                th:text="${page}"
             >
