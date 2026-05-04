@@ -53,4 +53,11 @@ updates:
     commit-message:
       prefix: ":dependabot"
 
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    commit-message:
+      prefix: ":dependabot"
+
 ...
