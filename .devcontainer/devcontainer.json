@@ -7,6 +7,9 @@
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"moby": false,
 			"installDockerBuildx": false
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"installTools": false
 		}
 	},
 	"postStartCommand": "sudo apt-get update && sudo apt-get install -y fontconfig && sudo apt-get clean",
