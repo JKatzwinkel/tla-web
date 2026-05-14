@@ -8,7 +8,7 @@ RUN gradle installAssets bootJar --no-daemon
 FROM eclipse-temurin:25-jre
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends fontconfig=2.15.0-1.1ubuntu2 \
+  && apt-get install -y --no-install-recommends fontconfig=2.17.1-3ubuntu1 \
   && apt-get clean && rm -r /var/lib/apt/lists/* \
   && mkdir /app
 
