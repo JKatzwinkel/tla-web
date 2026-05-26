@@ -5,8 +5,7 @@
 			"configureZshAsDefaultShell": true
 		},
 		"ghcr.io/devcontainers/features/docker-in-docker:3": {
-			"moby": false,
-			"installDockerBuildx": false
+			"moby": false
 		},
 		"ghcr.io/devcontainers/features/python:1": {
 			"installTools": false
